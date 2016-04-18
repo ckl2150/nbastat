@@ -1,3 +1,6 @@
+%IGNORE THIS!!!!
+%IGNORE THIS!!!!
+%IGNORE THIS!!!!!
 function openui
 %Creating opening page GUI and centering it
 
