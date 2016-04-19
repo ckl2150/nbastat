@@ -47,7 +47,6 @@ while count ~= n+1
         end
         
         if ~pass
-            disp(pass)
             %Converts minutes to decimal format
             [min, sec] = strtok(games(gamenum).MP,':');
             sec = sec(2:3);
