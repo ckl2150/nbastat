@@ -71,6 +71,16 @@ set(oneplayersearchbox,'Position',[01 300 200 20]);
 %Make search for player visible
 set(oneplayersearch,'Visible','on');
 
+    %function confirm
+        %error check
+        %parsePlayer();
+        %find({player.last}) figure out if this is ok, if not use for loop
+        %parsegames(filenametzt)
+        %gamemanip(games, 'away')
+        %this would either all away games or home games (probably an if
+        %function because there are all only 2 cases, but as we add more a
+        %menu function would presumably make more sense
+
     function openplayerstatfig(~,~)%Cbfn to open single player fig window
         set(openf,'Visible','off')
         singleplayername = get(oneplayersearchbox,'String');
