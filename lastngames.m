@@ -2,10 +2,14 @@ function avgs = lastngames(games, n)
 %function which takes a vector of structures as input and a number n, and
 %returns the average numbers of all categories over n games.
 
+%counter to track number of games played
 count = 1;
 
+%gamenum, in conjunction with count, is used to skip games which the player
+%has not played
 gamenum = length(games);
 
+%preallocation
 minutes = zeros(1,n);
 fgmade = zeros(1,n);
 fgatmpt = zeros(1,n);
@@ -21,11 +25,15 @@ to = zeros(1,n);
 pts = zeros(1,n);
 
 while count ~= n+1
+    %only retrieves information if player has played in the current game
     if ~isempty(games(gamenum).G)
-
-        %[hours min] = strtok(games(gamenum).MP,':'); %NOT CORRECT
-        %totaltime = str2double(min/60) + str2double(hours);
-        %minutes(count) = totaltime;
+        
+        %Converts minutes to decimal format
+        [min, sec] = strtok(games(gamenum).MP,':');
+        sec = sec(2:3);
+        totaltime = str2double(sec)/60 + str2double(min);
+        minutes(count) = totaltime;
+        
         fgmade(count) = str2double(games(gamenum).FG);
         fgatmpt(count) = str2double(games(gamenum).FGA);
         threeptmade(count) = str2double(games(gamenum).Threept);
@@ -45,7 +53,7 @@ while count ~= n+1
     end
 end
 
-%minutes = mean(minutes);
+minutes = mean(minutes);
 fgmade = sum(fgmade);
 fgatmpt = sum(fgatmpt);
 fgp = fgmade/fgatmpt;
@@ -62,7 +70,6 @@ blocks = mean(blocks);
 to = mean(to);
 pts = mean(pts);
 
-%haven't included minutes yet
 avgs = struct('TP', minutes, 'FGp', fgp, 'ThreePtp', threepp, 'FTp', ftp, 'Rebounds',...
     rebounds, 'Assists', assists, 'Steals', steals, 'Blocks', blocks,...
     'TO', to, 'Pts', pts);
