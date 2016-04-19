@@ -22,7 +22,10 @@ pts = zeros(1,n);
 
 while count ~= n+1
     if ~isempty(games(gamenum).G)
-        %minutes(count) = strrep(games(gamenum).MP,':', '.'); %NOT CORRECt
+
+        %[hours min] = strtok(games(gamenum).MP,':'); %NOT CORRECT
+        %totaltime = str2double(min/60) + str2double(hours);
+        %minutes(count) = totaltime;
         fgmade(count) = str2double(games(gamenum).FG);
         fgatmpt(count) = str2double(games(gamenum).FGA);
         threeptmade(count) = str2double(games(gamenum).Threept);
@@ -60,7 +63,7 @@ to = mean(to);
 pts = mean(pts);
 
 %haven't included minutes yet
-avgs = struct('FGp', fgp, 'ThreePtp', threepp, 'FTp', ftp, 'Rebounds',...
+avgs = struct('TP', minutes, 'FGp', fgp, 'ThreePtp', threepp, 'FTp', ftp, 'Rebounds',...
     rebounds, 'Assists', assists, 'Steals', steals, 'Blocks', blocks,...
     'TO', to, 'Pts', pts);
 
