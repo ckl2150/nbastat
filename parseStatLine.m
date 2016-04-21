@@ -1,4 +1,6 @@
-filename = fullfile('conradliu', 'Github', 'nbastattrack', 'playerdb', 'players_c_curryst01_gamelog_2016__pgl_basic.csv');
+cd('~/Github/nbastattrack/playerdb');
+
+filename = 'players_c_curryst01_gamelog_2016__pgl_basic.csv';
 fid = fopen(filename);
 
 %specify the delimiter for regexp
@@ -37,3 +39,5 @@ end
 
 
 done = fclose('all');
+
+cd('~/Github/nbastattrack');
