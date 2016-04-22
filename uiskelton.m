@@ -63,7 +63,7 @@ oneplayersearch = uibuttongroup('Visible','off','Position',[0 0 .25 1],...
     'backgroundcolor','white','BorderType','none');
 %Search for player editable textbox and instruction
 oneplayersearchbox = uicontrol(oneplayersearch,'Style','edit',...
-    'Callback',@openplayerstatfig);%callback function to open fig for single player
+    'Callback', @confirm);%callback function to open fig for single player
 oneplayerinstruct = uicontrol(oneplayersearch,'Style','text',...
     'Position',[01 350 200 20],'String','Enter player''s last name');
 set(oneplayersearchbox,'Position',[01 300 200 20]);
@@ -71,7 +71,11 @@ set(oneplayersearchbox,'Position',[01 300 200 20]);
 %Make search for player visible
 set(oneplayersearch,'Visible','on');
 
-    %function confirm
+%     function confirm(~,~)
+%         lastn = oneplayersearchbox.String;
+%         
+%         if sum(strcmp(lastn, {player.last})) == 1
+%         
         %error check
         %parsePlayer();
         %find({player.last}) figure out if this is ok, if not use for loop
