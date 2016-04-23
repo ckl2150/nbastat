@@ -6,6 +6,7 @@
 function uiskelton
 
 players = parsePlayer();
+fullplayerindex = zeros(1);
 
 %First, creates opening screen ui
 openf = figure('Visible','off','color','white',...
@@ -57,6 +58,8 @@ movegui(compare2fig,'center')
 set(openf,'Visible','on')
 set(optionpbg,'Visible','on')
 
+%global function which error checks user input of players
+
 %Callback function if searching single player
 function spchosen(~,~)
 set(optionpbg,'Visible','off');
@@ -64,35 +67,64 @@ set(optionpbg,'Visible','off');
 oneplayersearch = uibuttongroup('Visible','off','Position',[0 0 .25 1],...
     'backgroundcolor','white','BorderType','none');
 %Search for player editable textbox and instruction
-oneplayersearchbox = uicontrol(oneplayersearch,'Style','edit',...
+oneplayersearchbox = uicontrol(oneplayersearch,'Style','edit', 'Position', [01 300 200 20], ...
     'Callback', @confirm);%callback function to open fig for single player
 oneplayerinstruct = uicontrol(oneplayersearch,'Style','text',...
     'Position',[01 350 200 20],'String','Enter player''s last name');
-set(oneplayersearchbox,'Position',[01 300 200 20]);
 
 %Make search for player visible
 set(oneplayersearch,'Visible','on');
+        
+    function confirm(hObject,~)
+        lastname = lower(hObject.String);
+        if length(lastname) == 1
+            oneplayerinstruct.String = 'Please enter at least two letters';
+        else
+            fullplayerindex = strfind({players.last}, lastname);
+            for i = 1:length(players)
+                if isempty(fullplayerindex{i})
+                    fullplayerindex{i} = 0;
+                end
+            end
+            fullplayerindex = find(cell2mat(fullplayerindex)); 
+            if isempty(fullplayerindex)
+                oneplayerinstruct.String = sprintf('Sorry, no player''s name starts with %c%s.', upper(lastname(1)),lastname(2:end));
+            else
+                namearr = cell(1,length(fullplayerindex));
+                for i = 1:length(fullplayerindex)
+                    lastn = players(fullplayerindex(i)).last;
+                    lastn(1) = upper(lastn(1));
+                    first = players(fullplayerindex(i)).first;
+                    first(1) = upper(first(1));
+                    full = sprintf('%s %s', first, lastn);
+                    namearr{i} = full;
+                end
+                
+%                 if length(namearr) == 1
+%                     currentplayer = players(fullplayerindex(1));
+%                     singleplayerfig.Visible = 'on';
+%                     h = guihandles(openplayerstatfig);
+%                 else
+                %Add if statement later? if there's only one hit
+                    oneplayerinstruct.String = 'Did you mean:';
+                    oneplayersearchbox.Visible = 'off';
+                    didyoumean = uicontrol(oneplayersearch, 'Style', 'popupmenu', 'Position', [01 300 200 20],'String', namearr, 'Callback', @openplayerstatfig);
+                %end
+            end
+        end
+    end
 
-%     function confirm(~,~)
-%         lastn = oneplayersearchbox.String;
-%         
-%         if sum(strcmp(lastn, {player.last})) == 1
-%         
-        %error check
-        %parsePlayer();
-        %find({player.last}) figure out if this is ok, if not use for loop
-        %parsegames(filenametzt)
-        %gamemanip(games, 'away')
-        %this would either all away games or home games (probably an if
-        %function because there are all only 2 cases, but as we add more a
-        %menu function would presumably make more sense
-
-    function openplayerstatfig(~,~)%Cbfn to open single player fig window
+    function openplayerstatfig(hObject,~)%Cbfn to open single player fig window
+        currentplayer = players(fullplayerindex(hObject.Value));
         set(openf,'Visible','off')
-        singleplayername = get(oneplayersearchbox,'String');
-        set(singleplayerfig,'Name',singleplayername)
+        first = currentplayer.first;
+        first(1) = upper(first(1));
+        last = currentplayer.last;
+        last(1) = upper(currentplayer.last(1));
+        fullname = sprintf('%s %s', first, last);
+        set(singleplayerfig,'Name',fullname)
         set(singleplayerfig,'Visible','on')
-        %games = parseStatLine(player.filename);
+        %games = parseStatLine(players.filename);
     end
 end
 
