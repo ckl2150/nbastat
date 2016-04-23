@@ -5,6 +5,8 @@
 
 function uiskelton
 
+players = parsePlayer();
+
 %First, creates opening screen ui
 openf = figure('Visible','off','color','white',...
     'Position',[300,500,1200,800]);
@@ -90,6 +92,7 @@ set(oneplayersearch,'Visible','on');
         singleplayername = get(oneplayersearchbox,'String');
         set(singleplayerfig,'Name',singleplayername)
         set(singleplayerfig,'Visible','on')
+        %games = parseStatLine(player.filename);
     end
 end
 

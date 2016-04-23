@@ -52,8 +52,6 @@ for i = 2:4:18
             player(count).filename = file;
         end
         
-        disp({player.filename})
-        
         %while loop checks for filenames which could potentially be the
         %same. By default, files have a default '1' appended to it. If
         %duplicates are found, this number is incremented until it is a
