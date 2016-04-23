@@ -35,6 +35,11 @@ for i = 2:4:18
         lastn = lower(strtrim(txt{j,i+3}));
         player(count).last = lastn;
         
+        firstn(1) = upper(firstn(1));
+        lastn(1) = upper(lastn(1));
+        full = sprintf('%s %s', firstn, lastn);
+        player(count).fullname = full;
+        
         %The following if/else statement creates the name of player
         %data filenames in the correct format. In this format, up to the
         %first 5 letters of the last name are used, and the first 2 letters

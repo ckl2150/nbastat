@@ -7,6 +7,10 @@ function uiskelton
 
 players = parsePlayer();
 fullplayerindex = zeros(1);
+currentplayer1 = struct('team', '', 'posit', '', 'first', '', 'last', '',...
+    'filename', '', 'fullname', '');
+currentplayer2 = struct('team', '', 'posit', '', 'first', '', 'last', '',...
+    'filename', '', 'fullname', '');
 
 %First, creates opening screen ui
 openf = figure('Visible','off','color','white',...
@@ -76,10 +80,14 @@ oneplayerinstruct = uicontrol(oneplayersearch,'Style','text',...
 set(oneplayersearch,'Visible','on');
         
     function confirm(hObject,~)
+        %Stores string from user input
         lastname = lower(hObject.String);
+        
+        %Error checks to ensure at least 2 letters are entered
         if length(lastname) == 1
             oneplayerinstruct.String = 'Please enter at least two letters';
         else
+            %Finds all matches of the user string with database of players
             fullplayerindex = strfind({players.last}, lastname);
             for i = 1:length(players)
                 if isempty(fullplayerindex{i})
@@ -90,14 +98,11 @@ set(oneplayersearch,'Visible','on');
             if isempty(fullplayerindex)
                 oneplayerinstruct.String = sprintf('Sorry, no player''s name starts with %c%s.', upper(lastname(1)),lastname(2:end));
             else
+                %Uses the index vector to retrieve player names, and store
+                %in a cell array
                 namearr = cell(1,length(fullplayerindex));
                 for i = 1:length(fullplayerindex)
-                    lastn = players(fullplayerindex(i)).last;
-                    lastn(1) = upper(lastn(1));
-                    first = players(fullplayerindex(i)).first;
-                    first(1) = upper(first(1));
-                    full = sprintf('%s %s', first, lastn);
-                    namearr{i} = full;
+                    namearr{i} = players(fullplayerindex(i)).fullname;
                 end
                 
 %                 if length(namearr) == 1
@@ -115,16 +120,12 @@ set(oneplayersearch,'Visible','on');
     end
 
     function openplayerstatfig(hObject,~)%Cbfn to open single player fig window
-        currentplayer = players(fullplayerindex(hObject.Value));
+        currentplayer1 = players(fullplayerindex(hObject.Value));
         set(openf,'Visible','off')
-        first = currentplayer.first;
-        first(1) = upper(first(1));
-        last = currentplayer.last;
-        last(1) = upper(currentplayer.last(1));
-        fullname = sprintf('%s %s', first, last);
-        set(singleplayerfig,'Name',fullname)
+        set(singleplayerfig,'Name',currentplayer1.fullname)
         set(singleplayerfig,'Visible','on')
         %games = parseStatLine(players.filename);
+        %MORE TO COME
     end
 end
 
@@ -141,7 +142,9 @@ twoplayersearch_b = uibuttongroup('Visible','off','Position',[0 0 .25 1],...
 
 %Search for player one editable textbox and instruction
 twoplayersearchbox1 = uicontrol(twoplayersearch_a,'Style','edit',...
-    'Position',[01 300 200 20],'Callback',@getplayer2);
+    'Position',[01 300 200 20],'Callback',@confirm);
+twoplayersearchbox2 = uicontrol(twoplayersearch_b,'Style', 'edit', ...
+    'Position', [01 300 200 20], 'Callback', @confirm);
 set(twoplayersearchbox1,'Position',[01 300 200 20]);
 compare2playersinstruct1 = uicontrol(twoplayersearch_a,'Style','text',...
     'Position',[01 350 200 20],'String','Enter player one''s last name');
@@ -152,22 +155,73 @@ compare2playersinstruct2 = uicontrol(twoplayersearch_b,'Style','text',...
 %Make search for player 1 visible
 set(twoplayersearch_a,'Visible','on');
 
-    function getplayer2 (~,~) %Cbfn to print first player's name and prompt for 2nd player
+    function confirm(hObject,~)
+        lastname = lower(hObject.String);
+        
+        %Error checks to ensure at least 2 letters are entered
+        if length(lastname) == 1
+            hObject.String = 'Please enter at least two letters';
+        else
+            %Finds all matches of the user string with database of players
+            fullplayerindex = strfind({players.last}, lastname);
+            for i = 1:length(players)
+                if isempty(fullplayerindex{i})
+                    fullplayerindex{i} = 0;
+                end
+            end
+            fullplayerindex = find(cell2mat(fullplayerindex)); 
+            if isempty(fullplayerindex)
+                if hObject == twoplayersearchbox1  
+                    compare2playersinstruct1.String = sprintf('Sorry, no player''s name starts with %c%s.', upper(lastname(1)),lastname(2:end));
+                else
+                    compare2playersinstruct2.String = sprintf('Sorry, no player''s name starts wiht %c%s.', upper(lastname(1)), lastname(2:end));
+                end
+            else
+                %Uses the index vector to retrieve player names, and store
+                %in a cell array
+                namearr = cell(1,length(fullplayerindex));
+                for i = 1:length(fullplayerindex)
+                    namearr{i} = players(fullplayerindex(i)).fullname;
+                end
+                
+%                if length(namearr) == 1
+%                    currentplayer = players(fullplayerindex(1));
+%                    singleplayerfig.Visible = 'on';
+%                    h = guihandles(openplayerstatfig);
+%                else
+                 %Add if statement later? if there's only one hit
+                 if hObject == twoplayersearchbox1
+                     compare2playersinstruct1.String = 'Did you mean:';
+                     twoplayersearchbox1.Visible = 'off';
+                     didyoumean = uicontrol(twoplayersearch_a, 'Style', 'popupmenu', 'Position', [01 300 200 20],'String', namearr, 'Callback', @getplayer2);
+                     disp(didyoumean.Value)
+                 else
+                     compare2playersinstruct2.String = 'Did you mean:';
+                     twoplayersearchbox2.Visible = 'off';
+                     didyoumean = uicontrol(twoplayersearch_b, 'Style', 'popupmenu', 'Position', [01 300 200 20],'String', namearr, 'Callback', @opencomp2playerfig);
+                 end
+            end
+        end
+
+    
+    function getplayer2 (~,~) %Cbfn to print first player's name and prompt for 2nd player FIX THIS SHIT
+        currentplayer1 = players(fullplayerindex(hObject.Value));
         set(twoplayersearch_a,'Visible','off');
-        player1name = get(twoplayersearchbox1,'String');
         player1display = uicontrol(twoplayersearch_b,'Style','text',...
-            'String',player1name,'Position',[01 400 200 20]);
-        twoplayersearchbox2 = uicontrol(twoplayersearch_b,'Style','edit',...
-    'Position',[01 300 200 20],'Callback',@opencomp2playerfig);
-        set(twoplayersearch_b,'Visible','on')
+            'String',currentplayer1.fullname,'Position',[01 400 200 20]); %FIX THIS LINE
+        twoplayersearch_b.Visible = 'on';
+%         twoplayersearchbox2 = uicontrol(twoplayersearch_b,'Style','edit',...
+%             'Position',[01 300 200 20],'Callback',@confirm);
         
         function opencomp2playerfig(~,~)%Cbfn to open 2 player comparison fig
-        set(openf,'Visible','off')
-        player2name = get(twoplayersearchbox2,'String');
-        comptitle = sprintf('%s vs. %s Comparison',player1name,player2name);
-        set(compare2fig,'Name',comptitle)
-        set(compare2fig,'Visible','on')
+            currentplayer2 = players(fullplayerindex(hObject.Value));
+            set(openf,'Visible','off')
+            player2name = get(twoplayersearchbox2,'String');
+            comptitle = sprintf('%s vs. %s Comparison',player1name,player2name);
+            set(compare2fig,'Name',comptitle)
+            set(compare2fig,'Visible','on')
         end
+    end
     end
 end
 end
