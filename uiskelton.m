@@ -194,25 +194,20 @@ set(twoplayersearch_a,'Visible','on');
                     namearr{i} = players(fullplayerindex(i)).fullname;
                 end
                 
-%                if length(namearr) == 1
-%                    currentplayer = players(fullplayerindex(1));
-%                    singleplayerfig.Visible = 'on';
-%                    h = guihandles(openplayerstatfig);
-%                else
-                 %Add if statement later? if there's only one hit
-                 if hObject == twoplayersearchbox1
-                     compare2playersinstruct1.String = 'Did you mean:';
-                     twoplayersearchbox1.Visible = 'off';
-                     didyoumean = uicontrol(twoplayersearch_a, 'Style', 'popupmenu', 'Position', [01 300 200 20],'String', namearr, 'Callback', @getplayer2);
-                 else
-                     compare2playersinstruct2.String = 'Did you mean:';
-                     twoplayersearchbox2.Visible = 'off';
-                     didyoumean = uicontrol(twoplayersearch_b, 'Style', 'popupmenu', 'Position', [01 300 200 20],'String', namearr, 'Callback', @opencomp2playerfig);
-                 end
+                if hObject == twoplayersearchbox1
+                    compare2playersinstruct1.String = 'Did you mean:';
+                    twoplayersearchbox1.Visible = 'off';
+                    didyoumean = uicontrol(twoplayersearch_a, 'Style', 'popupmenu', 'Position', [01 300 200 20],'String', namearr, 'Callback', @getplayer2);
+                else
+                    compare2playersinstruct2.String = 'Did you mean:';
+                    twoplayersearchbox2.Visible = 'off';
+                    didyoumean = uicontrol(twoplayersearch_b, 'Style', 'popupmenu', 'Position', [01 300 200 20],'String', namearr, 'Callback', @opencomp2playerfig);
+                end
             end
         end
 
     
+
         function getplayer2 (hObject,~) %Cbfn to print first player's name and prompt for 2nd player FIX THIS SHIT
             currentplayer1 = players(fullplayerindex(hObject.Value));
             set(twoplayersearch_a,'Visible','off');
@@ -222,9 +217,10 @@ set(twoplayersearch_a,'Visible','on');
             twoplayersearch_b.Visible = 'on';
         end
         
-        function opencomp2playerfig(hObject,~) %Cbfn to open 2 player comparison fig
+        function opencomp2playerfig(hObject,~)%Cbfn to open 2 player comparison fig
             currentplayer2 = players(fullplayerindex(hObject.Value));
             set(openf,'Visible','off')
+            player2name = get(twoplayersearchbox2,'String');
             comptitle = sprintf('%s vs. %s Comparison',currentplayer1.fullname,currentplayer2.fullname);
             set(compare2fig,'Name',comptitle)
             set(compare2fig,'Visible','on')
