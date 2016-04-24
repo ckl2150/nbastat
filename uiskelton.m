@@ -204,7 +204,7 @@ set(twoplayersearch_a,'Visible','on');
         end
 
     
-    function getplayer2 (~,~) %Cbfn to print first player's name and prompt for 2nd player FIX THIS SHIT
+    function getplayer2 (hObject,~) %Cbfn to print first player's name and prompt for 2nd player FIX THIS SHIT
         currentplayer1 = players(fullplayerindex(hObject.Value));
         set(twoplayersearch_a,'Visible','off');
         player1display = uicontrol(twoplayersearch_b,'Style','text',...
@@ -212,16 +212,15 @@ set(twoplayersearch_a,'Visible','on');
         twoplayersearch_b.Visible = 'on';
 %         twoplayersearchbox2 = uicontrol(twoplayersearch_b,'Style','edit',...
 %             'Position',[01 300 200 20],'Callback',@confirm);
+    end
         
-        function opencomp2playerfig(~,~)%Cbfn to open 2 player comparison fig
+        function opencomp2playerfig(hObject,~)%Cbfn to open 2 player comparison fig
             currentplayer2 = players(fullplayerindex(hObject.Value));
             set(openf,'Visible','off')
-            player2name = get(twoplayersearchbox2,'String');
-            comptitle = sprintf('%s vs. %s Comparison',player1name,player2name);
+            comptitle = sprintf('%s vs. %s Comparison',currentplayer1.fullname,currentplayer2.fullname);
             set(compare2fig,'Name',comptitle)
             set(compare2fig,'Visible','on')
         end
-    end
     end
 end
 end
