@@ -58,8 +58,13 @@ compare2fig = figure('Visible','off','color','white',...
 set(compare2fig,'Name','Welcome to Our Awesome Project')
 movegui(compare2fig,'center')
 
-%Create back button to go back to opening figure from stat display figures
-back2openfig = uicontrol(singleplayerfig,'Style','pushbutton',...
+%Create back button to go back to opening figure from single display figures
+back2openfigfromspfig = uicontrol(singleplayerfig,'Style','pushbutton',...
+    'String','Start Over','Units','Normalized','Position',[0 .95 .05 .05],...
+    'Callback',@back2start);%Callback function that goes back to the opening figure
+
+%Create back button to go back to opening figure from two display figures
+back2openfigfromc2fig = uicontrol(compare2fig,'Style','pushbutton',...
     'String','Start Over','Units','Normalized','Position',[0 .95 .05 .05],...
     'Callback',@back2start);%Callback function that goes back to the opening figure
 
@@ -69,13 +74,14 @@ set(optionpbg,'Visible','on')
 
 %global function which error checks user input of players
 
+%Create button group for single player search 
+oneplayersearch = uibuttongroup('Visible','off','Units','Normalized',...
+    'Position',[0 0 .15 1],'backgroundcolor','white','BorderType','none');
+
 %Callback function if searching single player
 function spchosen(~,~)
 set(optionpbg,'Visible','off');
 
-%Create button group for single player search 
-oneplayersearch = uibuttongroup('Visible','off','Units','Normalized',...
-    'Position',[0 0 .15 1],'backgroundcolor','white','BorderType','none');
 
 %Search for player editable textbox and instruction
 oneplayersearchbox = uicontrol(oneplayersearch,'Style','edit',...
@@ -139,15 +145,17 @@ set(oneplayersearch,'Visible','on');
 end
 
 
-%Callback function if comparing two players
-function tpchosen(~,~)
-set(optionpbg,'Visible','off')
 %Create button groups for two player search;one to get the first player and
 %next to get the second player
 twoplayersearch_a = uibuttongroup('Visible','off','Units','Normalized',...
     'Position',[0 0 .15 1],'backgroundcolor','white','BorderType','none');
 twoplayersearch_b = uibuttongroup('Visible','off','Units','Normalized',...
     'Position',[0 0 .15 1],'backgroundcolor','white','BorderType','none');
+
+%Callback function if comparing two players
+function tpchosen(~,~)
+set(optionpbg,'Visible','off')
+
 
 %Search for player one editable textbox and instruction
 twoplayersearchbox1 = uicontrol(twoplayersearch_a,'Style','edit',...
@@ -228,7 +236,8 @@ set(twoplayersearch_a,'Visible','on');
     end
 end
     function back2start (~,~)
-        set([singleplayerfig compare2fig],'Visible','off')
+        set([singleplayerfig compare2fig oneplayersearch...
+            twoplayersearch_a twoplayersearch_b],'Visible','off')
         set([openf optionpbg],'Visible','on')
     end
 end
