@@ -165,8 +165,18 @@ set(oneplayersearch,'Visible','on');
                     case 5
                         n=length(games)
                 end
-                d=struct2cell(lastngames(games,n));
-                t.Data=d
+                val2=popup2.Value
+                switch val2
+                    case 1
+                        d=struct2cell(lastngames(games,n,'home'));
+                        t.Data=d 
+                    case 2
+                        d=struct2cell(lastngames(games,n,'away'));
+                        t.Data=d 
+                    case 3    
+                        d=struct2cell(lastngames(games,n));
+                        t.Data=d
+                end
             end
             function popfun2(source,~)
                 val = source.Value;
