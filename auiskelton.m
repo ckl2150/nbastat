@@ -279,7 +279,7 @@ set(twoplayersearch_a,'Visible','on');
                 if hObject == twoplayersearchbox1  
                     compare2playersinstruct1.String = sprintf('Sorry, no player''s name starts with %c%s.', upper(lastname(1)),lastname(2:end));
                 else
-                    compare2playersinstruct2.String = sprintf('Sorry, no player''s name starts wiht %c%s.', upper(lastname(1)), lastname(2:end));
+                    compare2playersinstruct2.String = sprintf('Sorry, no player''s name starts with %c%s.', upper(lastname(1)), lastname(2:end));
                 end
             else
                 %Uses the index vector to retrieve player names, and store
