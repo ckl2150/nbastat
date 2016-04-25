@@ -154,8 +154,7 @@ function spchosen(~,~)
         end
         function openplayerstatfig(hObject,~)%Cbfn to open single player fig window
             currentplayer1 = players(fullplayerindex(hObject.Value));
-            phsname = imread(lower(strcat(currentplayer1.last,currentplayer1.first,'.jpg')));
-            playerheadshot = image(phsname);
+            
             set([openf didyoumean],'Visible','off')
             set(singleplayerfig,'Name',currentplayer1.fullname)
             
@@ -163,6 +162,17 @@ function spchosen(~,~)
             set(gca,'Visible','off')
             
             set(singleplayerfig,'Visible','on')
+            
+%             playapanel = uipanel('Parent', singleplayerfig,'Units', 'Normalize', 'Position', [0 0 .2 1]);
+%             set(playapanel, 'Visible', 'on');
+%             phsname = imread(lower(strcat(currentplayer1.last,currentplayer1.first,'.jpg')));
+%             playerheadshot = image(phsname);
+%             set(gca,'Visible','off')
+%             axes('Position', [0 .5 .5 .5])
+%            
+%             %singleplayerfig, imshow(phsname)
+%             %axes(singleplayerfig, 'UserData', plot();
+            
             games = parseStatLine(currentplayer1.filename);
             n=length(games);
             d=struct2cell(lastngames(games,n));
