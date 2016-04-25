@@ -132,68 +132,17 @@ set(oneplayersearch,'Visible','on');
                 %end
             end
         end
-    end
-
-    function openplayerstatfig(hObject,~)%Cbfn to open single player fig window
+        function openplayerstatfig(hObject,~)%Cbfn to open single player fig window
         currentplayer1 = players(fullplayerindex(hObject.Value));
-        set(openf,'Visible','off')
+        set([openf didyoumean],'Visible','off')
         set(singleplayerfig,'Name',currentplayer1.fullname)
         set(singleplayerfig,'Visible','on')
-        games = parseStatLine(players.filename);
-        n=length(games)
-        d=struct2cell(lastngames(games,n));
-         rnames={'Minutes Played','Field Goal Percentage','Three Pointer Percentage','Free Throws Percentage','Rebounds',...
-            'Assists','Steals','Blocks','Time Outs?','Total Points'};
-        cname=sprintf('%s Average Game Statistics',currentplayer1.fullname);
-        t=uitable(singleplayerfig,'Data',d,'RowName',rnames,'ColumnName',cname,...
-            'Units','normalized','Position',[.35,.5,.5,.5],'Visible','off');
-        t.Position(3) = t.Extent(3);
-        t.Position(4) = t.Extent(4);
-        popup1 = uicontrol('Style', 'popup',...
-           'String', {'Last 5 Games','Last 10 Games','Last 20 Games','Last 30 Games','All Games'},...
-           'Units','normalized',... 
-           'Position', [.5 .1 .2 .4],...
-           'Value', 5,...
-           'Callback', @popfun1);
-        popup2 = uicontrol('Style', 'popup',...
-           'String', {'Home','Away','All Games'},...
-            'Units','normalized',...
-            'Position', [.1 .1 .2 .4],...
-        'Value', 3,...   
-        'Callback', @popfun2);
-        t.Visible='on'
-        function popfun1(source,callbackdata)
-        val = source.Value;
-        switch val
-            case 1
-                n=5;
-            case 2
-                n=10;
-            case 3
-                n=20;
-            case 4
-                n=30;
-            case 5
-                n=length(games)
-        end
-        d=struct2cell(lastngames(games,n));
-        t.Data=d
-        end
-       function popfun2(source,callbackdata)
-        val = source.Value;
-        switch val
-            case 1
-                d=struct2cell(lastngames(games,n,'home'));
-                t.Data=d 
-            case 2
-                d=struct2cell(lastngames(games,n,'away'));
-                t.Data=d 
-            case 3
-               d=struct2cell(lastngames(games,n));
-        t.Data=d
-        end
-        end   
+        %games = parseStatLine(players.filename);
+        %MORE TO COME
     end
+    end
+
+    
 end
 
 
@@ -270,7 +219,7 @@ set(twoplayersearch_a,'Visible','on');
 
         function getplayer2 (hObject,~) %Cbfn to print first player's name and prompt for 2nd player FIX THIS SHIT
             currentplayer1 = players(fullplayerindex(hObject.Value));
-            set(twoplayersearch_a,'Visible','off');
+            set([didyoumean twoplayersearch_a],'Visible','off');
             player1display = uicontrol(twoplayersearch_b,'Style','text',...
                 'String',currentplayer1.fullname,'Units','Normalized',...
                 'Position',[.05 .5 .8 .05]); %FIX THIS LINE
@@ -288,8 +237,8 @@ set(twoplayersearch_a,'Visible','on');
     end
 end
     function back2start (~,~)
-        set([singleplayerfig compare2fig oneplayersearch...
-            twoplayersearch_a twoplayersearch_b],'Visible','off')
+        set([singleplayerfig compare2fig oneplayersearch ...
+            twoplayersearch_a twoplayersearch_b ],'Visible','off')
         set([openf optionpbg],'Visible','on')
     end
 end
