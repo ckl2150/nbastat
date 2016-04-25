@@ -138,58 +138,52 @@ set(oneplayersearch,'Visible','on');
             cname=sprintf('%s Stats',currentplayer1.fullname);
             t=uitable(singleplayerfig,'Data',d,'RowName',rnames,'ColumnName',cname,...
                 'Units','normalized','Position',[.35,.5,.25,.25]);
-                popup1 = uicontrol('Style', 'popup',...
-           'String', {'Last 5 Games','Last 10 Games','Last 20 Games','Last 30 Games','All Games'},...
-           'Units','normalized',... 
-           'Position', [.5 .08 .1 .4],...
-           'Value', 5,...
-           'Visible','off',...
-           'Callback', @popfun1);
-        popup2 = uicontrol('Style', 'popup',...
-           'String', {'Home','Away','All Games'},...
-            'Units','normalized',...
-            'Visible','off',...    
-            'Position', [.35 .08 .1 .4],...
-            'Value', 3,...   
-            'Callback', @popfun2);
-        popup1.Visible='on'
-        popup2.Visible='on'
-        t.Visible='on'
-        function popfun1(source,~)
-        val = source.Value;
-        switch val
-            case 1
-                n=5;
-            case 2
-                n=10;
-            case 3
-                n=20;
-            case 4
-                n=30;
-            case 5
-                n=length(games)
-        end
-        d=struct2cell(lastngames(games,n));
-        t.Data=d
-        end
-       function popfun2(source,~)
-        val = source.Value;
-        switch val
-            case 1
-                d=struct2cell(lastngames(games,n,'home'));
-                t.Data=d 
-            case 2
-                d=struct2cell(lastngames(games,n,'away'));
-                t.Data=d 
-            case 3
-               d=struct2cell(lastngames(games,n));
-        t.Data=d
-        end
-        end    
+            popup1 = uicontrol('Style', 'popup',...
+                'String', {'Last 5 Games','Last 10 Games',...
+                'Last 20 Games','Last 30 Games','All Games'},...
+                'Units','normalized', 'Position', [.5 .08 .1 .4],...
+                'Value', 5, 'Visible','off', 'Callback', @popfun1);
+            popup2 = uicontrol('Style', 'popup',...
+                'String', {'Home','Away','All Games'},...
+                'Units','normalized', 'Visible','off',...    
+                'Position', [.35 .08 .1 .4], 'Value', 3,...   
+                'Callback', @popfun2);
+            popup1.Visible='on'
+            popup2.Visible='on'
+            t.Visible='on'
+            function popfun1(source,~)
+                val = source.Value;
+                switch val
+                    case 1
+                        n=5;
+                    case 2
+                        n=10;
+                    case 3
+                        n=20;
+                    case 4
+                        n=30;
+                    case 5
+                        n=length(games)
+                end
+                d=struct2cell(lastngames(games,n));
+                t.Data=d
+            end
+            function popfun2(source,~)
+                val = source.Value;
+                switch val
+                    case 1
+                    d=struct2cell(lastngames(games,n,'home'));
+                    t.Data=d 
+                case 2
+                    d=struct2cell(lastngames(games,n,'away'));
+                    t.Data=d 
+                case 3
+                    d=struct2cell(lastngames(games,n));
+                    t.Data=d
+                end
+            end    
         end
     end
-
-    
 end
 
 
