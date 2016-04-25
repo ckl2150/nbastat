@@ -1,6 +1,5 @@
 function games = parseStatLine(filename)
 
-cd('~/Github/nbastattrack/playerdb');
 fid = fopen(filename);
 
 %specify the delimiter for regexp
@@ -39,5 +38,4 @@ end
 
 
 done = fclose('all');
-
-cd('~/Github/nbastattrack');
+end
