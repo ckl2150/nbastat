@@ -113,16 +113,9 @@ set(oneplayersearch,'Visible','on');
                 for i = 1:length(fullplayerindex)
                     namearr{i} = players(fullplayerindex(i)).fullname;
                 end
-                
-%                 if length(namearr) == 1
-%                     currentplayer = players(fullplayerindex(1));
-%                     singleplayerfig.Visible = 'on';
-%                     h = guihandles(openplayerstatfig);
-%                 else
-                %Add if statement later? if there's only one hit
                     oneplayerinstruct.String = 'Did you mean:';
                     oneplayersearchbox.Visible = 'off';
-                    didyoumean = uicontrol(oneplayersearch, 'Style', 'popupmenu', 'Position', [01 300 200 20],'String', namearr, 'Callback', @openplayerstatfig);
+                    didyoumean = uicontrol(oneplayersearch, 'Style', 'popupmenu', 'Units', 'Normalize', 'Position', [.05 .35 .8 .05],'String', namearr, 'Callback', @openplayerstatfig);
                 %end
             end
         end
@@ -153,8 +146,8 @@ twoplayersearch_b = uibuttongroup('Visible','off','Units','Normalized',...
 twoplayersearchbox1 = uicontrol(twoplayersearch_a,'Style','edit',...
     'Units','Normalized','Position',[.05 .35 .8 .05],'Callback',@confirm);
 twoplayersearchbox2 = uicontrol(twoplayersearch_b,'Style','edit',...
-            'Units','Normalized','Position',[.05 .33 .8 .05],...
-            'Callback', @confirm);
+    'Units','Normalized','Position',[.05 .33 .8 .05],...
+    'Callback', @confirm);
 compare2playersinstruct1 = uicontrol(twoplayersearch_a,'Style','text',...
     'Units','Normalized','Position',[.05 .45 .8 .05],...
     'String','Enter player one''s last name:');
@@ -197,11 +190,11 @@ set(twoplayersearch_a,'Visible','on');
                 if hObject == twoplayersearchbox1
                     compare2playersinstruct1.String = 'Did you mean:';
                     twoplayersearchbox1.Visible = 'off';
-                    didyoumean = uicontrol(twoplayersearch_a, 'Style', 'popupmenu', 'Position', [01 300 200 20],'String', namearr, 'Callback', @getplayer2);
+                    didyoumean = uicontrol(twoplayersearch_a, 'Style', 'popupmenu', 'Units', 'Normalize', 'Position', [.05 .33 .8 .05],'String', namearr, 'Callback', @getplayer2);
                 else
                     compare2playersinstruct2.String = 'Did you mean:';
                     twoplayersearchbox2.Visible = 'off';
-                    didyoumean = uicontrol(twoplayersearch_b, 'Style', 'popupmenu', 'Position', [01 300 200 20],'String', namearr, 'Callback', @opencomp2playerfig);
+                    didyoumean = uicontrol(twoplayersearch_b, 'Style', 'popupmenu', 'Units', 'Normalize', 'Position', [.05 .33 .8 .05],'String', namearr, 'Callback', @opencomp2playerfig);
                 end
             end
         end

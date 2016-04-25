@@ -35,9 +35,9 @@ for i = 2:4:18
         lastn = lower(strtrim(txt{j,i+3}));
         player(count).last = lastn;
         
-        firstn(1) = upper(firstn(1));
-        lastn(1) = upper(lastn(1));
-        full = sprintf('%s %s', firstn, lastn);
+        firstupper = strcat(upper(firstn(1)), firstn(2:end));
+        lastupper = strcat(upper(lastn(1)), lastn(2:end));
+        full = sprintf('%s %s', firstupper, lastupper);
         player(count).fullname = full;
         
         %The following if/else statement creates the name of player

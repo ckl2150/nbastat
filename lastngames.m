@@ -66,12 +66,24 @@ while count ~= n+1
             to(count) = str2double(games(gamenum).TOV);
             pts(count) = str2double(games(gamenum).PTS);
             count = count + 1;
-            gamenum = gamenum - 1;
+            if gamenum == 1
+                count = n + 1;
+            else
+                gamenum = gamenum - 1;
+            end
+        else
+            if gamenum == 1
+                count = n + 1;
+            else
+                gamenum = gamenum - 1;
+            end
+        end
+    else
+        if gamenum == 1
+            count = n + 1;
         else
             gamenum = gamenum - 1;
         end
-    else
-        gamenum = gamenum - 1;
     end
 end
 
