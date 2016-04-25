@@ -314,11 +314,95 @@ set(twoplayersearch_a,'Visible','on');
         
         function opencomp2playerfig(hObject,~)%Cbfn to open 2 player comparison fig
             currentplayer2 = players(fullplayerindex(hObject.Value));
-            set(openf,'Visible','off')
-            player2name = get(twoplayersearchbox2,'String');
+            set([openf didyoumean],'Visible','off')
             comptitle = sprintf('%s vs. %s Comparison',currentplayer1.fullname,currentplayer2.fullname);
             set(compare2fig,'Name',comptitle)
             set(compare2fig,'Visible','on')
+        games1 = parseStatLine(currentplayer1.filename);
+        games2 = parseStatLine(currentplayer2.filename);
+            n1=length(games1);
+            d1=struct2cell(lastngames(games1,n1));
+            n2=length(games1);
+            d2=struct2cell(lastngames(games2,n2));
+            d=[d1,d2];
+            rnames={'Minutes Played','Field Goal Percentage','Three Pointer Percentage','Free Throws Percentage','Rebounds',...
+                'Assists','Steals','Blocks','Time Outs?','Total Points'};
+            cname={sprintf('%s Stats',currentplayer1.fullname),sprintf('%s Stats',currentplayer2.fullname)};
+            t=uitable(singleplayerfig,'Data',d,'RowName',rnames,'ColumnName',cname,...
+                'Units','normalized','Position',[.35,.5,.30,.30]);
+            t.Position(3)=t.Extent(3);
+            t.Position(4)=t.Extent(4);
+            popup1 = uicontrol('Style', 'popup',...
+                'String', {'Last 5 Games','Last 10 Games',...
+                'Last 20 Games','Last 30 Games','All Games'},...
+                'Units','normalized', 'Position', [.5 .08 .1 .4],...
+                'Value', 5, 'Visible','off', 'Callback', @popfun1);
+            popup2 = uicontrol('Style', 'popup',...
+                'String', {'Home','Away','All Games'},...
+                'Units','normalized', 'Visible','off',...    
+                'Position', [.35 .08 .1 .4], 'Value', 3,...   
+                'Callback', @popfun2);
+            popup1.Visible='on';
+            popup2.Visible='on';
+            t.Visible='on';
+            function popfun1(source,~)
+                val = source.Value;
+                switch val
+                    case 1
+                        n1=5;
+                        n2=5;
+                    case 2
+                        n1=10;
+                        n2=10;
+                    case 3
+                        n1=20;
+                        n2=20;
+                    case 4
+                        n1=30;
+                        n2=30;
+                    case 5
+                        n1=length(games1);
+                        n2=length(games2);
+                end
+                val2=popup2.Value;
+                switch val2
+                    case 1
+                        d1=struct2cell(lastngames(games1,n1,'home'));
+                        d2=struct2cell(lastngames(games2,n2,'home'));
+                        d=[d1,d2];
+                        t.Data=d;
+                    case 2
+                        d1=struct2cell(lastngames(games1,n1,'away'));
+                        d2=struct2cell(lastngames(games2,n2,'away'));
+                        d=[d1,d2];
+                        t.Data=d;
+                    case 3    
+                        d1=struct2cell(lastngames(games1,n1));
+                        d2=struct2cell(lastngames(games2,n2));
+                        d=[d1,d2];
+                        t.Data=d;
+                end
+            end
+            function popfun2(source,~)
+                val = source.Value;
+                switch val
+                    case 1
+                    d1=struct2cell(lastngames(games1,n1,'home'));
+                    d2=struct2cell(lastngames(games2,n2,'home'));
+                    d=[d1,d2];
+                    t.Data=d;
+                case 2
+                    d1=struct2cell(lastngames(games1,n1,'away'));
+                    d2=struct2cell(lastngames(games2,n2,'away'));
+                    d=[d1,d2];
+                    t.Data=d;
+                case 3
+                    d1=struct2cell(lastngames(games1,n1));
+                    d2=struct2cell(lastngames(games2,n2));
+                    d=[d1,d2];
+                    t.Data=d;
+                end
+            end
         end
     end
 end
