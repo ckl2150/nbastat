@@ -157,12 +157,10 @@ function spchosen(~,~)
             set([openf didyoumean],'Visible','off')
             set(singleplayerfig,'Name',currentplayer1.fullname)
             
-%             set(singleplayerfig, 'Color', image(logo));
-%             set(openf, 'Color', [r/255 g/255 b/255]);
-%             set(gca,'Visible','off')
+            set(singleplayerfig, 'Color', [r/255 g/255 b/255]);
+            set(gca,'Visible','off')
             
             set(singleplayerfig,'Visible','on')
-            disp(currentplayer1.filename)
             games = parseStatLine(currentplayer1.filename);
             n=length(games);
             d=struct2cell(lastngames(games,n));
