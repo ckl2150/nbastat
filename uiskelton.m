@@ -140,12 +140,59 @@ set(oneplayersearch,'Visible','on');
         set(singleplayerfig,'Name',currentplayer1.fullname)
         set(singleplayerfig,'Visible','on')
         games = parseStatLine(players.filename);
-        d=struct2cell(lastngames(games,length(games)));
-        rnames={'Minutes Played','Field Goal Percentage','Three Pointer Percentage','Free Throws Percentage','Rebounds',...
+        n=length(games)
+        d=struct2cell(lastngames(games,n));
+         rnames={'Minutes Played','Field Goal Percentage','Three Pointer Percentage','Free Throws Percentage','Rebounds',...
             'Assists','Steals','Blocks','Time Outs?','Total Points'};
-        cname=sprintf('%s Stats',currentplayer1.fullname);
+        cname=sprintf('%s Average Game Statistics',currentplayer1.fullname);
         t=uitable(singleplayerfig,'Data',d,'RowName',rnames,'ColumnName',cname,...
-            'Units','normalized','Position',[.35,.5,.25,.25]);
+            'Units','normalized','Position',[.35,.5,.5,.5],'Visible','off');
+        t.Position(3) = t.Extent(3);
+        t.Position(4) = t.Extent(4);
+        popup1 = uicontrol('Style', 'popup',...
+           'String', {'Last 5 Games','Last 10 Games','Last 20 Games','Last 30 Games','All Games'},...
+           'Units','normalized',... 
+           'Position', [.5 .1 .2 .4],...
+           'Value', 5,...
+           'Callback', @popfun1);
+        popup2 = uicontrol('Style', 'popup',...
+           'String', {'Home','Away','All Games'},...
+            'Units','normalized',...
+            'Position', [.1 .1 .2 .4],...
+        'Value', 3,...   
+        'Callback', @popfun2);
+        t.Visible='on'
+        function popfun1(source,callbackdata)
+        val = source.Value;
+        switch val
+            case 1
+                n=5;
+            case 2
+                n=10;
+            case 3
+                n=20;
+            case 4
+                n=30;
+            case 5
+                n=length(games)
+        end
+        d=struct2cell(lastngames(games,n));
+        t.Data=d
+        end
+       function popfun2(source,callbackdata)
+        val = source.Value;
+        switch val
+            case 1
+                d=struct2cell(lastngames(games,n,'home'));
+                t.Data=d 
+            case 2
+                d=struct2cell(lastngames(games,n,'away'));
+                t.Data=d 
+            case 3
+               d=struct2cell(lastngames(games,n));
+        t.Data=d
+        end
+        end   
     end
 end
 
