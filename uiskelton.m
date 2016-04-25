@@ -166,8 +166,8 @@ function spchosen(~,~)
             games = parseStatLine(currentplayer1.filename);
             n=length(games);
             d=struct2cell(lastngames(games,n));
-            rnames={'<html><font size=+30>Minutes Played','<html><font size=+30>Field Goal Percentage','<html><font size=+30>Three Pointer Percentage','<html><font size=+30>Free Throws Percentage','<html><font size=+30>Rebounds',...
-                '<html><font size=+30>Assists','<html><font size=+30>Steals','<html><font size=+30>Blocks','<html><font size=+30>Turnovers','<html><font size=+30>Total Points'};
+            rnames={'<html><font size=+25>Minutes Played','<html><font size=+25>Field Goal Percentage','<html><font size=+25>Three Pointer Percentage','<html><font size=+25>Free Throws Percentage','<html><font size=+25>Rebounds',...
+                '<html><font size=+25>Assists','<html><font size=+25>Steals','<html><font size=+25>Blocks','<html><font size=+25>Turnovers','<html><font size=+25>Total Points'};
             cname=sprintf('%s Stats',currentplayer1.fullname);
             t=uitable(singleplayerfig,'Data',d,'RowName',rnames,'ColumnName',cname,...
                 'Units','normalized','FontSize', 40, 'Position',[.5,.2,.30,.50]);
