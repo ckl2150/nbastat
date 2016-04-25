@@ -132,7 +132,7 @@ set(oneplayersearch,'Visible','on');
         set(openf,'Visible','off')
         set(singleplayerfig,'Name',currentplayer1.fullname)
         set(singleplayerfig,'Visible','on')
-        games = parseStatLine(players.filename);
+        games = parseStatLine(currentplayer1.filename);
         d=struct2cell(lastngames(games,length(games)));
         rnames={'Minutes Played','Field Goal Percentage','Three Pointer Percentage','Free Throws Percentage','Rebounds',...
             'Assists','Steals','Blocks','Time Outs?','Total Points'};

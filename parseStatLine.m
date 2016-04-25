@@ -1,6 +1,6 @@
-cd('~/Github/nbastattrack/playerdb');
+function games = parseStatLine(filename)
 
-filename = 'players_c_curryst01_gamelog_2016__pgl_basic.csv';
+cd('~/Github/nbastattrack/playerdb');
 fid = fopen(filename);
 
 %specify the delimiter for regexp
