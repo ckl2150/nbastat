@@ -154,6 +154,8 @@ function spchosen(~,~)
         end
         function openplayerstatfig(hObject,~)%Cbfn to open single player fig window
             currentplayer1 = players(fullplayerindex(hObject.Value));
+            phsname = imread(lower(strcat(currentplayer1.last,currentplayer1.first,'.jpg')));
+            playerheadshot = image(phsname);
             set([openf didyoumean],'Visible','off')
             set(singleplayerfig,'Name',currentplayer1.fullname)
             
