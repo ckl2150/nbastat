@@ -139,8 +139,13 @@ set(oneplayersearch,'Visible','on');
         set(openf,'Visible','off')
         set(singleplayerfig,'Name',currentplayer1.fullname)
         set(singleplayerfig,'Visible','on')
-        %games = parseStatLine(players.filename);
-        %MORE TO COME
+        games = parseStatLine(players.filename);
+        d=struct2cell(lastngames(games,length(games)));
+        rnames={'Minutes Played','Field Goal Percentage','Three Pointer Percentage','Free Throws Percentage','Rebounds',...
+            'Assists','Steals','Blocks','Time Outs?','Total Points'};
+        cname=sprintf('%s Stats',currentplayer1.fullname);
+        t=uitable(singleplayerfig,'Data',d,'RowName',rnames,'ColumnName',cname,...
+            'Units','normalized','Position',[.35,.5,.25,.25]);
     end
 end
 
