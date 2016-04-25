@@ -162,14 +162,15 @@ function spchosen(~,~)
 %             set(gca,'Visible','off')
             
             set(singleplayerfig,'Visible','on')
+            disp(currentplayer1.filename)
             games = parseStatLine(currentplayer1.filename);
             n=length(games);
             d=struct2cell(lastngames(games,n));
-            rnames={'Minutes Played','Field Goal Percentage','Three Pointer Percentage','Free Throws Percentage','Rebounds',...
-                'Assists','Steals','Blocks','Time Outs?','Total Points'};
+            rnames={'<html><font size=+30>Minutes Played','<html><font size=+30>Field Goal Percentage','<html><font size=+30>Three Pointer Percentage','<html><font size=+30>Free Throws Percentage','<html><font size=+30>Rebounds',...
+                '<html><font size=+30>Assists','<html><font size=+30>Steals','<html><font size=+30>Blocks','<html><font size=+30>Turnovers','<html><font size=+30>Total Points'};
             cname=sprintf('%s Stats',currentplayer1.fullname);
             t=uitable(singleplayerfig,'Data',d,'RowName',rnames,'ColumnName',cname,...
-                'Units','normalized','Position',[.35,.5,.30,.30]);
+                'Units','normalized','FontSize', 40, 'Position',[.5,.2,.30,.50]);
             t.Position(3)=t.Extent(3);
             t.Position(4)=t.Extent(4);
             popup1 = uicontrol('Style', 'popup',...
