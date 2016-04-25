@@ -318,8 +318,8 @@ set(twoplayersearch_a,'Visible','on');
             comptitle = sprintf('%s vs. %s Comparison',currentplayer1.fullname,currentplayer2.fullname);
             set(compare2fig,'Name',comptitle)
             set(compare2fig,'Visible','on')
-        games1 = parseStatLine(currentplayer1.filename);
-        games2 = parseStatLine(currentplayer2.filename);
+            games1 = parseStatLine(currentplayer1.filename);
+            games2 = parseStatLine(currentplayer2.filename);
             n1=length(games1);
             d1=struct2cell(lastngames(games1,n1));
             n2=length(games1);
@@ -328,7 +328,7 @@ set(twoplayersearch_a,'Visible','on');
             rnames={'Minutes Played','Field Goal Percentage','Three Pointer Percentage','Free Throws Percentage','Rebounds',...
                 'Assists','Steals','Blocks','Time Outs?','Total Points'};
             cname={sprintf('%s Stats',currentplayer1.fullname),sprintf('%s Stats',currentplayer2.fullname)};
-            t=uitable(singleplayerfig,'Data',d,'RowName',rnames,'ColumnName',cname,...
+            t=uitable(compare2fig,'Data',d,'RowName',rnames,'ColumnName',cname,...
                 'Units','normalized','Position',[.35,.5,.30,.30]);
             t.Position(3)=t.Extent(3);
             t.Position(4)=t.Extent(4);
@@ -406,6 +406,7 @@ set(twoplayersearch_a,'Visible','on');
         end
     end
 end
+
     function back2start (~,~)
         set([singleplayerfig compare2fig oneplayersearch ...
             twoplayersearch_a twoplayersearch_b ],'Visible','off')
