@@ -21,29 +21,55 @@ set(openf,'Name','Welcome to Our Awesome Project')
 movegui(openf,'center') %Can now probably get rid of this
 
 logo = imread('nba-logo-on-wood.jpg');
-nbalogo = image(logo);
+background = image(logo);
 set(gca,'Visible','off')
+
+%Create popup menu to allow user to change background to their fave team
+team_names = {'No preference', 'Lakers','Suns','Twolves','Pelicans','Nuggets','Kings','Jazz',...
+    'Rockets','Grizzlies','Mavs','Blazers','Clippers','Thunder','Spurs',...
+    'Warriors','Nets','Knicks','Bucks','Magic','Wizards','Bulls',...
+    'Pistons','Pacers','Hornets','Celtics','Hawks','Heat','Raptors','Cavs'};
+team_names(2:end) = sort(team_names(2:end));
+r = 0;
+g = 0;
+b = 0;
+
+faveteamtext = uicontrol(openf, 'Style', 'text', 'Visible', 'on', 'Units', 'Normalize', 'BackgroundColor', 'white', 'Position', [.018 .76 .1 .03], 'String', 'Pick your favorite team!');
+favoriteteam = uicontrol(openf, 'Style', 'popupmenu', 'Visible', 'on', 'Units', 'Normalize', 'Position', [.015 .7 .1 .05], 'String', team_names, 'Callback', @setteamlogo);
+
+function setteamlogo(hObject,~)
+    teamfilename = hObject.String{hObject.Value};
+    if ~strcmp(teamfilename, 'No preference')
+        [logo r g b] = faveteam(teamfilename);
+        background = image(logo);
+        set(gca,'Visible','off')
+        set([faveteamtext favoriteteam], 'Visible', 'off');
+        set(openf, 'Color', [r/255 g/255 b/255]);
+    else
+        set([faveteamtext favoriteteam], 'Visible', 'off');
+    end
+end
 
 %Create instructions text box as well as push buttons for single player
 %stats path or compare two players path
 
 %Create button group for path options
-optionpbg = uibuttongroup('Visible','off','Units','Normalized',...
-    'Position',[0 0 .2 1],'backgroundcolor','white','BorderType','none');
+% optionpbg = uibuttongroup('Visible','off','Units','Normalized',...
+%     'Position',[0 0 .2 1],'backgroundcolor','white','BorderType','none');
 
 %Textbox with instructions on which button to push
-searchinstruct = uicontrol(optionpbg,'Style','text',...
+searchinstruct = uicontrol(openf,'Style','text',...
     'BackgroundColor','white','Units','Normalized',...
-    'Position',[0 .45 .8 .1],'String','Would you like to:','FontSize',18);
+    'Position',[.022 .5 .08 .03],'String','Would you like to:','FontSize',12);
 
 %Pushbutton for looking at single player
-singleplayer = uicontrol(optionpbg,'Style','pushbutton',...
+singleplayer = uicontrol(openf,'Style','pushbutton',...
     'String','Look at single player','Units','Normalized',...
-    'Position',[.1 .4 .75 .075],'Callback',@spchosen);%callback function to open search box
+    'Position',[.015 .45 .1 .05],'Callback',@spchosen);%callback function to open search box
 %Pushbutton for comparing two players
-twoplayers = uicontrol(optionpbg,'Style','pushbutton',...
+twoplayers = uicontrol(openf,'Style','pushbutton',...
     'String','Compare two players','Units','Normalized',...
-    'Position',[.1 .3 .75 .075],'Callback',@tpchosen);%callback function to open player-1 search box
+    'Position',[.015 .40 .1 .05],'Callback',@tpchosen);%callback function to open player-1 search box
 
 %Create figure to show single player stats
 singleplayerfig = figure('Visible','off','color','white',...
@@ -70,7 +96,7 @@ back2openfigfromc2fig = uicontrol(compare2fig,'Style','pushbutton',...
 
 %Open gui is turned on
 set(openf,'Visible','on')
-set(optionpbg,'Visible','on')
+set([searchinstruct singleplayer twoplayers],'Visible','on')
 
 %global function which error checks user input of players
 
@@ -80,19 +106,20 @@ oneplayersearch = uibuttongroup('Visible','off','Units','Normalized',...
 
 %Callback function if searching single player
 function spchosen(~,~)
-set(optionpbg,'Visible','off');
+    set([searchinstruct singleplayer twoplayers],'Visible','off');
 
+    %Search for player editable textbox and instruction
+    oneplayersearchbox = uicontrol(oneplayersearch,'Style','edit',...
+        'Units','Normalized','Position',[.05 .35 .8 .05],...
+        'Callback', @confirm);%callback function to open fig for single player
+    oneplayerinstruct = uicontrol(oneplayersearch,'Style','text',...
+        'Units','Normalized','Position',[.05 .45 .8 .05],...
+        'String','Enter player''s last name:');
 
-%Search for player editable textbox and instruction
-oneplayersearchbox = uicontrol(oneplayersearch,'Style','edit',...
-    'Units','Normalized','Position',[.05 .35 .8 .05],...
-    'Callback', @confirm);%callback function to open fig for single player
-oneplayerinstruct = uicontrol(oneplayersearch,'Style','text',...
-    'Units','Normalized','Position',[.05 .45 .8 .05],...
-    'String','Enter player''s last name:');
-
-%Make search for player visible
-set(oneplayersearch,'Visible','on');
+    
+    
+    %Make search for player visible
+    set(oneplayersearch,'Visible','on');
         
     function confirm(hObject,~)
         %Stores string from user input
@@ -129,6 +156,11 @@ set(oneplayersearch,'Visible','on');
             currentplayer1 = players(fullplayerindex(hObject.Value));
             set([openf didyoumean],'Visible','off')
             set(singleplayerfig,'Name',currentplayer1.fullname)
+            
+%             set(singleplayerfig, 'Color', image(logo));
+%             set(openf, 'Color', [r/255 g/255 b/255]);
+%             set(gca,'Visible','off')
+            
             set(singleplayerfig,'Visible','on')
             games = parseStatLine(currentplayer1.filename);
             n=length(games);
@@ -150,9 +182,9 @@ set(oneplayersearch,'Visible','on');
                 'Units','normalized', 'Visible','off',...    
                 'Position', [.35 .08 .1 .4], 'Value', 3,...   
                 'Callback', @popfun2);
-            popup1.Visible='on'
-            popup2.Visible='on'
-            t.Visible='on'
+            popup1.Visible='on';
+            popup2.Visible='on';
+            t.Visible='on';
             function popfun1(source,~)
                 val = source.Value;
                 switch val
@@ -165,19 +197,19 @@ set(oneplayersearch,'Visible','on');
                     case 4
                         n=30;
                     case 5
-                        n=length(games)
+                        n=length(games);
                 end
-                val2=popup2.Value
+                val2=popup2.Value;
                 switch val2
                     case 1
                         d=struct2cell(lastngames(games,n,'home'));
-                        t.Data=d 
+                        t.Data=d;
                     case 2
                         d=struct2cell(lastngames(games,n,'away'));
-                        t.Data=d 
+                        t.Data=d;
                     case 3    
                         d=struct2cell(lastngames(games,n));
-                        t.Data=d
+                        t.Data=d;
                 end
             end
             function popfun2(source,~)
@@ -185,13 +217,13 @@ set(oneplayersearch,'Visible','on');
                 switch val
                     case 1
                     d=struct2cell(lastngames(games,n,'home'));
-                    t.Data=d 
+                    t.Data=d;
                 case 2
                     d=struct2cell(lastngames(games,n,'away'));
-                    t.Data=d 
+                    t.Data=d;
                 case 3
                     d=struct2cell(lastngames(games,n));
-                    t.Data=d
+                    t.Data=d;
                 end
             end    
         end
@@ -208,7 +240,7 @@ twoplayersearch_b = uibuttongroup('Visible','off','Units','Normalized',...
 
 %Callback function if comparing two players
 function tpchosen(~,~)
-set(optionpbg,'Visible','off')
+set([searchinstruct singleplayer twoplayers],'Visible','off')
 
 
 %Search for player one editable textbox and instruction
@@ -292,6 +324,6 @@ end
     function back2start (~,~)
         set([singleplayerfig compare2fig oneplayersearch ...
             twoplayersearch_a twoplayersearch_b ],'Visible','off')
-        set([openf optionpbg],'Visible','on')
+        set([openf searchinstruct singleplayer twoplayers],'Visible','on')
     end
 end
