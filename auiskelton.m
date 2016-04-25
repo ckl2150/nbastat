@@ -166,13 +166,13 @@ function spchosen(~,~)
             games = parseStatLine(currentplayer1.filename);
             n=length(games);
             d=struct2cell(lastngames(games,n));
-            rnames={'<html><font size=+18>Minutes Played','<html><font size=+18>Field Goal Percentage','<html><font size=+18>Three Pointer Percentage','<html><font size=+18>Free Throws Percentage','<html><font size=+18>Rebounds',...
-                '<html><font size=+18>Assists','<html><font size=+18>Steals','<html><font size=+18>Blocks','<html><font size=+18>Turnovers','<html><font size=+18>Total Points'};
-            cname=sprintf('<html><font size=+20>%s Stats',currentplayer1.fullname);
+            rnames={'<html><font size=+15>Minutes Played','<html><font size=+15>Field Goal Percentage','<html><font size=+15>Three Pointer Percentage','<html><font size=+15>Free Throws Percentage','<html><font size=+15>Rebounds',...
+                '<html><font size=+15>Assists','<html><font size=+15>Steals','<html><font size=+15>Blocks','<html><font size=+15>Turnovers','<html><font size=+15>Total Points'};
+            cname=sprintf('<html><font size=+15>%s Stats',currentplayer1.fullname);
             t=uitable(singleplayerfig,'Data',d,'RowName',rnames,'ColumnName',cname,...
-                'Units','normalized','FontSize', 40, 'Position',[.5,.2,.30,.50]);
-            t.Position(3)=t.Extent(3);
-            t.Position(4)=t.Extent(4);
+                'Units','normalized','FontSize', 40, 'Position',[.3,.2,.65,.745]);
+%             t.Position(3)=t.Extent(3);
+%             t.Position(4)=t.Extent(4);
             popup1 = uicontrol('Style', 'popup',...
                 'String', {'Last 5 Games','Last 10 Games',...
                 'Last 20 Games','Last 30 Games','All Games'},...
