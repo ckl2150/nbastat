@@ -125,21 +125,22 @@ set(oneplayersearch,'Visible','on');
                 %end
             end
         end
+        function openplayerstatfig(hObject,~)%Cbfn to open single player fig window
+            currentplayer1 = players(fullplayerindex(hObject.Value));
+            set([openf didyoumean],'Visible','off')
+            set(singleplayerfig,'Name',currentplayer1.fullname)
+            set(singleplayerfig,'Visible','on')
+            games = parseStatLine(currentplayer1.filename);
+            d=struct2cell(lastngames(games,length(games)));
+            rnames={'Minutes Played','Field Goal Percentage','Three Pointer Percentage','Free Throws Percentage','Rebounds',...
+                'Assists','Steals','Blocks','Time Outs?','Total Points'};
+            cname=sprintf('%s Stats',currentplayer1.fullname);
+            t=uitable(singleplayerfig,'Data',d,'RowName',rnames,'ColumnName',cname,...
+                'Units','normalized','Position',[.35,.5,.25,.25]);
+        end
     end
 
-    function openplayerstatfig(hObject,~)%Cbfn to open single player fig window
-        currentplayer1 = players(fullplayerindex(hObject.Value));
-        set(openf,'Visible','off')
-        set(singleplayerfig,'Name',currentplayer1.fullname)
-        set(singleplayerfig,'Visible','on')
-        games = parseStatLine(currentplayer1.filename);
-        d=struct2cell(lastngames(games,length(games)));
-        rnames={'Minutes Played','Field Goal Percentage','Three Pointer Percentage','Free Throws Percentage','Rebounds',...
-            'Assists','Steals','Blocks','Time Outs?','Total Points'};
-        cname=sprintf('%s Stats',currentplayer1.fullname);
-        t=uitable(singleplayerfig,'Data',d,'RowName',rnames,'ColumnName',cname,...
-            'Units','normalized','Position',[.35,.5,.25,.25]);
-    end
+    
 end
 
 
@@ -216,7 +217,7 @@ set(twoplayersearch_a,'Visible','on');
 
         function getplayer2 (hObject,~) %Cbfn to print first player's name and prompt for 2nd player FIX THIS SHIT
             currentplayer1 = players(fullplayerindex(hObject.Value));
-            set(twoplayersearch_a,'Visible','off');
+            set([didyoumean twoplayersearch_a],'Visible','off');
             player1display = uicontrol(twoplayersearch_b,'Style','text',...
                 'String',currentplayer1.fullname,'Units','Normalized',...
                 'Position',[.05 .5 .8 .05]); %FIX THIS LINE
@@ -234,8 +235,8 @@ set(twoplayersearch_a,'Visible','on');
     end
 end
     function back2start (~,~)
-        set([singleplayerfig compare2fig oneplayersearch...
-            twoplayersearch_a twoplayersearch_b],'Visible','off')
+        set([singleplayerfig compare2fig oneplayersearch ...
+            twoplayersearch_a twoplayersearch_b ],'Visible','off')
         set([openf optionpbg],'Visible','on')
     end
 end
