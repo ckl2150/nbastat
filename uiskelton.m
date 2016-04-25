@@ -199,7 +199,7 @@ set(twoplayersearch_a,'Visible','on');
                 namearr = cell(1,length(fullplayerindex));
                 for i = 1:length(fullplayerindex)
                     namearr{i} = players(fullplayerindex(i)).fullname;
-                end
+                    end
                 
                 if hObject == twoplayersearchbox1
                     compare2playersinstruct1.String = 'Did you mean:';
