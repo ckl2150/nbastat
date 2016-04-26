@@ -168,17 +168,15 @@ function spchosen(~,~)
             set(singleplayerfig,'Visible','on')
             
             
-%             playapanel = uipanel('Parent', singleplayerfig,'Units', 'Normalize', 'Position', [0 0 .2 1]);
-%             set(playapanel, 'Visible', 'on');
-%              phsname = imread(lower(strcat(currentplayer1.last,currentplayer1.first,'.jpg')));
-%             playerheadshot = image(phsname);
-%             set(gca,'Visible','off')
-%              ha = axes('Units', 'Normalized', 'Position', [0 .5 .5 .5]);
-%              im = imshow(phsname);
-%              disp(phsname)
-%              set(im, 'AlphaData', newphs);
-%              ha.HandleVisibility = 'off';
-%              ha.Visible = 'off';
+            %Shows player headshot and positions it to the side
+             phsname = imread(lower(strcat(currentplayer1.last,currentplayer1.first,'.jpg')));           
+             set(gca,'Visible','off')
+              ha = axes('Units', 'Normalized', 'Position', [0 .5 .25 .25]);
+              im = imshow(phsname);
+              ha.HandleVisibility = 'off';
+              ha.Visible = 'off';
+            
+            
             
             games = parseStatLine(currentplayer1.filename);
             n=length(games);
@@ -194,179 +192,26 @@ function spchosen(~,~)
                 'String', {'Last 5 Games','Last 10 Games',...
                 'Last 20 Games','Last 30 Games','All Games'},...
                 'Units','normalized', 'Position', [.5 .08 .1 .4],...
-                'Value', 5,'Callback', @popfun1);
+                'Value', 5, 'Visible','off', 'Callback', @popfun1);
             popup2 = uicontrol('Style', 'popup',...
                 'String', {'Home','Away','All Games'},...
-                'Units','normalized',...    
+                'Units','normalized', 'Visible','off',...    
                 'Position', [.35 .08 .1 .4], 'Value', 3,...   
                 'Callback', @popfun2);
-%            popup1 = uicontrol('Style', 'popup',...
-%                'String', {'Last 5 Games','Last 10 Games',...
-%                'Last 20 Games','Last 30 Games','All Games'},...
-%                'Units','normalized', 'Position', [.5 .08 .1 .4],...
-%                'Value', 5, 'Visible','off', 'Callback', @popfun1);
-%            popup2 = uicontrol('Style', 'popup',...
-%                'String', {'Home','Away','All Games'},...
-%                'Units','normalized', 'Visible','off',...    
-%                'Position', [.35 .08 .1 .4], 'Value', 3,...   
-%                'Callback', @popfun2);
-%            popup1.Visible='on';
-%            popup2.Visible='on';
-%            t.Visible='on';
-            pb1=uicontrol('Style','pushbutton','String','Plot Stat','Units','normalized',...
-                'Position', [.25 .825 .05 .07],'Callback', @pbfun1);
-            pb2=uicontrol('Style','pushbutton','String','Plot Stat','Units','normalized',...
-                'Position', [.25 .754 .05 .07],'Callback', @pbfun2);
-            pb3=uicontrol('Style','pushbutton','String','Plot Stat','Units','normalized',...
-                'Position', [.25 .683 .05 .071],'Callback', @pbfun3);
-            pb4=uicontrol('Style','pushbutton','String','Plot Stat','Units','normalized',...
-                'Position', [.25 .612 .05 .07],'Callback', @pbfun4);
-            pb5=uicontrol('Style','pushbutton','String','Plot Stat','Units','normalized',...
-                'Position', [.25 .541 .05 .071],'Callback', @pbfun5);
-            pb6=uicontrol('Style','pushbutton','String','Plot Stat','Units','normalized',...
-                'Position', [.25 .47 .05 .07],'Callback', @pbfun6);
-            pb7=uicontrol('Style','pushbutton','String','Plot Stat','Units','normalized',...
-                'Position', [.25 .4 .05 .07],'Callback', @pbfun7);
-            pb8=uicontrol('Style','pushbutton','String','Plot Stat','Units','normalized',...
-                'Position', [.25 .33 .05 .07],'Callback', @pbfun8);
-            pb9=uicontrol('Style','pushbutton','String','Plot Stat','Units','normalized',...
-                'Position', [.25 .26 .05 .07],'Callback', @pbfun9);
-            pb10=uicontrol('Style','pushbutton','String','Plot Stat','Units','normalized',...
-                'Position', [.25 .19 .05 .07],'Callback', @pbfun10);
-            function pbfun1(~,~)
-                set(singleplayerfig,'Visible','off')
-                tit=sprintf('%s Minutes Played',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
-                backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [.1 .9 .05 .07],'Callback', @back69);
-                backbutton.Position(3)=backbutton.Extent(3);
-                backbutton.Position(4)=backbutton.Extent(4);
-                [x,y]=plotStats(games,length(games),'min');
-                plot(x,y,'*')
-                title(tit);
-                plotstatfig.Visible='on'
-            end
-            function pbfun2(~,~)
-                set(singleplayerfig,'Visible','off')
-                tit=sprintf('%s Field Goal Percentages',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
-                backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [.1 .9 .05 .07],'Callback', @back69);
-                backbutton.Position(3)=backbutton.Extent(3);
-                backbutton.Position(4)=backbutton.Extent(4);
-                [x,y]=plotStats(games,length(games),'fgp');
-                plot(x,y,'*')
-                title(tit);
-                plotstatfig.Visible='on'
-            end
-            function pbfun3(~,~)
-                set(singleplayerfig,'Visible','off')
-                tit=sprintf('%s Three Point Percentages',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
-                backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [.1 .9 .05 .07],'Callback', @back69);
-                backbutton.Position(3)=backbutton.Extent(3);
-                backbutton.Position(4)=backbutton.Extent(4);
-                [x,y]=plotStats(games,length(games),'3pp');
-                plot(x,y,'*')
-                title(tit);
-                plotstatfig.Visible='on'
-            end
-            function pbfun4(~,~)
-                set(singleplayerfig,'Visible','off')
-                tit=sprintf('%s Free Throw Percentages',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
-                backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [.1 .9 .05 .07],'Callback', @back69);
-                backbutton.Position(3)=backbutton.Extent(3);
-                backbutton.Position(4)=backbutton.Extent(4);
-                [x,y]=plotStats(games,length(games),'ftp');
-                plot(x,y,'*')
-                title(tit);
-                plotstatfig.Visible='on'
-            end
-            function pbfun5(~,~)
-                set(singleplayerfig,'Visible','off')
-                tit=sprintf('%s Rebounds',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
-                backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [.1 .9 .05 .07],'Callback', @back69);
-                backbutton.Position(3)=backbutton.Extent(3);
-                backbutton.Position(4)=backbutton.Extent(4);
-                [x,y]=plotStats(games,length(games),'rebound');
-                plot(x,y,'*')
-                title(tit);
-                plotstatfig.Visible='on'
-            end
-            function pbfun6(~,~)
-                set(singleplayerfig,'Visible','off')
-                tit=sprintf('%s Assists',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
-                backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [.1 .9 .05 .07],'Callback', @back69);
-                backbutton.Position(3)=backbutton.Extent(3);
-                backbutton.Position(4)=backbutton.Extent(4);
-                [x,y]=plotStats(games,length(games),'ast');
-                plot(x,y,'*')
-                title(tit);
-                plotstatfig.Visible='on'
-            end
-            function pbfun7(~,~)
-                set(singleplayerfig,'Visible','off')
-                tit=sprintf('%s Steals',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
-                backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [.1 .9 .05 .07],'Callback', @back69);
-                backbutton.Position(3)=backbutton.Extent(3);
-                backbutton.Position(4)=backbutton.Extent(4);
-                [x,y]=plotStats(games,length(games),'stl');
-                plot(x,y,'*')
-                title(tit);
-                plotstatfig.Visible='on'
-            end
-            function pbfun8(~,~)
-                set(singleplayerfig,'Visible','off')
-                tit=sprintf('%s Blocks',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
-                backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [.1 .9 .05 .07],'Callback', @back69);
-                backbutton.Position(3)=backbutton.Extent(3);
-                backbutton.Position(4)=backbutton.Extent(4);
-                [x,y]=plotStats(games,length(games),'blk');
-                plot(x,y,'*')
-                title(tit);
-                plotstatfig.Visible='on'
-            end
-            function pbfun9(~,~)
-                set(singleplayerfig,'Visible','off')
-                tit=sprintf('%s Turnovers',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
-                backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [.1 .9 .05 .07],'Callback', @back69);
-                backbutton.Position(3)=backbutton.Extent(3);
-                backbutton.Position(4)=backbutton.Extent(4);
-                [x,y]=plotStats(games,length(games),'to');
-                plot(x,y,'*')
-                title(tit);
-                plotstatfig.Visible='on'
-            end
-            function pbfun10(~,~)
-                set(singleplayerfig,'Visible','off')
-                tit=sprintf('%s Total Points',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
-                backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [.1 .9 .05 .07],'Callback', @back69);
-                backbutton.Position(3)=backbutton.Extent(3);
-                backbutton.Position(4)=backbutton.Extent(4);
-                [x,y]=plotStats(games,length(games),'pts');
-                plot(x,y,'*')
-                title(tit);
-                plotstatfig.Visible='on'
-            end
-            function back69(~,~)
-                plotstatfig.Visible='off'
-                singleplayerfig.Visible='on'
-            end
+             %Shows some basic information about the player
+            vitalstr = sprintf('Team: %s\n\nPosition: %s\n\nAge: %s',...
+                currentplayer1.team, currentplayer1.posit, games.Age);
+            team = uicontrol('Style','text','String',vitalstr,...
+                'Units','Normalized','Position',[.01 .4 .2 .1],...
+                'BackgroundColor','w','FontSize',14);
+            
+            %Trying to access the first two columns of the last row to
+            %display age at last game but forgetting how to do this
+            % age = games.Age(82)
+            
+            popup1.Visible='on';
+            popup2.Visible='on';
+            t.Visible='on';
             function popfun1(source,~)
                 val = source.Value;
                 switch val
@@ -507,7 +352,7 @@ set(twoplayersearch_a,'Visible','on');
             d2=struct2cell(lastngames(games2,n2));
             d=[d1,d2];
             rnames={'Minutes Played','Field Goal Percentage','Three Pointer Percentage','Free Throws Percentage','Rebounds',...
-                'Assists','Steals','Blocks','Time Outs?','Total Points'};
+                'Assists','Steals','Blocks','Turnovers','Total Points'};
             cname={sprintf('%s Stats',currentplayer1.fullname),sprintf('%s Stats',currentplayer2.fullname)};
             t=uitable(compare2fig,'Data',d,'RowName',rnames,'ColumnName',cname,...
                 'Units','normalized','Position',[.35,.5,.30,.30]);
@@ -523,6 +368,31 @@ set(twoplayersearch_a,'Visible','on');
                 'Units','normalized', 'Visible','off',...    
                 'Position', [.35 .08 .1 .4], 'Value', 3,...   
                 'Callback', @popfun2);
+            
+            %Can play around with where this is so that loading it doesn't
+            %look as fucked up
+            
+            %Shows player headshot for player1 and positions it 
+             p1name = imread(lower(strcat(currentplayer1.last,currentplayer1.first,'.jpg')));           
+             set(gca,'Visible','off')
+              ha1 = axes('Units', 'Normalized', 'Position', [.4 .8 .15 .15]);
+              im1 = imshow(p1name);
+              ha1.HandleVisibility = 'off';
+              ha1.Visible = 'off';
+            
+            %Shows player headshot for player2 and positions it 
+             p2name = imread(lower(strcat(currentplayer2.last,currentplayer2.first,'.jpg')));           
+             set(gca,'Visible','off')
+              ha2 = axes('Units', 'Normalized', 'Position', [.6 .8 .15 .15]);
+              im2 = imshow(p2name);
+              ha2.HandleVisibility = 'off';
+              ha2.Visible = 'off';
+              
+              vs = uicontrol('Style','text','Units','Normalized',...
+                  'Position',[.565 .82 .02 .02],'String','VS.',...
+                  'FontSize',14);
+              
+              
             popup1.Visible='on';
             popup2.Visible='on';
             t.Visible='on';
