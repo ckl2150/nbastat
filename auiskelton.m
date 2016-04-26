@@ -40,7 +40,7 @@ favoriteteam = uicontrol(openf, 'Style', 'popupmenu', 'Visible', 'on', 'Units', 
 function setteamlogo(hObject,~)
     teamfilename = hObject.String{hObject.Value};
     if ~strcmp(teamfilename, 'No preference')
-        [logo r g b] = faveteam(teamfilename);
+        [logo, r, g, b] = faveteam(teamfilename);
         background = image(logo);
         set(gca,'Visible','off')
         set([faveteamtext favoriteteam], 'Visible', 'off');
@@ -84,15 +84,39 @@ compare2fig = figure('Visible','off','color','white',...
 set(compare2fig,'Name','Welcome to Our Awesome Project')
 movegui(compare2fig,'center')
 
-%Create back button to go back to opening figure from single display figures
-back2openfigfromspfig = uicontrol(singleplayerfig,'Style','pushbutton',...
-    'String','Start Over','Units','Normalized','Position',[0 .95 .05 .05],...
-    'Callback',@back2start);%Callback function that goes back to the opening figure
+%Getting rid of back button to go opening figure
 
-%Create back button to go back to opening figure from two display figures
-back2openfigfromc2fig = uicontrol(compare2fig,'Style','pushbutton',...
-    'String','Start Over','Units','Normalized','Position',[0 .95 .05 .05],...
-    'Callback',@back2start);%Callback function that goes back to the opening figure
+%Create back button to go back to opening figure from single display figures
+%    back2openfigfromspfig = uicontrol(singleplayerfig,'Style','pushbutton',...
+%         'String','Start Over','Units','Normalized','Position',[0 .95 .05 .05],...
+%            'Callback',@back2start);%Callback function that goes back to the opening figure
+
+%Create back button to go back to single player search from singleplayerfig
+back2spchosenbutton = uicontrol(singleplayerfig,'Style','pushbutton',...
+    'String','Back to Search','Units','Normalized','Position',[0 .95 .075 .05],...
+    'Callback',@go2spchosen);%Callback function that goes back to single player search
+
+%Create back button to go to 2 player search from singleplayer fig
+go2tpchosenbutton = uicontrol(singleplayerfig,'Style','pushbutton',...
+    'String','Compare two Players','Units','Normalized','Position',[.075 .95 .1 .05],...
+    'Callback',@go2tpchosen);%Callback function that goes back to the opening figure
+
+%getting rid of back button to go to opening figure
+
+%Create back button to go back to opening figure from two display figure
+%    back2openfigfromc2fig = uicontrol(compare2fig,'Style','pushbutton',...
+%        'String','Start Over','Units','Normalized','Position',[0 .95 .05 .05],...
+%        'Callback',@back2start);%Callback function that goes back to the opening figure
+
+%Create back button to go back to tpchosen from two display figure
+back2tpchosenbutton = uicontrol(compare2fig,'Style','pushbutton',...
+    'String','Back to Search','Units','Normalized','Position',[0 .95 .075 .05],...
+    'Callback',@go2tpchosen);%Callback function that goes to tpchosen
+
+%Create back button to go to spchosen from 2 player compare fig
+go2spchosenbutton = uicontrol(compare2fig,'Style','pushbutton',...
+    'String','Look at Single Player','Units','Normalized','Position',[.075 .95 .1 .05],...
+    'Callback',@go2spchosen);%Callback function that goes back to single player search
 
 %Open gui is turned on
 set(openf,'Visible','on')
@@ -111,6 +135,7 @@ end
 %Callback function if searching single player
 function spchosen(~,~)
     set([searchinstruct singleplayer twoplayers],'Visible','off');
+%    set(back2openspchosengroup,'Visible','on');
 
     %Search for player editable textbox and instruction
     oneplayersearchbox = uicontrol(oneplayersearch,'Style','edit',...
@@ -119,7 +144,11 @@ function spchosen(~,~)
     oneplayerinstruct = uicontrol(oneplayersearch,'Style','text',...
         'Units','Normalized','Position',[.05 .45 .8 .05],...
         'String','Enter player''s last name:');
-
+   
+    %Back button to go tpchosen from spchosen
+    oneplayerbackbutton = uicontrol(oneplayersearch,'Style','pushbutton',...
+    'String','Compare two Players','Units','Normalized','Position',[0 .95 .5 .05],...
+    'Callback',@go2tpchosen);%Callback function that goes to tpchosen
     
     
     %Make search for player visible
@@ -200,9 +229,9 @@ function spchosen(~,~)
                 'Callback', @popfun2);
              %Shows some basic information about the player
             vitalstr = sprintf('Team: %s\n\nPosition: %s\n\nAge: %s',...
-                currentplayer1.team, currentplayer1.posit, games.Age);
+                currentplayer1.team, currentplayer1.posit, games.Age); %see note below
             team = uicontrol('Style','text','String',vitalstr,...
-                'Units','Normalized','Position',[.01 .4 .2 .1],...
+                'Units','Normalized','Position',[.01 .4 .25 .1],...
                 'BackgroundColor','w','FontSize',14);
             
             %Trying to access the first two columns of the last row to
@@ -269,6 +298,14 @@ twoplayersearch_b = uibuttongroup('Visible','off','Units','Normalized',...
 function tpchosen(~,~)
 set([searchinstruct singleplayer twoplayers],'Visible','off')
 
+
+%Back buttons to go to spchosen
+comp2playerbackbutton_a = uicontrol(twoplayersearch_a,'Style','pushbutton',...
+    'String','Look at one Player','Units','Normalized','Position',[0 .95 .5 .05],...
+    'Callback',@go2spchosen);%Callback function that goes to spchosen
+comp2playerbackbutton_b = uicontrol(twoplayersearch_b,'Style','pushbutton',...
+    'String','Look at one Player','Units','Normalized','Position',[0 .95 .5 .05],...
+    'Callback',@go2spchosen);%Callback function that goes to spchosen
 
 %Search for player one editable textbox and instruction
 twoplayersearchbox1 = uicontrol(twoplayersearch_a,'Style','edit',...
@@ -460,7 +497,22 @@ end
 
     function back2start (~,~)
         set([singleplayerfig compare2fig oneplayersearch ...
-            twoplayersearch_a twoplayersearch_b ],'Visible','off')
+            twoplayersearch_a twoplayersearch_b],'Visible','off')
         set([openf searchinstruct singleplayer twoplayers],'Visible','on')
     end
+
+    function go2spchosen(~,~)
+        set([singleplayerfig compare2fig twoplayersearch_a twoplayersearch_b],...
+            'Visible','off');
+        set(openf,'Visible','on');
+        spchosen;
+    end
+
+    function go2tpchosen(~,~)
+        set([singleplayerfig compare2fig twoplayersearch_a twoplayersearch_b],...
+            'Visible','off');
+        set(openf,'Visible','on');
+        tpchosen;
+    end
+        
 end
