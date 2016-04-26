@@ -18,7 +18,7 @@ function [x,y] = plotStats(games, n, stat)
     to = zeros(1,n);
     pts = zeros(1,n);
     
-    x = 1:length(n);
+    x = 1:n;
     while count ~= n+1
         %only retrieves information if player has played in the current game
         if ~isempty(games(gamenum).G)
@@ -29,11 +29,11 @@ function [x,y] = plotStats(games, n, stat)
         
             pass = false;
         
-            if strcmp(format,'away') && isempty(games(gamenum).At)
-                pass = true;
-            elseif strcmp(format,'home') && ~isempty(games(gamenum).At)
-                pass = true;
-            end
+%             if strcmp(format,'away') && isempty(games(gamenum).At)
+%                 pass = true;
+%             elseif strcmp(format,'home') && ~isempty(games(gamenum).At)
+%                 pass = true;
+%             end
         
             if ~pass
                 %Converts minutes to decimal format
@@ -88,13 +88,13 @@ function [x,y] = plotStats(games, n, stat)
         y = rebounds;
     elseif strcmp(stat,'ast')
         y = assists;
-    elseif strcmp(star,'stl')
+    elseif strcmp(stat,'stl')
         y = steals;
     elseif strcmp(stat,'blk')
         y = blocks;
     elseif strcmp(stat,'to')
         y = to;
-    elseif strcmp(star,'pts')
+    elseif strcmp(stat,'pts')
         y = pts;
     end
 end
