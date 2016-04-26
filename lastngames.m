@@ -92,19 +92,38 @@ end
 calcavg = @(made, attempt) sum(made)/sum(attempt);
 
 minutes = mean(minutes);
-fgp = calcavg(fgmade,fgatmpt);
-threepp = calcavg(threeptmade,threeptatmpt);
-ftp = calcavg(ftmade,ftatmpt);
-rebounds = mean(rebounds);
-assists = mean(assists);
-steals = mean(steals);
-blocks = mean(blocks);
-to = mean(to);
-pts = mean(pts);
+minstr = sprintf('%.1f', minutes);
 
-avgs = struct('MP', minutes, 'FGp', fgp, 'ThreePtp', threepp, 'FTp', ftp, 'Rebounds',...
-    rebounds, 'Assists', assists, 'Steals', steals, 'Blocks', blocks,...
-    'TO', to, 'Pts', pts);
+fgp = calcavg(fgmade,fgatmpt);
+fgpstr = sprintf('%.2f', fgp);
+
+threepp = calcavg(threeptmade,threeptatmpt);
+threeppstr = sprintf('%.2f', threepp);
+
+ftp = calcavg(ftmade,ftatmpt);
+ftpstr = sprintf('%.2f', ftp);
+
+rebounds = mean(rebounds);
+rbdstr = sprintf('%.1f', rebounds);
+
+assists = mean(assists);
+aststr = sprintf('%.1f', assists);
+
+steals = mean(steals);
+stlstr = sprintf('%.1f', steals);
+
+blocks = mean(blocks);
+blkstr = sprintf('%.1f', blocks);
+
+to = mean(to);
+tostr = sprintf('%.1f', to);
+
+pts = mean(pts);
+ptsstr = sprintf('%.1f', pts);
+
+avgs = struct('MP', minstr, 'FGp', fgpstr, 'ThreePtp', threeppstr, 'FTp', ftpstr, 'Rebounds',...
+    rbdstr, 'Assists', aststr, 'Steals', stlstr, 'Blocks', blkstr,...
+    'TO', tostr, 'Pts', ptsstr);
 
 end
 

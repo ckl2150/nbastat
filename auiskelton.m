@@ -103,6 +103,10 @@ set([searchinstruct singleplayer twoplayers],'Visible','on')
 %Create button group for single player search 
 oneplayersearch = uibuttongroup('Visible','off','Units','Normalized',...
     'Position',[0 0 .15 1],'backgroundcolor','white','BorderType','none');
+disp(favoriteteam.Value)
+if favoriteteam.Value > 1
+    oneplayersearch.BackgroundColor = [r/255 g/255 b/255];
+end
 
 %Callback function if searching single player
 function spchosen(~,~)
@@ -166,15 +170,15 @@ function spchosen(~,~)
             
 %             playapanel = uipanel('Parent', singleplayerfig,'Units', 'Normalize', 'Position', [0 0 .2 1]);
 %             set(playapanel, 'Visible', 'on');
-             phsname = imread(lower(strcat(currentplayer1.last,currentplayer1.first,'.jpg')));
+%              phsname = imread(lower(strcat(currentplayer1.last,currentplayer1.first,'.jpg')));
 %             playerheadshot = image(phsname);
 %             set(gca,'Visible','off')
-             ha = axes('Units', 'Normalized', 'Position', [0 .5 .5 .5]);
-             im = imshow(phsname);
-             disp(phsname)
-             set(im, 'AlphaData', newphs);
-             ha.HandleVisibility = 'off';
-             ha.Visible = 'off';
+%              ha = axes('Units', 'Normalized', 'Position', [0 .5 .5 .5]);
+%              im = imshow(phsname);
+%              disp(phsname)
+%              set(im, 'AlphaData', newphs);
+%              ha.HandleVisibility = 'off';
+%              ha.Visible = 'off';
             
             games = parseStatLine(currentplayer1.filename);
             n=length(games);
@@ -183,7 +187,7 @@ function spchosen(~,~)
                 '<html><font size=+15>Assists','<html><font size=+15>Steals','<html><font size=+15>Blocks','<html><font size=+15>Turnovers','<html><font size=+15>Total Points'};
             cname=sprintf('<html><font size=+15>%s Stats',currentplayer1.fullname);
             t=uitable(singleplayerfig,'Data',d,'RowName',rnames,'ColumnName',cname,...
-                'Units','normalized','FontSize', 40, 'Position',[.3,.2,.65,.745]);
+                'Units','normalized','FontSize', 40, 'Position',[.3,.2,.64,.748]);
 %             t.Position(3)=t.Extent(3);
 %             t.Position(4)=t.Extent(4);
             popup1 = uicontrol('Style', 'popup',...

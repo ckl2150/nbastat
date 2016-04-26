@@ -30,12 +30,17 @@ for i = 2:4:18
         
         %pulls out first and last name into variables for manipulation
         firstn = lower(txt{j,i+1});
+        firstupper = strcat(upper(firstn(1)), firstn(2:end));
+        
+        firstn = strrep(firstn,'.','');
+
+        
         player(count).first = firstn;
         
         lastn = lower(strtrim(txt{j,i+3}));
         player(count).last = lastn;
         
-        firstupper = strcat(upper(firstn(1)), firstn(2:end));
+   
         lastupper = strcat(upper(lastn(1)), lastn(2:end));
         full = sprintf('%s %s', firstupper, lastupper);
         player(count).fullname = full;
