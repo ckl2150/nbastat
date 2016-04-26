@@ -87,16 +87,14 @@ while count ~= n+1
     end
 end
 
+%anonymous function used to quickly refer to the formula for calculating
+%show percentage
+calcavg = @(made, attempt) sum(made)/sum(attempt);
+
 minutes = mean(minutes);
-fgmade = sum(fgmade);
-fgatmpt = sum(fgatmpt);
-fgp = fgmade/fgatmpt;
-threeptmade = sum(threeptmade);
-threeptatmpt = sum(threeptatmpt);
-threepp = threeptmade/threeptatmpt;
-ftmade = sum(ftmade);
-ftatmpt = sum(ftatmpt);
-ftp = ftmade/ftatmpt;
+fgp = calcavg(fgmade,fgatmpt);
+threepp = calcavg(threeptmade,threeptatmpt);
+ftp = calcavg(ftmade,ftatmpt);
 rebounds = mean(rebounds);
 assists = mean(assists);
 steals = mean(steals);
