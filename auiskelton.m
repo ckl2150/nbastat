@@ -163,15 +163,18 @@ function spchosen(~,~)
             
             set(singleplayerfig,'Visible','on')
             
+            
 %             playapanel = uipanel('Parent', singleplayerfig,'Units', 'Normalize', 'Position', [0 0 .2 1]);
 %             set(playapanel, 'Visible', 'on');
-%             phsname = imread(lower(strcat(currentplayer1.last,currentplayer1.first,'.jpg')));
+             phsname = imread(lower(strcat(currentplayer1.last,currentplayer1.first,'.jpg')));
 %             playerheadshot = image(phsname);
 %             set(gca,'Visible','off')
-%             axes('Position', [0 .5 .5 .5])
-%            
-%             %singleplayerfig, imshow(phsname)
-%             %axes(singleplayerfig, 'UserData', plot();
+             ha = axes('Units', 'Normalized', 'Position', [0 .5 .5 .5]);
+             im = imshow(phsname);
+             disp(phsname)
+             set(im, 'AlphaData', newphs);
+             ha.HandleVisibility = 'off';
+             ha.Visible = 'off';
             
             games = parseStatLine(currentplayer1.filename);
             n=length(games);
