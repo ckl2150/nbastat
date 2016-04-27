@@ -1,4 +1,8 @@
 function avgs = lastngames(games, n, varargin)
+%THIS FUNCTION TAKES IN A VARIABLE NUMBER OF INPUT PARAMETERS. THIS INPUT
+%PARAMETER DICTATES WHETHER ONLY HOME OR AWAY GAMES ARE USED FOR AS DATA,
+%OR WHETHER ALL GAMES ARE USED
+
 %function which takes a vector of structures as input and a number n, and
 %returns the average numbers of all categories over n games.
 
@@ -35,6 +39,10 @@ while (count ~= n+1) || (endgame)
         elseif strcmp(format,'home') && ~isempty(games(gamenum).At)
             pass = true;
         end
+        
+        %THE FOLLOWING BLOCK OF CODE INDEXES INTO A VECTOR OF STRUCTURES
+        %(GAMES), RETRIEVES ITS ASSOCIATED FIELDNAME VALUE, AND CONTINUES
+        %UNTIL THE FIRST WHILE CONDITIONS ARE FULFILLED
         
         if ~pass
             %Converts minutes to decimal format
@@ -80,10 +88,14 @@ while (count ~= n+1) || (endgame)
     end
 end
 
+%THIS ANONYMOUS FUNCTION IS USED TO QUICKLY REFER TO THE FORMULA FOR
+%CALCULATING PERCENTAGES
 
-%anonymous function used to quickly refer to the formula for calculating
-%show percentage
 calcavg = @(made, attempt) sum(made)/sum(attempt);
+
+%STATISTICAL ANALYSES IS USED TO FIND THE MEAN OF ALL ASSOCIATED VECTORS.
+%THIS ALLOWS US TO RETURN THE DATA IN STRUCTURE FORM TO THE UI, WHICH IS
+%DISPLAYED TO THE USER AS A TABLE.
 
 minutes = mean(minutes);
 minstr = sprintf('%.1f', minutes);

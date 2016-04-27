@@ -23,12 +23,20 @@ set(openf,'Name','Welcome to Our Awesome Project')
 logo = imread('nba-logo-on-wood.jpg');
 background = image(logo);
 set(gca,'Visible','off')
+r = 0;
+g = 0;
+b = 0;
 
 %Create popup menu to allow user to change background to their favorite team
 team_names = {'No preference', 'Lakers','Suns','Twolves','Pelicans','Nuggets','Kings','Jazz',...
     'Rockets','Grizzlies','Mavs','Blazers','Clippers','Thunder','Spurs',...
     'Warriors','Nets','Knicks','Bucks','Magic','Wizards','Bulls',...
     'Pistons','Pacers','Hornets','Celtics','Hawks','Heat','Raptors','Cavs'};
+
+%THE DATABASE OF TEAM LOGOS IS UNSORTED; CALLING THE SORT FUNCTION ALLOWS
+%FOR ALPHABETICAL ORDERING OF TEAM NAMES. THE USER CAN THEN EASILY SEARCH
+%FOR HIS OR HER PREFERRED TEAM
+
 team_names(2:end) = sort(team_names(2:end));
 
 faveteamtext = uicontrol(openf, 'Style', 'text', 'Visible', 'on',...
@@ -39,6 +47,12 @@ favoriteteam = uicontrol(openf, 'Style', 'popupmenu', 'Visible',...
     'String', team_names, 'Callback', @setteamlogo);
 
 %Sets team logo
+
+%THIS FUNCTION PROCESSES AN INCOMING IMAGE BY CALLING THE FAVETEAM
+%FUNCTION. SPECIFICALLY, IT CONVERTS THE IMAGE INTO A MATRIX, AND FINDS
+%THE MEAN OF ITS RED, GREEN, AND BLUE DIMENSIONS. THE RESULTING COLOR IS
+%USED AS THE BACKGROUND COLOR OF THE OPENING PAGE.
+
 function setteamlogo(hObject,~)
     teamfilename = hObject.String{hObject.Value};
     if ~strcmp(teamfilename, 'No preference')
@@ -59,6 +73,10 @@ end
 searchinstruct = uicontrol(openf,'Style','text',...
     'BackgroundColor','white','Units','Normalized',...
     'Position',[.022 .5 .08 .03],'String','Would you like to:','FontSize',12);
+
+%THE CONSTRUCTS BELOW CONSTITUTE A MENU-DRIVEN PROGRAM. IN THIS CASE, A
+%USER CAN CHOOSE WHETHER TO LOOK UP STATSITICS FOR A SINGLE PLAYER, OR
+%A COMPARISON OF TWO PLAYER'S STATISTICS
 
 %Pushbutton for looking at single player
 singleplayer = uicontrol(openf,'Style','pushbutton',...
@@ -206,6 +224,16 @@ function spchosen(~,~)
             set(singleplayerfig, 'Color', 'black');
             set(gca,'Visible','off')
             
+            %THE VARIABLE GAMES IS A VECTOR OF STRUCTURES, AND REFERS TO A
+            %DATABASE OF PLAYED GAMES FOR ONE PLAYER. THIS VARIABLE IS USED
+            %THROUGHOUT THE PROGRAM TO PROVIDE STATISTICAL DATA FOR
+            %DISPLAY. IT IS CREATED USING THE PARSESTATLINE FUNCTION
+            
+            %THE FUNCTION WHICH OUTPUTS VARIABLE GAMES IS PARSESTATLINE.
+            %THIS FUNCTION READS IN A FILE INPUT (IN THIS CASE, IN .CSV
+            %FORMAT), AND RETURNS ITS INFORMATION TO A DATABASE FOR EASY
+            %USE BY THE PROGRAM
+            
             %games is a vector of games structures, used to access a
             %player's stats
             games = parseStatLine(currentplayer1.filename);
@@ -226,6 +254,8 @@ function spchosen(~,~)
                 'Units','normalized','FontSize', 40, 'Position',[.3,.1,.64,.9]);
              t.Position(3)=t.Extent(3);
              t.Position(4)=t.Extent(4);
+            
+            
              
             popup1 = uicontrol(singleplayerfig,'Style', 'popup',...
                   'String', {'Last 5 Games','Last 10 Games',...
@@ -341,6 +371,11 @@ function spchosen(~,~)
                     case 3    
                         [x,y]=plotStats(games,n,'min');
                 end
+      
+                %THE ABOVE SWITCH STATEMENT UTILIZES THE PLOTSTATS FUNCTION
+                %TO RECEIVE AN X AND Y VECTOR. THESE VECTORS ARE THEN
+                %PLOTTED ONTO A FIGURE WINDOW.
+                
                 plot(x,y)
                 title(tit);
                 plotstatfig1.Visible = 'on';
@@ -1011,6 +1046,10 @@ function spchosen(~,~)
                 vitalstr,'Units','Normalized','Position',[.025 .4 .2 .14],...
                 'BackgroundColor','w','FontSize',14);
         
+            %THE FOLLOWING FUNCTION IS A CALLBACK FUNCTION. IN THIS CASE,
+            %POPFUN1 IS BEING CALLED BY POPUP1. FOR A DESCRIPTION OF ITS
+            %PURPOSE, REFER TO THE COMMENTS BELOW
+            
             %Both popfun1 and popfun2 exist to update the data in the UI tables
             %when the values in popfun are changed
             function popfun1(source,~)

@@ -1,5 +1,5 @@
 function [x,y] = plotStats(games, n, stat, varargin)
-%This function returns a vector x and y for use in plotting
+%This function returns a vector x and y for use in plotting said values
 
     if nargin == 4
         format = varargin{1};
