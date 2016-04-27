@@ -1,5 +1,11 @@
-function [x,y] = plotStats(games, n, stat)
-    
+function [x,y] = plotStats(games, n, stat, varargin)
+
+    if nargin == 4
+        format = varargin{1};
+    else
+        format = '';        
+    end
+
     count = 1;
     gamenum = length(games);
     
@@ -29,11 +35,11 @@ function [x,y] = plotStats(games, n, stat)
         
             pass = false;
         
-%             if strcmp(format,'away') && isempty(games(gamenum).At)
-%                 pass = true;
-%             elseif strcmp(format,'home') && ~isempty(games(gamenum).At)
-%                 pass = true;
-%             end
+            if strcmp(format,'away') && isempty(games(gamenum).At)
+                pass = true;
+            elseif strcmp(format,'home') && ~isempty(games(gamenum).At)
+                pass = true;
+            end
         
             if ~pass
                 %Converts minutes to decimal format
@@ -76,14 +82,17 @@ function [x,y] = plotStats(games, n, stat)
         end
     end
     
+    disp(fgmade)
+    disp(fgatmpt)
+    
     if strcmp(stat,'min')
         y = minutes;
     elseif strcmp(stat,'fgp')
-        y = fgmade/fgatempt;
+        y = fgmade./fgatmpt;
     elseif strcmp(stat,'3pp')
-        y = threeptmade/threeptatmpt;
+        y = threeptmade./threeptatmpt;
     elseif strcmp(stat,'ftp')
-        y = ftmade/ftatmpt;
+        y = ftmade./ftatmpt;
     elseif strcmp(stat,'rebound')
         y = rebounds;
     elseif strcmp(stat,'ast')
