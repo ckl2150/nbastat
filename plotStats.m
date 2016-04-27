@@ -59,6 +59,7 @@ function [x,y] = plotStats(games, n, stat, varargin)
                 blocks(count) = str2double(games(gamenum).BLK);
                 to(count) = str2double(games(gamenum).TOV);
                 pts(count) = str2double(games(gamenum).PTS);
+                
                 count = count + 1;
                 if gamenum == 1
                     count = n + 1;
@@ -80,6 +81,20 @@ function [x,y] = plotStats(games, n, stat, varargin)
             end
         end
     end
+    
+    minutes = fliplr(minutes);
+    fgmade = fliplr(fgmade);
+    fgatmpt = fliplr(fgatmpt);
+    threeptmade = fliplr(threeptmade);
+    threeptatmpt = fliplr(threeptatmpt);
+    ftmade = fliplr(ftmade);
+    ftatmpt = fliplr(ftatmpt);
+    rebounds = fliplr(rebounds);
+    assists = fliplr(assists);
+    steals = fliplr(steals);
+    blocks = fliplr(blocks);
+    to = fliplr(to);
+    pts = fliplr(pts);
     
     if strcmp(stat,'min')
         y = minutes;
