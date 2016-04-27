@@ -230,7 +230,7 @@ function spchosen(~,~)
 %            popup1.Visible='on';
 %            popup2.Visible='on';
 %            t.Visible='on';
-             pb1=uicontrol(singleplayerfig,'Style','pushbutton','String','Plot Stat','Units','normalized',...
+            pb1=uicontrol(singleplayerfig,'Style','pushbutton','String','Plot Stat','Units','normalized',...
                'Position', [.25 .825 .05 .07],'Callback', @pbfun1);
             pb2=uicontrol(singleplayerfig,'Style','pushbutton','String','Plot Stat','Units','normalized',...
                'Position', [.25 .754 .05 .07],'Callback', @pbfun2);
@@ -258,99 +258,267 @@ function spchosen(~,~)
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
                 backbutton.Position(4)=backbutton.Extent(4);
-                [x,y]=plotStats(games,length(games),'min');
-                plot(x,y,'*')
+                val1 = popup1.Value;
+                val2 = popup2.Value;
+                switch val1
+                    case 1
+                        n=5;
+                    case 2
+                        n=10;
+                    case 3
+                        n=20;
+                    case 4
+                        n=30;
+                    case 5
+                        n=length(games);
+                end
+                switch val2
+                    case 1
+                        [x,y]=plotStats(games,n,'min','home');
+                    case 2
+                        [x,y]=plotStats(games,n,'min','away');
+                    case 3    
+                        [x,y]=plotStats(games,n,'min');
+                end
+                plot(x,y)
                 title(tit);
                 plotstatfig.Visible='on';
             end
             function pbfun2(~,~)
                 set(singleplayerfig,'Visible','off')
                 tit=sprintf('%s Field Goal Percentages',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
+                plotstatfig=figure('Visible','off');
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
                 backbutton.Position(4)=backbutton.Extent(4);
-                [x,y]=plotStats(games,length(games),'fgp');
-                plot(x,y,'*')
+                val1 = popup1.Value;
+                val2 = popup2.Value;
+                switch val1
+                    case 1
+                        n=5;
+                    case 2
+                        n=10;
+                    case 3
+                        n=20;
+                    case 4
+                        n=30;
+                    case 5
+                        n=length(games);
+                end
+                switch val2
+                    case 1
+                        [x,y]=plotStats(games,n,'fgp','home');
+                    case 2
+                        [x,y]=plotStats(games,n,'fgp','away');
+                    case 3    
+                        [x,y]=plotStats(games,n,'fgp');
+                end
+                plot(x,y)
                 title(tit);
                 plotstatfig.Visible='on';
             end
             function pbfun3(~,~)
                 set(singleplayerfig,'Visible','off')
                 tit=sprintf('%s Three Point Percentages',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
+                plotstatfig=figure('Visible','off');
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
                 backbutton.Position(4)=backbutton.Extent(4);
-                [x,y]=plotStats(games,length(games),'3pp');
-                plot(x,y,'*')
+                val1 = popup1.Value;
+                val2 = popup2.Value;
+                switch val1
+                    case 1
+                        n=5;
+                    case 2
+                        n=10;
+                    case 3
+                        n=20;
+                    case 4
+                        n=30;
+                    case 5
+                        n=length(games);
+                end
+                switch val2
+                    case 1
+                        [x,y]=plotStats(games,n,'3pp','home');
+                    case 2
+                        [x,y]=plotStats(games,n,'3pp','away');
+                    case 3    
+                        [x,y]=plotStats(games,n,'3pp');
+                end
+                plot(x,y)
                 title(tit);
                 plotstatfig.Visible='on';
             end
             function pbfun4(~,~)
                 set(singleplayerfig,'Visible','off')
                 tit=sprintf('%s Free Throw Percentages',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
+                plotstatfig=figure('Visible','off');
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
                 backbutton.Position(4)=backbutton.Extent(4);
-                [x,y]=plotStats(games,length(games),'ftp');
-                plot(x,y,'*')
+                val1 = popup1.Value;
+                val2 = popup2.Value;
+                switch val1
+                    case 1
+                        n=5;
+                    case 2
+                        n=10;
+                    case 3
+                        n=20;
+                    case 4
+                        n=30;
+                    case 5
+                        n=length(games);
+                end
+                switch val2
+                    case 1
+                        [x,y]=plotStats(games,n,'ftp','home');
+                    case 2
+                        [x,y]=plotStats(games,n,'ftp','away');
+                    case 3    
+                        [x,y]=plotStats(games,n,'ftp');
+                end
+                plot(x,y)
                 title(tit);
                 plotstatfig.Visible='on';
             end
             function pbfun5(~,~)
                 set(singleplayerfig,'Visible','off')
                 tit=sprintf('%s Rebounds',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
+                plotstatfig=figure('Visible','off');
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
                 backbutton.Position(4)=backbutton.Extent(4);
-                [x,y]=plotStats(games,length(games),'rebound');
-                plot(x,y,'*')
+                val1 = popup1.Value;
+                val2 = popup2.Value;
+                switch val1
+                    case 1
+                        n=5;
+                    case 2
+                        n=10;
+                    case 3
+                        n=20;
+                    case 4
+                        n=30;
+                    case 5
+                        n=length(games);
+                end
+                switch val2
+                    case 1
+                        [x,y]=plotStats(games,n,'rebound','home');
+                    case 2
+                        [x,y]=plotStats(games,n,'rebound','away');
+                    case 3    
+                        [x,y]=plotStats(games,n,'rebound');
+                end
+                plot(x,y)
                 title(tit);
                 plotstatfig.Visible='on';
             end
             function pbfun6(~,~)
                 set(singleplayerfig,'Visible','off')
                 tit=sprintf('%s Assists',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
+                plotstatfig=figure('Visible','off');
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
                 backbutton.Position(4)=backbutton.Extent(4);
-                [x,y]=plotStats(games,length(games),'ast');
-                plot(x,y,'*')
+                val1 = popup1.Value;
+                val2 = popup2.Value;
+                switch val1
+                    case 1
+                        n=5;
+                    case 2
+                        n=10;
+                    case 3
+                        n=20;
+                    case 4
+                        n=30;
+                    case 5
+                        n=length(games);
+                end
+                switch val2
+                    case 1
+                        [x,y]=plotStats(games,n,'ast','home');
+                    case 2
+                        [x,y]=plotStats(games,n,'ast','away');
+                    case 3    
+                        [x,y]=plotStats(games,n,'ast');
+                end
+                plot(x,y)
                 title(tit);
                 plotstatfig.Visible='on';
             end
             function pbfun7(~,~)
                 set(singleplayerfig,'Visible','off')
                 tit=sprintf('%s Steals',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
+                plotstatfig=figure('Visible','off');
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
                 backbutton.Position(4)=backbutton.Extent(4);
-                [x,y]=plotStats(games,length(games),'stl');
-                plot(x,y,'*')
+                val1 = popup1.Value;
+                val2 = popup2.Value;
+                switch val1
+                    case 1
+                        n=5;
+                    case 2
+                        n=10;
+                    case 3
+                        n=20;
+                    case 4
+                        n=30;
+                    case 5
+                        n=length(games);
+                end
+                switch val2
+                    case 1
+                        [x,y]=plotStats(games,n,'stl','home');
+                    case 2
+                        [x,y]=plotStats(games,n,'stl','away');
+                    case 3    
+                        [x,y]=plotStats(games,n,'stl');
+                end
+                plot(x,y)
                 title(tit);
                 plotstatfig.Visible='on';
             end
             function pbfun8(~,~)
                 set(singleplayerfig,'Visible','off')
                 tit=sprintf('%s Blocks',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
+                plotstatfig=figure('Visible','off');
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
                 backbutton.Position(4)=backbutton.Extent(4);
-                [x,y]=plotStats(games,length(games),'blk');
-                plot(x,y,'*')
+                val1 = popup1.Value;
+                val2 = popup2.Value;
+                switch val1
+                    case 1
+                        n=5;
+                    case 2
+                        n=10;
+                    case 3
+                        n=20;
+                    case 4
+                        n=30;
+                    case 5
+                        n=length(games);
+                end
+                switch val2
+                    case 1
+                        [x,y]=plotStats(games,n,'blk','home');
+                    case 2
+                        [x,y]=plotStats(games,n,'blk','away');
+                    case 3    
+                        [x,y]=plotStats(games,n,'blk');
+                end
+                plot(x,y)
                 title(tit);
                 plotstatfig.Visible='on';
             end
@@ -362,8 +530,29 @@ function spchosen(~,~)
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
                 backbutton.Position(4)=backbutton.Extent(4);
-                [x,y]=plotStats(games,length(games),'to');
-                plot(x,y,'*')
+                val1 = popup1.Value;
+                val2 = popup2.Value;
+                switch val1
+                    case 1
+                        n=5;
+                    case 2
+                        n=10;
+                    case 3
+                        n=20;
+                    case 4
+                        n=30;
+                    case 5
+                        n=length(games);
+                end
+                switch val2
+                    case 1
+                        [x,y]=plotStats(games,n,'to','home');
+                    case 2
+                        [x,y]=plotStats(games,n,'to','away');
+                    case 3    
+                        [x,y]=plotStats(games,n,'to');
+                end
+                plot(x,y)
                 title(tit);
                 plotstatfig.Visible='on';
             end
@@ -375,8 +564,29 @@ function spchosen(~,~)
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
                 backbutton.Position(4)=backbutton.Extent(4);
-                [x,y]=plotStats(games,length(games),'pts');
-                plot(x,y,'*')
+                val1 = popup1.Value;
+                val2 = popup2.Value;
+                switch val1
+                    case 1
+                        n=5;
+                    case 2
+                        n=10;
+                    case 3
+                        n=20;
+                    case 4
+                        n=30;
+                    case 5
+                        n=length(games);
+                end
+                switch val2
+                    case 1
+                        [x,y]=plotStats(games,n,'pts','home');
+                    case 2
+                        [x,y]=plotStats(games,n,'pts','away');
+                    case 3    
+                        [x,y]=plotStats(games,n,'pts');
+                end
+                plot(x,y)
                 title(tit);
                 plotstatfig.Visible='on';
             end
