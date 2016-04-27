@@ -84,6 +84,10 @@ compare2fig = figure('Visible','off','color','black',...
 set(compare2fig,'Name','Welcome to Our Awesome Project')
 movegui(compare2fig,'center')
 
+%Create figure to display player stat graphs
+plotstatfig = figure('Visible','off','Units','Normalized',...
+    'Position',[0 1 1 1]);
+
 %Getting rid of back button to go opening figure
 
 %Create back button to go back to opening figure from single display figures
