@@ -401,14 +401,11 @@ function spchosen(~,~)
 
                          %Shows some basic information about the player
             vitalstr = sprintf('Team: %s\n\nPosition: %s\n\nAge: %s',...
-                currentplayer1.team, currentplayer1.posit, games.Age); %see note below
+                currentplayer1.team, currentplayer1.posit, games(end).Age(1:2));
             team = uicontrol('Style','text','String',vitalstr,...
                 'Units','Normalized','Position',[.01 .4 .25 .1],...
                 'BackgroundColor','w','FontSize',14);
-            
-            %Trying to access the first two columns of the last row to
-            %display age at last game but forgetting how to do this
-            % age = games.Age(82)
+        
             
             function popfun1(source,~)
                 val = source.Value;
