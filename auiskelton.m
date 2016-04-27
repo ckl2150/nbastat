@@ -253,7 +253,8 @@ function spchosen(~,~)
             function pbfun1(~,~)
                 set(singleplayerfig,'Visible','off');
                 tit=sprintf('%s Minutes Played',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off');
+                plotstatfig = figure('Name',currentplayer1.filename,'Units',...
+                    'Normalized','Position',[0 0 1 1]);
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -287,7 +288,8 @@ function spchosen(~,~)
             function pbfun2(~,~)
                 set(singleplayerfig,'Visible','off')
                 tit=sprintf('%s Field Goal Percentages',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off');
+                plotstatfig = figure('Name',currentplayer1.filename,'Units',...
+                    'Normalized','Position',[0 0 1 1]);
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -321,7 +323,8 @@ function spchosen(~,~)
             function pbfun3(~,~)
                 set(singleplayerfig,'Visible','off')
                 tit=sprintf('%s Three Point Percentages',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off');
+                plotstatfig = figure('Name',currentplayer1.filename,'Units',...
+                    'Normalized','Position',[0 0 1 1]);
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -355,7 +358,8 @@ function spchosen(~,~)
             function pbfun4(~,~)
                 set(singleplayerfig,'Visible','off')
                 tit=sprintf('%s Free Throw Percentages',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off');
+                plotstatfig = figure('Name',currentplayer1.filename,'Units',...
+                    'Normalized','Position',[0 0 1 1]);
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -389,7 +393,8 @@ function spchosen(~,~)
             function pbfun5(~,~)
                 set(singleplayerfig,'Visible','off')
                 tit=sprintf('%s Rebounds',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off');
+                plotstatfig = figure('Name',currentplayer1.filename,'Units',...
+                    'Normalized','Position',[0 0 1 1]);
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -423,7 +428,8 @@ function spchosen(~,~)
             function pbfun6(~,~)
                 set(singleplayerfig,'Visible','off')
                 tit=sprintf('%s Assists',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off');
+                plotstatfig = figure('Name',currentplayer1.filename,'Units',...
+                    'Normalized','Position',[0 0 1 1]);
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -457,7 +463,8 @@ function spchosen(~,~)
             function pbfun7(~,~)
                 set(singleplayerfig,'Visible','off')
                 tit=sprintf('%s Steals',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off');
+               plotstatfig = figure('Name',currentplayer1.filename,'Units',...
+                    'Normalized','Position',[0 0 1 1]);
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -491,7 +498,8 @@ function spchosen(~,~)
             function pbfun8(~,~)
                 set(singleplayerfig,'Visible','off')
                 tit=sprintf('%s Blocks',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off');
+                plotstatfig = figure('Name',currentplayer1.filename,'Units',...
+                    'Normalized','Position',[0 0 1 1]);
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -525,7 +533,8 @@ function spchosen(~,~)
             function pbfun9(~,~)
                 set(singleplayerfig,'Visible','off')
                 tit=sprintf('%s Turnovers',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
+                plotstatfig = figure('Name',currentplayer1.filename,'Units',...
+                    'Normalized','Position',[0 0 1 1]);
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -559,7 +568,8 @@ function spchosen(~,~)
             function pbfun10(~,~)
                 set(singleplayerfig,'Visible','off')
                 tit=sprintf('%s Total Points',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
+                plotstatfig = figure('Name',currentplayer1.filename,'Units',...
+                    'Normalized','Position',[0 0 1 1]);
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
