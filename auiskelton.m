@@ -198,7 +198,7 @@ function spchosen(~,~)
                 '<html><font size=+15>Assists','<html><font size=+15>Steals','<html><font size=+15>Blocks','<html><font size=+15>Turnovers','<html><font size=+15>Total Points'};
             cname=sprintf('<html><font size=+15>%s Stats',currentplayer1.fullname);
             t=uitable(singleplayerfig,'Data',d,'RowName',rnames,'ColumnName',cname,...
-                'Units','normalized','FontSize', 40, 'Position',[.3,.1,.64,.748]);
+                'Units','normalized','FontSize', 40, 'Position',[.3,.1,.64,.9]);
              t.Position(3)=t.Extent(3);
              t.Position(4)=t.Extent(4);
              
@@ -554,7 +554,7 @@ set(twoplayersearch_a,'Visible','on');
                 '<html><font size=+8>Assists','<html><font size=+8>Steals','<html><font size=+8>Blocks','<html><font size=+8>Turnovers','<html><font size=+8>Total Points'};
             cname={sprintf('<html><font size=+8>%s',currentplayer1.fullname),sprintf('<html><font size=+8>%s',currentplayer2.fullname)};
             t=uitable(compare2fig,'Data',d,'RowName',rnames,'ColumnName',cname,...
-                'Units','normalized','FontSize', 38,'Position',[.02 .08 .30 .30]);
+                'Units','normalized','FontSize', 38,'Position',[.02 .12 .4 .4]);
             t.Position(3)=t.Extent(3);
             t.Position(4)=t.Extent(4);
             popup1 = uicontrol(compare2fig,'Style', 'popup',...
@@ -570,7 +570,7 @@ set(twoplayersearch_a,'Visible','on');
             
               
               vs = uicontrol(compare2fig,'Style','text','Units','Normalized',...
-                  'Position',[.52 .67 .02 .02],'String','VS.',...
+                  'Position',[.52 .8 .02 .02],'String','VS.',...
                   'FontSize',14);
               
              
@@ -638,7 +638,7 @@ set(twoplayersearch_a,'Visible','on');
            %Shows player headshot for player1 and positions it 
              p1name = imread(lower(strcat(currentplayer1.last,currentplayer1.first,'.jpg')));           
              set(gca,'Visible','off')
-              ha1 = axes('Units', 'Normalized', 'Position', [.35 .655 .15 .15]);
+              ha1 = axes('Units', 'Normalized', 'Position', [.35 .75 .15 .15]);
               im1 = imshow(p1name);
               ha1.HandleVisibility = 'off';
               ha1.Visible = 'off';
@@ -646,7 +646,7 @@ set(twoplayersearch_a,'Visible','on');
             %Shows player headshot for player2 and positions it 
              p2name = imread(lower(strcat(currentplayer2.last,currentplayer2.first,'.jpg')));           
              set(gca,'Visible','off')
-              ha2 = axes('Units', 'Normalized', 'Position', [.55 .655 .15 .15]);
+              ha2 = axes('Units', 'Normalized', 'Position', [.55 .75 .15 .15]);
               im2 = imshow(p2name);
               ha2.HandleVisibility = 'off';
               ha2.Visible = 'off';
