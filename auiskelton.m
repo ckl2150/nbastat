@@ -247,9 +247,9 @@ function spchosen(~,~)
             pb10=uicontrol(singleplayerfig,'Style','pushbutton','String','Plot Stat','Units','normalized',...
                 'Position', [.25 .19 .05 .07],'Callback', @pbfun10);
             function pbfun1(~,~)
-                set(singleplayerfig,'Visible','off')
+                set(singleplayerfig,'Visible','off');
                 tit=sprintf('%s Minutes Played',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
+                plotstatfig=figure('Visible','off');
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -257,7 +257,7 @@ function spchosen(~,~)
                 [x,y]=plotStats(games,length(games),'min');
                 plot(x,y,'*')
                 title(tit);
-                plotstatfig.Visible='on'
+                plotstatfig.Visible='on';
             end
             function pbfun2(~,~)
                 set(singleplayerfig,'Visible','off')
@@ -270,7 +270,7 @@ function spchosen(~,~)
                 [x,y]=plotStats(games,length(games),'fgp');
                 plot(x,y,'*')
                 title(tit);
-                plotstatfig.Visible='on'
+                plotstatfig.Visible='on';
             end
             function pbfun3(~,~)
                 set(singleplayerfig,'Visible','off')
@@ -283,7 +283,7 @@ function spchosen(~,~)
                 [x,y]=plotStats(games,length(games),'3pp');
                 plot(x,y,'*')
                 title(tit);
-                plotstatfig.Visible='on'
+                plotstatfig.Visible='on';
             end
             function pbfun4(~,~)
                 set(singleplayerfig,'Visible','off')
@@ -296,7 +296,7 @@ function spchosen(~,~)
                 [x,y]=plotStats(games,length(games),'ftp');
                 plot(x,y,'*')
                 title(tit);
-                plotstatfig.Visible='on'
+                plotstatfig.Visible='on';
             end
             function pbfun5(~,~)
                 set(singleplayerfig,'Visible','off')
@@ -309,7 +309,7 @@ function spchosen(~,~)
                 [x,y]=plotStats(games,length(games),'rebound');
                 plot(x,y,'*')
                 title(tit);
-                plotstatfig.Visible='on'
+                plotstatfig.Visible='on';
             end
             function pbfun6(~,~)
                 set(singleplayerfig,'Visible','off')
@@ -322,7 +322,7 @@ function spchosen(~,~)
                 [x,y]=plotStats(games,length(games),'ast');
                 plot(x,y,'*')
                 title(tit);
-                plotstatfig.Visible='on'
+                plotstatfig.Visible='on';
             end
             function pbfun7(~,~)
                 set(singleplayerfig,'Visible','off')
@@ -335,7 +335,7 @@ function spchosen(~,~)
                 [x,y]=plotStats(games,length(games),'stl');
                 plot(x,y,'*')
                 title(tit);
-                plotstatfig.Visible='on'
+                plotstatfig.Visible='on';
             end
             function pbfun8(~,~)
                 set(singleplayerfig,'Visible','off')
@@ -348,7 +348,7 @@ function spchosen(~,~)
                 [x,y]=plotStats(games,length(games),'blk');
                 plot(x,y,'*')
                 title(tit);
-                plotstatfig.Visible='on'
+                plotstatfig.Visible='on';
             end
             function pbfun9(~,~)
                 set(singleplayerfig,'Visible','off')
@@ -361,7 +361,7 @@ function spchosen(~,~)
                 [x,y]=plotStats(games,length(games),'to');
                 plot(x,y,'*')
                 title(tit);
-                plotstatfig.Visible='on'
+                plotstatfig.Visible='on';
             end
             function pbfun10(~,~)
                 set(singleplayerfig,'Visible','off')
@@ -374,11 +374,11 @@ function spchosen(~,~)
                 [x,y]=plotStats(games,length(games),'pts');
                 plot(x,y,'*')
                 title(tit);
-                plotstatfig.Visible='on'
+                plotstatfig.Visible='on';
             end
             function back69(~,~)
-                plotstatfig.Visible='off'
-                singleplayerfig.Visible='on'
+                plotstatfig.Visible='off';
+                singleplayerfig.Visible='on';
             end
             
             
