@@ -256,7 +256,7 @@ function spchosen(~,~)
                 plotstatfig = figure('Name',currentplayer1.filename,'Units',...
                     'Normalized','Position',[0 0 1 1]);
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [.1 .9 .05 .07],'Callback', @back69);
+                'Position', [0 .95 .1 .05],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
                 backbutton.Position(4)=backbutton.Extent(4);
                 val1 = popup1.Value;
