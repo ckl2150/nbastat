@@ -18,25 +18,27 @@ currentplayer2 = struct('team', '', 'posit', '', 'first', '', 'last', '',...
 openf = figure('Visible','off','color','white','Units','Normalized',...
     'Position',[0,0,1,1]);
 set(openf,'Name','Welcome to Our Awesome Project')
-movegui(openf,'center') %Can now probably get rid of this
 
+%This sets the default nba logo on the opening screen
 logo = imread('nba-logo-on-wood.jpg');
 background = image(logo);
 set(gca,'Visible','off')
 
-%Create popup menu to allow user to change background to their fave team
+%Create popup menu to allow user to change background to their favorite team
 team_names = {'No preference', 'Lakers','Suns','Twolves','Pelicans','Nuggets','Kings','Jazz',...
     'Rockets','Grizzlies','Mavs','Blazers','Clippers','Thunder','Spurs',...
     'Warriors','Nets','Knicks','Bucks','Magic','Wizards','Bulls',...
     'Pistons','Pacers','Hornets','Celtics','Hawks','Heat','Raptors','Cavs'};
 team_names(2:end) = sort(team_names(2:end));
-r = 0;
-g = 0;
-b = 0;
 
-faveteamtext = uicontrol(openf, 'Style', 'text', 'Visible', 'on', 'Units', 'Normalize', 'BackgroundColor', 'white', 'Position', [.018 .76 .1 .03], 'String', 'Pick your favorite team!');
-favoriteteam = uicontrol(openf, 'Style', 'popupmenu', 'Visible', 'on', 'Units', 'Normalize', 'Position', [.015 .7 .1 .05], 'String', team_names, 'Callback', @setteamlogo);
+faveteamtext = uicontrol(openf, 'Style', 'text', 'Visible', 'on',...
+    'Units','Normalize', 'BackgroundColor', 'white', 'Position',...
+    [.018 .76 .1 .03], 'String', 'Pick your favorite team!');
+favoriteteam = uicontrol(openf, 'Style', 'popupmenu', 'Visible',...
+    'on', 'Units', 'Normalize', 'Position', [.015 .7 .1 .05],...
+    'String', team_names, 'Callback', @setteamlogo);
 
+%Sets team logo
 function setteamlogo(hObject,~)
     teamfilename = hObject.String{hObject.Value};
     if ~strcmp(teamfilename, 'No preference')
@@ -53,10 +55,6 @@ end
 %Create instructions text box as well as push buttons for single player
 %stats path or compare two players path
 
-%Create button group for path options
-% optionpbg = uibuttongroup('Visible','off','Units','Normalized',...
-%     'Position',[0 0 .2 1],'backgroundcolor','white','BorderType','none');
-
 %Textbox with instructions on which button to push
 searchinstruct = uicontrol(openf,'Style','text',...
     'BackgroundColor','white','Units','Normalized',...
@@ -65,11 +63,14 @@ searchinstruct = uicontrol(openf,'Style','text',...
 %Pushbutton for looking at single player
 singleplayer = uicontrol(openf,'Style','pushbutton',...
     'String','Look at single player','Units','Normalized',...
-    'Position',[.015 .45 .1 .05],'Callback',@spchosen);%callback function to open search box
+    'Position',[.015 .45 .1 .05],'Callback',@spchosen); 
+    %callback function to open search box
+
 %Pushbutton for comparing two players
 twoplayers = uicontrol(openf,'Style','pushbutton',...
     'String','Compare two players','Units','Normalized',...
-    'Position',[.015 .40 .1 .05],'Callback',@tpchosen);%callback function to open player-1 search box
+    'Position',[.015 .40 .1 .05],'Callback',@tpchosen);
+    %callback function to open player-1 search box
 
 %Create figure to show single player stats
 singleplayerfig = figure('Visible','off','color','black',...
@@ -84,7 +85,7 @@ compare2fig = figure('Visible','off','color','black',...
 set(compare2fig,'Name','Welcome to Our Awesome Project')
 movegui(compare2fig,'center')
 
-%Create figure to display player stat graphs
+%Create figure to display player stat graphs, one for each category
 plotstatfig1 = figure('Visible','off','Units','Normalized',...
     'Position',[0 1 1 1]);
 plotstatfig2 = figure('Visible','off','Units','Normalized',...
@@ -106,14 +107,6 @@ plotstatfig9 = figure('Visible','off','Units','Normalized',...
 plotstatfig10 = figure('Visible','off','Units','Normalized',...
     'Position',[0 1 1 1]);
 
-
-%Getting rid of back button to go opening figure
-
-%Create back button to go back to opening figure from single display figures
-%    back2openfigfromspfig = uicontrol(singleplayerfig,'Style','pushbutton',...
-%         'String','Start Over','Units','Normalized','Position',[0 .95 .05 .05],...
-%            'Callback',@back2start);%Callback function that goes back to the opening figure
-
 %Create back button to go back to single player search from singleplayerfig
 back2spchosenbutton = uicontrol(singleplayerfig,'Style','pushbutton',...
     'String','Back to Search','Units','Normalized','Position',[0 .95 .075 .05],...
@@ -123,13 +116,6 @@ back2spchosenbutton = uicontrol(singleplayerfig,'Style','pushbutton',...
 go2tpchosenbutton = uicontrol(singleplayerfig,'Style','pushbutton',...
     'String','Compare two Players','Units','Normalized','Position',[.075 .95 .1 .05],...
     'Callback',@go2tpchosen);%Callback function that goes back to the opening figure
-
-%getting rid of back button to go to opening figure
-
-%Create back button to go back to opening figure from two display figure
-%    back2openfigfromc2fig = uicontrol(compare2fig,'Style','pushbutton',...
-%        'String','Start Over','Units','Normalized','Position',[0 .95 .05 .05],...
-%        'Callback',@back2start);%Callback function that goes back to the opening figure
 
 %Create back button to go back to tpchosen from two display figure
 back2tpchosenbutton = uicontrol(compare2fig,'Style','pushbutton',...
@@ -145,8 +131,6 @@ go2spchosenbutton = uicontrol(compare2fig,'Style','pushbutton',...
 set(openf,'Visible','on')
 set([searchinstruct singleplayer twoplayers],'Visible','on')
 
-%global function which error checks user input of players
-
 %Create button group for single player search 
 oneplayersearch = uibuttongroup('Visible','off','Units','Normalized',...
     'Position',[0 0 .15 1],'backgroundcolor','white','BorderType','none');
@@ -154,7 +138,6 @@ oneplayersearch = uibuttongroup('Visible','off','Units','Normalized',...
 %Callback function if searching single player
 function spchosen(~,~)
     set([searchinstruct singleplayer twoplayers],'Visible','off');
-%    set(back2openspchosengroup,'Visible','on');
 
     %Search for player editable textbox and instruction
     oneplayersearchbox = uicontrol(oneplayersearch,'Style','edit',...
@@ -174,6 +157,7 @@ function spchosen(~,~)
     set(oneplayersearch,'Visible','on');
         
     function confirm(hObject,~)
+        %This callback function error checks the user's input
         %Stores string from user input
         lastname = lower(hObject.String);
         
@@ -190,7 +174,9 @@ function spchosen(~,~)
             end
             fullplayerindex = find(cell2mat(fullplayerindex)); 
             if isempty(fullplayerindex)
-                oneplayerinstruct.String = sprintf('Sorry, no player''s name starts with %c%s.', upper(lastname(1)),lastname(2:end));
+                oneplayerinstruct.String = sprintf...
+                    ('Sorry, no player''s name starts with %c%s.',...
+                    upper(lastname(1)),lastname(2:end));
             else
                 %Uses the index vector to retrieve player names, and store
                 %in a cell array
@@ -198,13 +184,20 @@ function spchosen(~,~)
                 for i = 1:length(fullplayerindex)
                     namearr{i} = players(fullplayerindex(i)).fullname;
                 end
-                    oneplayerinstruct.String = 'Did you mean:';
-                    oneplayersearchbox.Visible = 'off';
-                    didyoumean = uicontrol(oneplayersearch, 'Style', 'popupmenu', 'Units', 'Normalize', 'Position', [.05 .35 .8 .05],'String', namearr, 'Callback', @openplayerstatfig);
-                %end
+                oneplayerinstruct.String = 'Did you mean:';
+                oneplayersearchbox.Visible = 'off';
+                didyoumean = uicontrol(oneplayersearch, 'Style',...
+                    'popupmenu', 'Units', 'Normalize', 'Position',...
+                    [.05 .35 .8 .05],'String', namearr, 'Callback',...
+                    @openplayerstatfig);
             end
         end
-        function openplayerstatfig(hObject,~)%Cbfn to open single player fig window
+        
+        %Cbfn to open single player fig window; this presents one player's
+        %stats in a table format
+        %It utilizes the functions lastngames (with variable parameters),
+        %parseStatLine, plotStats
+        function openplayerstatfig(hObject,~)
             currentplayer1 = players(fullplayerindex(hObject.Value));
             
             set([openf didyoumean],'Visible','off')
@@ -213,19 +206,28 @@ function spchosen(~,~)
             set(singleplayerfig, 'Color', 'black');
             set(gca,'Visible','off')
             
-            
+            %games is a vector of games structures, used to access a
+            %player's stats
             games = parseStatLine(currentplayer1.filename);
             n=length(games);
             d=struct2cell(lastngames(games,n));
-            rnames={'<html><font size=+15>Minutes Played','<html><font size=+15>Field Goal Percentage','<html><font size=+15>Three Pointer Percentage','<html><font size=+15>Free Throws Percentage','<html><font size=+15>Rebounds',...
-                '<html><font size=+15>Assists','<html><font size=+15>Steals','<html><font size=+15>Blocks','<html><font size=+15>Turnovers','<html><font size=+15>Total Points'};
+            rnames={'<html><font size=+15>Minutes Played',...
+                '<html><font size=+15>Field Goal Percentage',...
+                '<html><font size=+15>Three Pointer Percentage',...
+                '<html><font size=+15>Free Throws Percentage',...
+                '<html><font size=+15>Rebounds',...
+                '<html><font size=+15>Assists',...
+                '<html><font size=+15>Steals',...
+                '<html><font size=+15>Blocks',...
+                '<html><font size=+15>Turnovers',...
+                '<html><font size=+15>Total Points'};
             cname=sprintf('<html><font size=+15>%s Stats',currentplayer1.fullname);
             t=uitable(singleplayerfig,'Data',d,'RowName',rnames,'ColumnName',cname,...
                 'Units','normalized','FontSize', 40, 'Position',[.3,.1,.64,.9]);
              t.Position(3)=t.Extent(3);
              t.Position(4)=t.Extent(4);
              
-             popup1 = uicontrol(singleplayerfig,'Style', 'popup',...
+            popup1 = uicontrol(singleplayerfig,'Style', 'popup',...
                   'String', {'Last 5 Games','Last 10 Games',...
                   'Last 20 Games','Last 30 Games','All Games'},...
                   'Units','normalized', 'Position', [.74 .5 .1 .4],...
@@ -235,40 +237,41 @@ function spchosen(~,~)
                   'Units','normalized',...    
                   'Position', [.43 .5 .1 .4], 'Value', 3,...   
                   'Callback', @popfun2);
-             
-%             popup1 = uicontrol('Style', 'popup',...
-%                 'String', {'Last 5 Games','Last 10 Games',...
-%                 'Last 20 Games','Last 30 Games','All Games'},...
-%                 'Units','normalized', 'Position', [.5 .08 .1 .4],...
-%                 'Value', 5, 'Visible','off', 'Callback', @popfun1);
-%             popup2 = uicontrol('Style', 'popup',...
-%                 'String', {'Home','Away','All Games'},...
-%                 'Units','normalized', 'Visible','off',...    
-%                 'Position', [.35 .08 .1 .4], 'Value', 3,...   
-%                 'Callback', @popfun2);
-%            popup1.Visible='on';
-%            popup2.Visible='on';
-%            t.Visible='on';
-            pb1=uicontrol(singleplayerfig,'Style','pushbutton','String','Plot Minutes Played','Units','normalized',...
+            
+            %These are 10 push buttons that plot a different stat in a
+            %separate figure window
+            pb1=uicontrol(singleplayerfig,'Style','pushbutton','String',...
+                'Plot Minutes Played','Units','normalized',...
                'Position', [.235 .734 .065 .07],'Callback', @pbfun1);
-            pb2=uicontrol(singleplayerfig,'Style','pushbutton','String','Plot Field Goal Pct','Units','normalized',...
+            pb2=uicontrol(singleplayerfig,'Style','pushbutton','String',...
+                'Plot Field Goal Pct','Units','normalized',...
                'Position', [.235 .664 .065 .07],'Callback', @pbfun2);
-            pb3=uicontrol(singleplayerfig,'Style','pushbutton','String','Plot Three Pointer Pct','Units','normalized',...
+            pb3=uicontrol(singleplayerfig,'Style','pushbutton','String',...
+                'Plot Three Pointer Pct','Units','normalized',...
                'Position', [.235 .594 .065 .071],'Callback', @pbfun3);
-            pb4=uicontrol(singleplayerfig,'Style','pushbutton','String','Plot Free Throw Pct','Units','normalized',...
+            pb4=uicontrol(singleplayerfig,'Style','pushbutton','String',...
+                'Plot Free Throw Pct','Units','normalized',...
                 'Position', [.235 .524 .065 .07],'Callback', @pbfun4);
-            pb5=uicontrol(singleplayerfig,'Style','pushbutton','String','Plot Rebounds','Units','normalized',...
+            pb5=uicontrol(singleplayerfig,'Style','pushbutton','String',...
+                'Plot Rebounds','Units','normalized',...
                 'Position', [.235 .454 .065 .071],'Callback', @pbfun5);
-            pb6=uicontrol(singleplayerfig,'Style','pushbutton','String','Plot Assists','Units','normalized',...
+            pb6=uicontrol(singleplayerfig,'Style','pushbutton','String',...
+                'Plot Assists','Units','normalized',...
                 'Position', [.235 .384 .065 .07],'Callback', @pbfun6);
-            pb7=uicontrol(singleplayerfig,'Style','pushbutton','String','Plot Steals','Units','normalized',...
+            pb7=uicontrol(singleplayerfig,'Style','pushbutton','String',...
+                'Plot Steals','Units','normalized',...
                 'Position', [.235 .314 .065 .07],'Callback', @pbfun7);
-            pb8=uicontrol(singleplayerfig,'Style','pushbutton','String','Plot Blocks','Units','normalized',...
+            pb8=uicontrol(singleplayerfig,'Style','pushbutton','String',...
+                'Plot Blocks','Units','normalized',...
                 'Position', [.235 .244 .065 .07],'Callback', @pbfun8);
-            pb9=uicontrol(singleplayerfig,'Style','pushbutton','String','Plot Turnovers','Units','normalized',...
+            pb9=uicontrol(singleplayerfig,'Style','pushbutton','String',...
+                'Plot Turnovers','Units','normalized',...
                 'Position', [.235 .174 .065 .07],'Callback', @pbfun9);
-            pb10=uicontrol(singleplayerfig,'Style','pushbutton','String','Plot Total Points','Units','normalized',...
+            pb10=uicontrol(singleplayerfig,'Style','pushbutton','String',...
+                'Plot Total Points','Units','normalized',...
                 'Position', [.235 .104 .065 .07],'Callback', @pbfun10);
+            
+            %The following comments apply to all variations of pbfun
             function pbfun1(~,~)
                 plotstatfig1.Visible = 'off';
                 plotstatfig2.Visible = 'off';
@@ -287,9 +290,9 @@ function spchosen(~,~)
                 plotstatfig1.Units = 'normalized';
                 plotstatfig1.Position = [0 0 1 1];
                 
-                backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [0 .95 .1 .05],'Callback', @back69);
-<<<<<<< HEAD
+                backbutton=uicontrol('Style','pushbutton','String',...
+                    'Back to Player Page','Units','normalized',...
+                    'Position', [0 .95 .1 .05],'Callback', @back69);
                 pb1.Parent = plotstatfig1;
                 pb2.Parent = plotstatfig1;
                 pb3.Parent = plotstatfig1;
@@ -311,10 +314,13 @@ function spchosen(~,~)
                 pb8.Position = [.03 .244 .065 .07];
                 pb9.Position = [.03 .174 .065 .07];
                 pb10.Position = [.03 .104 .065 .07];
-%                backbutton.Position(3)=backbutton.Extent(3);
-%                backbutton.Position(4)=backbutton.Extent(4);
                 val1 = popup1.Value;
                 val2 = popup2.Value;
+                
+                %The following switch statements modify the input
+                %parameters when calling lastngames and plotStats, eg
+                %plotting 10 vs 20 vs 30 games, or plotting home vs away
+                %games
                 switch val1
                     case 1
                         n=5;
@@ -378,10 +384,9 @@ function spchosen(~,~)
                 pb8.Position = [.03 .244 .065 .07];
                 pb9.Position = [.03 .174 .065 .07];
                 pb10.Position = [.03 .104 .065 .07];
-                backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [0 .95 .1 .05],'Callback', @back69);
-%                backbutton.Position(3)=backbutton.Extent(3);
-%                backbutton.Position(4)=backbutton.Extent(4);
+                backbutton=uicontrol('Style','pushbutton',...
+                    'String','Back to Player Page','Units','normalized',...
+                    'Position', [0 .95 .1 .05],'Callback', @back69);
                 val1 = popup1.Value;
                 val2 = popup2.Value;
                 switch val1
@@ -447,10 +452,9 @@ function spchosen(~,~)
                 pb8.Position = [.03 .244 .065 .07];
                 pb9.Position = [.03 .174 .065 .07];
                 pb10.Position = [.03 .104 .065 .07];
-                backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [0 .95 .1 .05],'Callback', @back69);
-%                backbutton.Position(3)=backbutton.Extent(3);
-%                backbutton.Position(4)=backbutton.Extent(4);
+                backbutton=uicontrol('Style','pushbutton','String',...
+                    'Back to Player Page','Units','normalized',...
+                    'Position', [0 .95 .1 .05],'Callback', @back69);
                 val1 = popup1.Value;
                 val2 = popup2.Value;
                 switch val1
@@ -517,10 +521,9 @@ function spchosen(~,~)
                 pb8.Position = [.03 .244 .065 .07];
                 pb9.Position = [.03 .174 .065 .07];
                 pb10.Position = [.03 .104 .065 .07];
-                backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [0 .95 .1 .05],'Callback', @back69);
-%                backbutton.Position(3)=backbutton.Extent(3);
-%                backbutton.Position(4)=backbutton.Extent(4);
+                backbutton=uicontrol('Style','pushbutton','String',...
+                    'Back to Player Page','Units','normalized',...
+                    'Position', [0 .95 .1 .05],'Callback', @back69);
                 val1 = popup1.Value;
                 val2 = popup2.Value;
                 switch val1
@@ -587,10 +590,9 @@ function spchosen(~,~)
                 pb8.Position = [.03 .244 .065 .07];
                 pb9.Position = [.03 .174 .065 .07];
                 pb10.Position = [.03 .104 .065 .07];
-                backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [0 .95 .1 .05],'Callback', @back69);
-%                backbutton.Position(3)=backbutton.Extent(3);
-%                backbutton.Position(4)=backbutton.Extent(4);
+                backbutton=uicontrol('Style','pushbutton','String',...
+                    'Back to Player Page','Units','normalized',...
+                    'Position', [0 .95 .1 .05],'Callback', @back69);
                 val1 = popup1.Value;
                 val2 = popup2.Value;
                 switch val1
@@ -657,10 +659,9 @@ function spchosen(~,~)
                 pb8.Position = [.03 .244 .065 .07];
                 pb9.Position = [.03 .174 .065 .07];
                 pb10.Position = [.03 .104 .065 .07];
-                backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [0 .95 .1 .05],'Callback', @back69);
-%                backbutton.Position(3)=backbutton.Extent(3);
-%                backbutton.Position(4)=backbutton.Extent(4);
+                backbutton=uicontrol('Style','pushbutton','String',...
+                    'Back to Player Page','Units','normalized',...
+                    'Position', [0 .95 .1 .05],'Callback', @back69);
                 val1 = popup1.Value;
                 val2 = popup2.Value;
                 switch val1
@@ -727,10 +728,9 @@ function spchosen(~,~)
                 pb8.Position = [.03 .244 .065 .07];
                 pb9.Position = [.03 .174 .065 .07];
                 pb10.Position = [.03 .104 .065 .07];
-                backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [0 .95 .1 .05],'Callback', @back69);
-%                backbutton.Position(3)=backbutton.Extent(3);
-%                backbutton.Position(4)=backbutton.Extent(4);
+                backbutton=uicontrol('Style','pushbutton',...
+                    'String','Back to Player Page','Units','normalized',...
+                    'Position', [0 .95 .1 .05],'Callback', @back69);
                 val1 = popup1.Value;
                 val2 = popup2.Value;
                 switch val1
@@ -797,10 +797,9 @@ function spchosen(~,~)
                 pb8.Position = [.03 .244 .065 .07];
                 pb9.Position = [.03 .174 .065 .07];
                 pb10.Position = [.03 .104 .065 .07];
-                backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [0 .95 .1 .05],'Callback', @back69);
-%                backbutton.Position(3)=backbutton.Extent(3);
-%                backbutton.Position(4)=backbutton.Extent(4);
+                backbutton=uicontrol('Style','pushbutton','String',...
+                    'Back to Player Page','Units','normalized',...
+                    'Position', [0 .95 .1 .05],'Callback', @back69);
                 val1 = popup1.Value;
                 val2 = popup2.Value;
                 switch val1
@@ -867,10 +866,9 @@ function spchosen(~,~)
                 pb8.Position = [.03 .244 .065 .07];
                 pb9.Position = [.03 .174 .065 .07];
                 pb10.Position = [.03 .104 .065 .07];
-                backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [0 .95 .1 .05],'Callback', @back69);
-%                backbutton.Position(3)=backbutton.Extent(3);
-%                backbutton.Position(4)=backbutton.Extent(4);
+                backbutton=uicontrol('Style','pushbutton','String',...
+                    'Back to Player Page','Units','normalized',...
+                    'Position', [0 .95 .1 .05],'Callback', @back69);
                 val1 = popup1.Value;
                 val2 = popup2.Value;
                 switch val1
@@ -937,10 +935,9 @@ function spchosen(~,~)
                 pb8.Position = [.03 .244 .065 .07];
                 pb9.Position = [.03 .174 .065 .07];
                 pb10.Position = [.03 .104 .065 .07];
-                backbutton = uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [0 .95 .1 .05],'Callback', @back69);
-%                backbutton.Position(3)=backbutton.Extent(3);
-%                backbutton.Position(4)=backbutton.Extent(4);
+                backbutton = uicontrol('Style','pushbutton','String',...
+                    'Back to Player Page','Units','normalized',...
+                    'Position', [0 .95 .1 .05],'Callback', @back69);
                 val1 = popup1.Value;
                 val2 = popup2.Value;
                 switch val1
@@ -967,6 +964,10 @@ function spchosen(~,~)
                 title(tit);
                 plotstatfig10.Visible='on';
             end
+            
+            %this function is called by all pbfun variations. It displays a
+            %push button on the plot figure, and takes you back to the
+            %player's original statline
             function back69(~,~)
                 pb1.Parent = singleplayerfig;
                 pb2.Parent = singleplayerfig;
@@ -1001,17 +1002,17 @@ function spchosen(~,~)
                 singleplayerfig.Visible='on';
                 
             end
-            
-            
 
-                         %Shows some basic information about the player
+            %Shows some basic information about the player
             vitalstr = sprintf('Team: %s\n\nPosition: %s\n\nAge: %s',...
-                currentplayer1.team, currentplayer1.posit, games(end).Age(1:2));
-            team = uicontrol(singleplayerfig,'Style','text','String',vitalstr,...
-                'Units','Normalized','Position',[.025 .4 .2 .1],...
+                currentplayer1.team, currentplayer1.posit,...
+                games(end).Age(1:2));
+            team = uicontrol(singleplayerfig,'Style','text','String',...
+                vitalstr,'Units','Normalized','Position',[.025 .4 .2 .14],...
                 'BackgroundColor','w','FontSize',14);
         
-            
+            %Both popfun1 and popfun2 exist to update the data in the UI tables
+            %when the values in popfun are changed
             function popfun1(source,~)
                 val = source.Value;
                 switch val
@@ -1054,25 +1055,26 @@ function spchosen(~,~)
                 end
             end   
             
-             %Turns figure on after generating all objects other than
-            %picture
+            %Turns figure on after generating all objects other than the
+            %player picture
             set(singleplayerfig,'Visible','on')
             
             
             %Shows player headshot and positions it to the side
-             phsname = imread(lower(strcat(currentplayer1.last,currentplayer1.first,'.jpg')));           
-             set(gca,'Visible','off')
-              ha = axes('Units', 'Normalized', 'Position', [0 .5 .25 .25]);
-              im = imshow(phsname);
-              ha.HandleVisibility = 'off';
-              ha.Visible = 'off';
+            phsname = imread(lower(strcat(currentplayer1.last,...
+                currentplayer1.first,'.jpg')));           
+            set(gca,'Visible','off')
+            a = axes('Units', 'Normalized', 'Position', [0 .5 .25 .25]);
+            im = imshow(phsname);
+            ha.HandleVisibility = 'off';
+            ha.Visible = 'off';
         end
     end
 end
 
 
-%Create button groups for two player search;one to get the first player and
-%next to get the second player
+%Create button groups for two player search; one to get the first player
+% and next to get the second player
 twoplayersearch_a = uibuttongroup('Visible','off','Units','Normalized',...
     'Position',[0 0 .15 1],'backgroundcolor','white','BorderType','none');
 twoplayersearch_b = uibuttongroup('Visible','off','Units','Normalized',...
@@ -1082,14 +1084,14 @@ twoplayersearch_b = uibuttongroup('Visible','off','Units','Normalized',...
 function tpchosen(~,~)
 set([searchinstruct singleplayer twoplayers],'Visible','off')
 
-
 %Back buttons to go to spchosen
 comp2playerbackbutton_a = uicontrol(twoplayersearch_a,'Style','pushbutton',...
     'String','Look at one Player','Units','Normalized','Position',[0 .95 .5 .05],...
-    'Callback',@go2spchosen);%Callback function that goes to spchosen
+    'Callback',@go2spchosen);
+%Callback function that goes to spchosen
 comp2playerbackbutton_b = uicontrol(twoplayersearch_b,'Style','pushbutton',...
     'String','Look at one Player','Units','Normalized','Position',[0 .95 .5 .05],...
-    'Callback',@go2spchosen);%Callback function that goes to spchosen
+    'Callback',@go2spchosen);
 
 %Search for player one editable textbox and instruction
 twoplayersearchbox1 = uicontrol(twoplayersearch_a,'Style','edit',...
@@ -1100,13 +1102,16 @@ twoplayersearchbox2 = uicontrol(twoplayersearch_b,'Style','edit',...
 compare2playersinstruct1 = uicontrol(twoplayersearch_a,'Style','text',...
     'Units','Normalized','Position',[.05 .45 .8 .05],...
     'String','Enter player one''s last name:');
+
 %Search for player two instruction
 compare2playersinstruct2 = uicontrol(twoplayersearch_b,'Style','text',...
     'Units','Normalized','Position',[.05 .4 .8 .05],...
     'String','Enter second player''s last name:');
+
 %Make search for player 1 visible
 set(twoplayersearch_a,'Visible','on');
 
+    %See previous comment at the confirm function for its description
     function confirm(hObject,~)
         lastname = lower(hObject.String);
         
@@ -1149,8 +1154,8 @@ set(twoplayersearch_a,'Visible','on');
         end
 
     
-
-        function getplayer2 (hObject,~) %Cbfn to print first player's name and prompt for 2nd player FIX THIS SHIT
+        %Cbfn to print first player's name and prompt for 2nd player
+        function getplayer2 (hObject,~) 
             currentplayer1 = players(fullplayerindex(hObject.Value));
             set([didyoumean twoplayersearch_a],'Visible','off');
             player1display = uicontrol(twoplayersearch_b,'Style','text',...
@@ -1159,10 +1164,12 @@ set(twoplayersearch_a,'Visible','on');
             twoplayersearch_b.Visible = 'on';
         end
         
-        function opencomp2playerfig(hObject,~)%Cbfn to open 2 player comparison fig
+        %Cbfn to open 2 player comparison fig
+        function opencomp2playerfig(hObject,~)
             currentplayer2 = players(fullplayerindex(hObject.Value));
             set([openf didyoumean],'Visible','off')
-            comptitle = sprintf('%s vs. %s Comparison',currentplayer1.fullname,currentplayer2.fullname);
+            comptitle = sprintf('%s vs. %s Comparison',...
+                currentplayer1.fullname,currentplayer2.fullname);
             set(compare2fig,'Name',comptitle)
             games1 = parseStatLine(currentplayer1.filename);
             games2 = parseStatLine(currentplayer2.filename);
@@ -1171,21 +1178,32 @@ set(twoplayersearch_a,'Visible','on');
             n2=length(games1);
             d2=struct2cell(lastngames(games2,n2));
             d=[d1,d2];
-            rnames={'<html><font size=+8>Minutes Played','<html><font size=+8>Field Goal Percentage','<html><font size=+8>Three Pointer Percentage','<html><font size=+8>Free Throws Percentage','<html><font size=+8>Rebounds',...
-                '<html><font size=+8>Assists','<html><font size=+8>Steals','<html><font size=+8>Blocks','<html><font size=+8>Turnovers','<html><font size=+8>Total Points'};
-            cname={sprintf('<html><font size=+8>%s',currentplayer1.fullname),sprintf('<html><font size=+8>%s',currentplayer2.fullname)};
-            t=uitable(compare2fig,'Data',d,'RowName',rnames,'ColumnName',cname,...
-                'Units','normalized','FontSize', 38,'Position',[.02 .12 .4 .4]);
+            rnames={'<html><font size=+8>Minutes Played',...
+                '<html><font size=+8>Field Goal Percentage',...
+                '<html><font size=+8>Three Pointer Percentage',...
+                '<html><font size=+8>Free Throws Percentage',...
+                '<html><font size=+8>Rebounds',...
+                '<html><font size=+8>Assists',...
+                '<html><font size=+8>Steals',...
+                '<html><font size=+8>Blocks',...
+                '<html><font size=+8>Turnovers',...
+                '<html><font size=+8>Total Points'};
+            cname={sprintf('<html><font size=+8>%s',...
+                currentplayer1.fullname),...
+                sprintf('<html><font size=+8>%s',currentplayer2.fullname)};
+            t=uitable(compare2fig,'Data',d,'RowName',rnames,...
+                'ColumnName',cname,'Units','normalized','FontSize',...
+                38,'Position',[.02 .12 .4 .4]);
             t.Position(3)=t.Extent(3);
             t.Position(4)=t.Extent(4);
             popup1 = uicontrol(compare2fig,'Style', 'popup',...
                 'String', {'Last 5 Games','Last 10 Games',...
                 'Last 20 Games','Last 30 Games','All Games'},...
                 'Units','normalized', 'Position', [.90 .4 .1 .4],...
-                'Value', 5);%, 'Visible','off', 'Callback', @popfun1);
+                'Value', 5, 'Callback', @popfun1);
             popup2 = uicontrol(compare2fig,'Style', 'popup',...
                 'String', {'Home','Away','All Games'},...
-                'Units','normalized',...% 'Visible','off',...    
+                'Units','normalized',...  
                 'Position', [.80 .4 .1 .4], 'Value', 3,...   
                 'Callback', @popfun2);
             
@@ -1194,7 +1212,8 @@ set(twoplayersearch_a,'Visible','on');
                   'Position',[.52 .8 .02 .02],'String','VS.',...
                   'FontSize',14);
               
-             
+            %See previous popfun1 and popfun2 descriptions, defined
+            %previously
             function popfun1(source,~)
                 val = source.Value;
                 switch val
@@ -1254,33 +1273,29 @@ set(twoplayersearch_a,'Visible','on');
                 end
             end
             
-        %Open compare2fig after objects have been created
-             set(compare2fig,'Visible','on')
-           %Shows player headshot for player1 and positions it 
-             p1name = imread(lower(strcat(currentplayer1.last,currentplayer1.first,'.jpg')));           
-             set(gca,'Visible','off')
-              ha1 = axes('Units', 'Normalized', 'Position', [.35 .75 .15 .15]);
-              im1 = imshow(p1name);
-              ha1.HandleVisibility = 'off';
-              ha1.Visible = 'off';
+            %Open compare2fig after objects have been created
+            set(compare2fig,'Visible','on')
+            
+            %Shows player headshot for player1 and positions it 
+            p1name = imread(lower(strcat(currentplayer1.last,currentplayer1.first,'.jpg')));           
+            set(gca,'Visible','off')
+            ha1 = axes('Units', 'Normalized', 'Position', [.35 .75 .15 .15]);
+            im1 = imshow(p1name);
+            ha1.HandleVisibility = 'off';
+            ha1.Visible = 'off';
             
             %Shows player headshot for player2 and positions it 
-             p2name = imread(lower(strcat(currentplayer2.last,currentplayer2.first,'.jpg')));           
-             set(gca,'Visible','off')
-              ha2 = axes('Units', 'Normalized', 'Position', [.55 .75 .15 .15]);
-              im2 = imshow(p2name);
-              ha2.HandleVisibility = 'off';
-              ha2.Visible = 'off';
+            p2name = imread(lower(strcat(currentplayer2.last,currentplayer2.first,'.jpg')));           
+            set(gca,'Visible','off')
+            ha2 = axes('Units', 'Normalized', 'Position', [.55 .75 .15 .15]);
+            im2 = imshow(p2name);
+            ha2.HandleVisibility = 'off';
+            ha2.Visible = 'off';
         end
     end
 end
 
-    function back2start (~,~)
-        set([singleplayerfig compare2fig oneplayersearch ...
-            twoplayersearch_a twoplayersearch_b],'Visible','off')
-        set([openf searchinstruct singleplayer twoplayers],'Visible','on')
-    end
-
+    %Pushback button which takes the user to the 1-player stat window
     function go2spchosen(~,~)
         set([singleplayerfig compare2fig twoplayersearch_a twoplayersearch_b],...
             'Visible','off');
@@ -1288,6 +1303,7 @@ end
         spchosen;
     end
 
+    %Pushback button which takes the user to the 2-player comparison window
     function go2tpchosen(~,~)
         set([singleplayerfig compare2fig twoplayersearch_a twoplayersearch_b],...
             'Visible','off');

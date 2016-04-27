@@ -1,4 +1,5 @@
 function [x,y] = plotStats(games, n, stat, varargin)
+%This function returns a vector x and y for use in plotting
 
     if nargin == 4
         format = varargin{1};
@@ -9,20 +10,8 @@ function [x,y] = plotStats(games, n, stat, varargin)
     count = 1;
     gamenum = length(games);
     
-    %preallocation
-%     minutes = zeros(1,n);
-%     fgmade = zeros(1,n);
-%     fgatmpt = zeros(1,n);
-%     threeptmade = zeros(1,n);
-%     threeptatmpt = zeros(1,n);
-%     ftmade = zeros(1,n);
-%     ftatmpt = zeros(1,n);
-%     rebounds = zeros(1,n);
-%     assists = zeros(1,n);
-%     steals = zeros(1,n);
-%     blocks = zeros(1,n);
-%     to = zeros(1,n);
-%     pts = zeros(1,n);
+%Will not preallocate since we do not know ahead of time, the number of
+%elements in our vectors
     
     while count ~= n+1
         %only retrieves information if player has played in the current game
@@ -95,6 +84,9 @@ function [x,y] = plotStats(games, n, stat, varargin)
     blocks = fliplr(blocks);
     to = fliplr(to);
     pts = fliplr(pts);
+    
+    %If input parameters match these conditions, the y vector will be
+    %assigned to its associated stat
     
     if strcmp(stat,'min')
         y = minutes;

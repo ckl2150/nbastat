@@ -36,6 +36,7 @@ while feof(fid) == 0
     end
 end
 
+%Close all files
 
 done = fclose('all');
 end

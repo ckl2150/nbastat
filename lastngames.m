@@ -17,20 +17,8 @@ count = 1;
 %has not played
 gamenum = length(games);
 
-%preallocation
-% minutes = zeros(1,n);
-% fgmade = zeros(1,n);
-% fgatmpt = zeros(1,n);
-% threeptmade = zeros(1,n);
-% threeptatmpt = zeros(1,n);
-% ftmade = zeros(1,n);
-% ftatmpt = zeros(1,n);
-% rebounds = zeros(1,n);
-% assists = zeros(1,n);
-% steals = zeros(1,n);
-% blocks = zeros(1,n);
-% to = zeros(1,n);
-% pts = zeros(1,n);
+%Will not preallocate since we do not know ahead of time, the number of
+%elements in our vectors
 
 while (count ~= n+1) || (endgame)
     %only retrieves information if player has played in the current game
@@ -127,6 +115,7 @@ tostr = sprintf('%.1f', to);
 pts = mean(pts);
 ptsstr = sprintf('%.1f', pts);
 
+%output it returned as a structure of stat averages over count games
 avgs = struct('MP', minstr, 'FGp', fgpstr, 'ThreePtp', threeppstr, 'FTp', ftpstr, 'Rebounds',...
     rbdstr, 'Assists', aststr, 'Steals', stlstr, 'Blocks', blkstr,...
     'TO', tostr, 'Pts', ptsstr);
