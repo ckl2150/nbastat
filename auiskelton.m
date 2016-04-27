@@ -543,7 +543,6 @@ set(twoplayersearch_a,'Visible','on');
             set([openf didyoumean],'Visible','off')
             comptitle = sprintf('%s vs. %s Comparison',currentplayer1.fullname,currentplayer2.fullname);
             set(compare2fig,'Name',comptitle)
-            set(compare2fig,'Visible','on')
             games1 = parseStatLine(currentplayer1.filename);
             games2 = parseStatLine(currentplayer2.filename);
             n1=length(games1);
@@ -558,26 +557,23 @@ set(twoplayersearch_a,'Visible','on');
                 'Units','normalized','FontSize', 38,'Position',[.02 .08 .30 .30]);
             t.Position(3)=t.Extent(3);
             t.Position(4)=t.Extent(4);
-            popup1 = uicontrol('Style', 'popup',...
+            popup1 = uicontrol(compare2fig,'Style', 'popup',...
                 'String', {'Last 5 Games','Last 10 Games',...
                 'Last 20 Games','Last 30 Games','All Games'},...
                 'Units','normalized', 'Position', [.90 .4 .1 .4],...
-                'Value', 5, 'Visible','off', 'Callback', @popfun1);
-            popup2 = uicontrol('Style', 'popup',...
+                'Value', 5);%, 'Visible','off', 'Callback', @popfun1);
+            popup2 = uicontrol(compare2fig,'Style', 'popup',...
                 'String', {'Home','Away','All Games'},...
-                'Units','normalized', 'Visible','off',...    
+                'Units','normalized',...% 'Visible','off',...    
                 'Position', [.80 .4 .1 .4], 'Value', 3,...   
                 'Callback', @popfun2);
             
               
-              vs = uicontrol('Style','text','Units','Normalized',...
-                  'Position',[.565 .82 .02 .02],'String','VS.',...
+              vs = uicontrol(compare2fig,'Style','text','Units','Normalized',...
+                  'Position',[.52 .67 .02 .02],'String','VS.',...
                   'FontSize',14);
               
-              
-            popup1.Visible='on';
-            popup2.Visible='on';
-            t.Visible='on';
+             
             function popfun1(source,~)
                 val = source.Value;
                 switch val
@@ -636,11 +632,13 @@ set(twoplayersearch_a,'Visible','on');
                     t.Data=d;
                 end
             end
+            
+        %Open compare2fig after objects have been created
              set(compare2fig,'Visible','on')
            %Shows player headshot for player1 and positions it 
              p1name = imread(lower(strcat(currentplayer1.last,currentplayer1.first,'.jpg')));           
              set(gca,'Visible','off')
-              ha1 = axes('Units', 'Normalized', 'Position', [.4 .8 .15 .15]);
+              ha1 = axes('Units', 'Normalized', 'Position', [.35 .655 .15 .15]);
               im1 = imshow(p1name);
               ha1.HandleVisibility = 'off';
               ha1.Visible = 'off';
@@ -648,7 +646,7 @@ set(twoplayersearch_a,'Visible','on');
             %Shows player headshot for player2 and positions it 
              p2name = imread(lower(strcat(currentplayer2.last,currentplayer2.first,'.jpg')));           
              set(gca,'Visible','off')
-              ha2 = axes('Units', 'Normalized', 'Position', [.6 .8 .15 .15]);
+              ha2 = axes('Units', 'Normalized', 'Position', [.55 .655 .15 .15]);
               im2 = imshow(p2name);
               ha2.HandleVisibility = 'off';
               ha2.Visible = 'off';
