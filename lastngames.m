@@ -2,6 +2,8 @@ function avgs = lastngames(games, n, varargin)
 %function which takes a vector of structures as input and a number n, and
 %returns the average numbers of all categories over n games.
 
+endgame = false;
+
 if nargin == 3
     format = varargin{1};
 else
@@ -16,21 +18,21 @@ count = 1;
 gamenum = length(games);
 
 %preallocation
-minutes = zeros(1,n);
-fgmade = zeros(1,n);
-fgatmpt = zeros(1,n);
-threeptmade = zeros(1,n);
-threeptatmpt = zeros(1,n);
-ftmade = zeros(1,n);
-ftatmpt = zeros(1,n);
-rebounds = zeros(1,n);
-assists = zeros(1,n);
-steals = zeros(1,n);
-blocks = zeros(1,n);
-to = zeros(1,n);
-pts = zeros(1,n);
+% minutes = zeros(1,n);
+% fgmade = zeros(1,n);
+% fgatmpt = zeros(1,n);
+% threeptmade = zeros(1,n);
+% threeptatmpt = zeros(1,n);
+% ftmade = zeros(1,n);
+% ftatmpt = zeros(1,n);
+% rebounds = zeros(1,n);
+% assists = zeros(1,n);
+% steals = zeros(1,n);
+% blocks = zeros(1,n);
+% to = zeros(1,n);
+% pts = zeros(1,n);
 
-while count ~= n+1
+while (count ~= n+1) || (endgame)
     %only retrieves information if player has played in the current game
     if ~isempty(games(gamenum).G)
         
@@ -85,7 +87,11 @@ while count ~= n+1
             gamenum = gamenum - 1;
         end
     end
+    if gamenum == length(games)
+        endgame = true;
+    end
 end
+
 
 %anonymous function used to quickly refer to the formula for calculating
 %show percentage
