@@ -568,24 +568,6 @@ set(twoplayersearch_a,'Visible','on');
                 'Position', [.80 .4 .1 .4], 'Value', 3,...   
                 'Callback', @popfun2);
             
-            %Can play around with where this is so that loading it doesn't
-            %look as fucked up
-            
-            %Shows player headshot for player1 and positions it 
-             p1name = imread(lower(strcat(currentplayer1.last,currentplayer1.first,'.jpg')));           
-             set(gca,'Visible','off')
-              ha1 = axes('Units', 'Normalized', 'Position', [.4 .8 .15 .15]);
-              im1 = imshow(p1name);
-              ha1.HandleVisibility = 'off';
-              ha1.Visible = 'off';
-            
-            %Shows player headshot for player2 and positions it 
-             p2name = imread(lower(strcat(currentplayer2.last,currentplayer2.first,'.jpg')));           
-             set(gca,'Visible','off')
-              ha2 = axes('Units', 'Normalized', 'Position', [.6 .8 .15 .15]);
-              im2 = imshow(p2name);
-              ha2.HandleVisibility = 'off';
-              ha2.Visible = 'off';
               
               vs = uicontrol('Style','text','Units','Normalized',...
                   'Position',[.565 .82 .02 .02],'String','VS.',...
@@ -653,6 +635,22 @@ set(twoplayersearch_a,'Visible','on');
                     t.Data=d;
                 end
             end
+             set(compare2fig,'Visible','on')
+           %Shows player headshot for player1 and positions it 
+             p1name = imread(lower(strcat(currentplayer1.last,currentplayer1.first,'.jpg')));           
+             set(gca,'Visible','off')
+              ha1 = axes('Units', 'Normalized', 'Position', [.4 .8 .15 .15]);
+              im1 = imshow(p1name);
+              ha1.HandleVisibility = 'off';
+              ha1.Visible = 'off';
+            
+            %Shows player headshot for player2 and positions it 
+             p2name = imread(lower(strcat(currentplayer2.last,currentplayer2.first,'.jpg')));           
+             set(gca,'Visible','off')
+              ha2 = axes('Units', 'Normalized', 'Position', [.6 .8 .15 .15]);
+              im2 = imshow(p2name);
+              ha2.HandleVisibility = 'off';
+              ha2.Visible = 'off';
         end
     end
 end
