@@ -289,6 +289,7 @@ function spchosen(~,~)
                 
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [0 .95 .1 .05],'Callback', @back69);
+<<<<<<< HEAD
                 pb1.Parent = plotstatfig1;
                 pb2.Parent = plotstatfig1;
                 pb3.Parent = plotstatfig1;
@@ -310,8 +311,8 @@ function spchosen(~,~)
                 pb8.Position = [.03 .244 .065 .07];
                 pb9.Position = [.03 .174 .065 .07];
                 pb10.Position = [.03 .104 .065 .07];
-                backbutton.Position(3)=backbutton.Extent(3);
-                backbutton.Position(4)=backbutton.Extent(4);
+%                backbutton.Position(3)=backbutton.Extent(3);
+%                backbutton.Position(4)=backbutton.Extent(4);
                 val1 = popup1.Value;
                 val2 = popup2.Value;
                 switch val1
@@ -378,9 +379,9 @@ function spchosen(~,~)
                 pb9.Position = [.03 .174 .065 .07];
                 pb10.Position = [.03 .104 .065 .07];
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [.1 .9 .05 .07],'Callback', @back69);
-                backbutton.Position(3)=backbutton.Extent(3);
-                backbutton.Position(4)=backbutton.Extent(4);
+                'Position', [0 .95 .1 .05],'Callback', @back69);
+%                backbutton.Position(3)=backbutton.Extent(3);
+%                backbutton.Position(4)=backbutton.Extent(4);
                 val1 = popup1.Value;
                 val2 = popup2.Value;
                 switch val1
@@ -447,9 +448,9 @@ function spchosen(~,~)
                 pb9.Position = [.03 .174 .065 .07];
                 pb10.Position = [.03 .104 .065 .07];
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [.1 .9 .05 .07],'Callback', @back69);
-                backbutton.Position(3)=backbutton.Extent(3);
-                backbutton.Position(4)=backbutton.Extent(4);
+                'Position', [0 .95 .1 .05],'Callback', @back69);
+%                backbutton.Position(3)=backbutton.Extent(3);
+%                backbutton.Position(4)=backbutton.Extent(4);
                 val1 = popup1.Value;
                 val2 = popup2.Value;
                 switch val1
@@ -517,9 +518,9 @@ function spchosen(~,~)
                 pb9.Position = [.03 .174 .065 .07];
                 pb10.Position = [.03 .104 .065 .07];
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [.1 .9 .05 .07],'Callback', @back69);
-                backbutton.Position(3)=backbutton.Extent(3);
-                backbutton.Position(4)=backbutton.Extent(4);
+                'Position', [0 .95 .1 .05],'Callback', @back69);
+%                backbutton.Position(3)=backbutton.Extent(3);
+%                backbutton.Position(4)=backbutton.Extent(4);
                 val1 = popup1.Value;
                 val2 = popup2.Value;
                 switch val1
@@ -587,9 +588,9 @@ function spchosen(~,~)
                 pb9.Position = [.03 .174 .065 .07];
                 pb10.Position = [.03 .104 .065 .07];
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [.1 .9 .05 .07],'Callback', @back69);
-                backbutton.Position(3)=backbutton.Extent(3);
-                backbutton.Position(4)=backbutton.Extent(4);
+                'Position', [0 .95 .1 .05],'Callback', @back69);
+%                backbutton.Position(3)=backbutton.Extent(3);
+%                backbutton.Position(4)=backbutton.Extent(4);
                 val1 = popup1.Value;
                 val2 = popup2.Value;
                 switch val1
@@ -657,9 +658,9 @@ function spchosen(~,~)
                 pb9.Position = [.03 .174 .065 .07];
                 pb10.Position = [.03 .104 .065 .07];
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [.1 .9 .05 .07],'Callback', @back69);
-                backbutton.Position(3)=backbutton.Extent(3);
-                backbutton.Position(4)=backbutton.Extent(4);
+                'Position', [0 .95 .1 .05],'Callback', @back69);
+%                backbutton.Position(3)=backbutton.Extent(3);
+%                backbutton.Position(4)=backbutton.Extent(4);
                 val1 = popup1.Value;
                 val2 = popup2.Value;
                 switch val1
@@ -727,9 +728,9 @@ function spchosen(~,~)
                 pb9.Position = [.03 .174 .065 .07];
                 pb10.Position = [.03 .104 .065 .07];
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [.1 .9 .05 .07],'Callback', @back69);
-                backbutton.Position(3)=backbutton.Extent(3);
-                backbutton.Position(4)=backbutton.Extent(4);
+                'Position', [0 .95 .1 .05],'Callback', @back69);
+%                backbutton.Position(3)=backbutton.Extent(3);
+%                backbutton.Position(4)=backbutton.Extent(4);
                 val1 = popup1.Value;
                 val2 = popup2.Value;
                 switch val1
@@ -797,9 +798,9 @@ function spchosen(~,~)
                 pb9.Position = [.03 .174 .065 .07];
                 pb10.Position = [.03 .104 .065 .07];
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [.1 .9 .05 .07],'Callback', @back69);
-                backbutton.Position(3)=backbutton.Extent(3);
-                backbutton.Position(4)=backbutton.Extent(4);
+                'Position', [0 .95 .1 .05],'Callback', @back69);
+%                backbutton.Position(3)=backbutton.Extent(3);
+%                backbutton.Position(4)=backbutton.Extent(4);
                 val1 = popup1.Value;
                 val2 = popup2.Value;
                 switch val1
@@ -867,9 +868,9 @@ function spchosen(~,~)
                 pb9.Position = [.03 .174 .065 .07];
                 pb10.Position = [.03 .104 .065 .07];
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [.1 .9 .05 .07],'Callback', @back69);
-                backbutton.Position(3)=backbutton.Extent(3);
-                backbutton.Position(4)=backbutton.Extent(4);
+                'Position', [0 .95 .1 .05],'Callback', @back69);
+%                backbutton.Position(3)=backbutton.Extent(3);
+%                backbutton.Position(4)=backbutton.Extent(4);
                 val1 = popup1.Value;
                 val2 = popup2.Value;
                 switch val1
@@ -937,9 +938,9 @@ function spchosen(~,~)
                 pb9.Position = [.03 .174 .065 .07];
                 pb10.Position = [.03 .104 .065 .07];
                 backbutton = uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
-                'Position', [.1 .9 .05 .07],'Callback', @back69);
-                backbutton.Position(3)=backbutton.Extent(3);
-                backbutton.Position(4)=backbutton.Extent(4);
+                'Position', [0 .95 .1 .05],'Callback', @back69);
+%                backbutton.Position(3)=backbutton.Extent(3);
+%                backbutton.Position(4)=backbutton.Extent(4);
                 val1 = popup1.Value;
                 val2 = popup2.Value;
                 switch val1
