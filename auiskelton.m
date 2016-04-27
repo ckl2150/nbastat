@@ -85,8 +85,27 @@ set(compare2fig,'Name','Welcome to Our Awesome Project')
 movegui(compare2fig,'center')
 
 %Create figure to display player stat graphs
-plotstatfig = figure('Visible','off','Units','Normalized',...
+plotstatfig1 = figure('Visible','off','Units','Normalized',...
     'Position',[0 1 1 1]);
+plotstatfig2 = figure('Visible','off','Units','Normalized',...
+    'Position',[0 1 1 1]);
+plotstatfig3 = figure('Visible','off','Units','Normalized',...
+    'Position',[0 1 1 1]);
+plotstatfig4 = figure('Visible','off','Units','Normalized',...
+    'Position',[0 1 1 1]);
+plotstatfig5 = figure('Visible','off','Units','Normalized',...
+    'Position',[0 1 1 1]);
+plotstatfig6 = figure('Visible','off','Units','Normalized',...
+    'Position',[0 1 1 1]);
+plotstatfig7 = figure('Visible','off','Units','Normalized',...
+    'Position',[0 1 1 1]);
+plotstatfig8 = figure('Visible','off','Units','Normalized',...
+    'Position',[0 1 1 1]);
+plotstatfig9 = figure('Visible','off','Units','Normalized',...
+    'Position',[0 1 1 1]);
+plotstatfig10 = figure('Visible','off','Units','Normalized',...
+    'Position',[0 1 1 1]);
+
 
 %Getting rid of back button to go opening figure
 
@@ -251,12 +270,46 @@ function spchosen(~,~)
             pb10=uicontrol(singleplayerfig,'Style','pushbutton','String','Plot Total Points','Units','normalized',...
                 'Position', [.235 .104 .065 .07],'Callback', @pbfun10);
             function pbfun1(~,~)
+                plotstatfig1.Visible = 'off';
+                plotstatfig2.Visible = 'off';
+                plotstatfig3.Visible = 'off';
+                plotstatfig4.Visible = 'off';
+                plotstatfig5.Visible = 'off';
+                plotstatfig6.Visible = 'off';
+                plotstatfig7.Visible = 'off';
+                plotstatfig8.Visible = 'off';
+                plotstatfig9.Visible = 'off';
+                plotstatfig10.Visible = 'off';
                 set(singleplayerfig,'Visible','off');
+                set(plotstatfig1, 'Visible', 'on');
                 tit=sprintf('%s Minutes Played',currentplayer1.fullname);
-                plotstatfig = figure('Name',currentplayer1.fullname,'Units',...
-                    'Normalized','Position',[0 0 1 1]);
+                plotstatfig1.Name = currentplayer1.fullname;
+                plotstatfig1.Units = 'normalized';
+                plotstatfig1.Position = [0 0 1 1];
+                
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [0 .95 .1 .05],'Callback', @back69);
+                pb1.Parent = plotstatfig1;
+                pb2.Parent = plotstatfig1;
+                pb3.Parent = plotstatfig1;
+                pb4.Parent = plotstatfig1;
+                pb5.Parent = plotstatfig1;
+                pb6.Parent = plotstatfig1;
+                pb7.Parent = plotstatfig1;
+                pb8.Parent = plotstatfig1;
+                pb9.Parent = plotstatfig1;
+                pb10.Parent = plotstatfig1;
+                
+                pb1.Position = [.03 .734 .065 .07];
+                pb2.Position = [.03 .664 .065 .07];
+                pb3.Position = [.03 .594 .065 .07];
+                pb4.Position = [.03 .524 .065 .07];
+                pb5.Position = [.03 .454 .065 .07];
+                pb6.Position = [.03 .384 .065 .07];
+                pb7.Position = [.03 .314 .065 .07];
+                pb8.Position = [.03 .244 .065 .07];
+                pb9.Position = [.03 .174 .065 .07];
+                pb10.Position = [.03 .104 .065 .07];
                 backbutton.Position(3)=backbutton.Extent(3);
                 backbutton.Position(4)=backbutton.Extent(4);
                 val1 = popup1.Value;
@@ -283,13 +336,47 @@ function spchosen(~,~)
                 end
                 plot(x,y)
                 title(tit);
-                plotstatfig.Visible='on';
+                plotstatfig1.Visible = 'on';
             end
             function pbfun2(~,~)
+                plotstatfig1.Visible = 'off';
+                plotstatfig2.Visible = 'off';
+                plotstatfig3.Visible = 'off';
+                plotstatfig4.Visible = 'off';
+                plotstatfig5.Visible = 'off';
+                plotstatfig6.Visible = 'off';
+                plotstatfig7.Visible = 'off';
+                plotstatfig8.Visible = 'off';
+                plotstatfig9.Visible = 'off';
+                plotstatfig10.Visible = 'off';
                 set(singleplayerfig,'Visible','off');
-                tit=sprintf('%s Field Goal Percentages',currentplayer1.fullname);
-                plotstatfig = figure('Name',currentplayer1.fullname,'Units',...
-                    'Normalized','Position',[0 0 1 1]);
+                set(plotstatfig2, 'Visible', 'on');
+                tit=sprintf('%s Field Goal Percentage',currentplayer1.fullname);
+                
+                plotstatfig2.Name = currentplayer1.fullname;
+                plotstatfig2.Units = 'normalized';
+                plotstatfig2.Position = [0 0 1 1];
+                pb1.Parent = plotstatfig2;
+                pb2.Parent = plotstatfig2;
+                pb3.Parent = plotstatfig2;
+                pb4.Parent = plotstatfig2;
+                pb5.Parent = plotstatfig2;
+                pb6.Parent = plotstatfig2;
+                pb7.Parent = plotstatfig2;
+                pb8.Parent = plotstatfig2;
+                pb9.Parent = plotstatfig2;
+                pb10.Parent = plotstatfig2;
+                
+                pb1.Position = [.03 .734 .065 .07];
+                pb2.Position = [.03 .664 .065 .07];
+                pb3.Position = [.03 .594 .065 .07];
+                pb4.Position = [.03 .524 .065 .07];
+                pb5.Position = [.03 .454 .065 .07];
+                pb6.Position = [.03 .384 .065 .07];
+                pb7.Position = [.03 .314 .065 .07];
+                pb8.Position = [.03 .244 .065 .07];
+                pb9.Position = [.03 .174 .065 .07];
+                pb10.Position = [.03 .104 .065 .07];
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -318,13 +405,47 @@ function spchosen(~,~)
                 end
                 plot(x,y)
                 title(tit);
-                plotstatfig.Visible='on';
+                plotstatfig2.Visible='on';
             end
             function pbfun3(~,~)
+                plotstatfig1.Visible = 'off';
+                plotstatfig2.Visible = 'off';
+                plotstatfig3.Visible = 'off';
+                plotstatfig4.Visible = 'off';
+                plotstatfig5.Visible = 'off';
+                plotstatfig6.Visible = 'off';
+                plotstatfig7.Visible = 'off';
+                plotstatfig8.Visible = 'off';
+                plotstatfig9.Visible = 'off';
+                plotstatfig10.Visible = 'off';
                 set(singleplayerfig,'Visible','off')
+                set(plotstatfig3, 'Visible', 'on');
                 tit=sprintf('%s Three Point Percentages',currentplayer1.fullname);
-                plotstatfig = figure('Name',currentplayer1.fullname,'Units',...
-                    'Normalized','Position',[0 0 1 1]);
+                
+                plotstatfig3.Name = currentplayer1.fullname;
+                plotstatfig3.Units = 'normalized';
+                plotstatfig3.Position = [0 0 1 1];
+                pb1.Parent = plotstatfig3;
+                pb2.Parent = plotstatfig3;
+                pb3.Parent = plotstatfig3;
+                pb4.Parent = plotstatfig3;
+                pb5.Parent = plotstatfig3;
+                pb6.Parent = plotstatfig3;
+                pb7.Parent = plotstatfig3;
+                pb8.Parent = plotstatfig3;
+                pb9.Parent = plotstatfig3;
+                pb10.Parent = plotstatfig3;
+                
+                pb1.Position = [.03 .734 .065 .07];
+                pb2.Position = [.03 .664 .065 .07];
+                pb3.Position = [.03 .594 .065 .07];
+                pb4.Position = [.03 .524 .065 .07];
+                pb5.Position = [.03 .454 .065 .07];
+                pb6.Position = [.03 .384 .065 .07];
+                pb7.Position = [.03 .314 .065 .07];
+                pb8.Position = [.03 .244 .065 .07];
+                pb9.Position = [.03 .174 .065 .07];
+                pb10.Position = [.03 .104 .065 .07];
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -353,13 +474,48 @@ function spchosen(~,~)
                 end
                 plot(x,y)
                 title(tit);
-                plotstatfig.Visible='on';
+                plotstatfig3.Visible='on';
             end
             function pbfun4(~,~)
+                plotstatfig1.Visible = 'off';
+                plotstatfig2.Visible = 'off';
+                plotstatfig3.Visible = 'off';
+                plotstatfig4.Visible = 'off';
+                plotstatfig5.Visible = 'off';
+                plotstatfig6.Visible = 'off';
+                plotstatfig7.Visible = 'off';
+                plotstatfig8.Visible = 'off';
+                plotstatfig9.Visible = 'off';
+                plotstatfig10.Visible = 'off';
                 set(singleplayerfig,'Visible','off')
-                tit=sprintf('%s Free Throw Percentages',currentplayer1.fullname);
-                plotstatfig = figure('Name',currentplayer1.fullname,'Units',...
-                    'Normalized','Position',[0 0 1 1]);
+                set(plotstatfig4, 'Visible', 'on');
+                tit=sprintf('%s Free Throw Percentage',currentplayer1.fullname);
+
+                plotstatfig4.Name = currentplayer1.fullname;
+                plotstatfig4.Units = 'normalized';
+                plotstatfig4.Position = [0 0 1 1];
+                
+                pb1.Parent = plotstatfig4;
+                pb2.Parent = plotstatfig4;
+                pb3.Parent = plotstatfig4;
+                pb4.Parent = plotstatfig4;
+                pb5.Parent = plotstatfig4;
+                pb6.Parent = plotstatfig4;
+                pb7.Parent = plotstatfig4;
+                pb8.Parent = plotstatfig4;
+                pb9.Parent = plotstatfig4;
+                pb10.Parent = plotstatfig4;
+                
+                pb1.Position = [.03 .734 .065 .07];
+                pb2.Position = [.03 .664 .065 .07];
+                pb3.Position = [.03 .594 .065 .07];
+                pb4.Position = [.03 .524 .065 .07];
+                pb5.Position = [.03 .454 .065 .07];
+                pb6.Position = [.03 .384 .065 .07];
+                pb7.Position = [.03 .314 .065 .07];
+                pb8.Position = [.03 .244 .065 .07];
+                pb9.Position = [.03 .174 .065 .07];
+                pb10.Position = [.03 .104 .065 .07];
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -388,13 +544,48 @@ function spchosen(~,~)
                 end
                 plot(x,y)
                 title(tit);
-                plotstatfig.Visible='on';
+                plotstatfig4.Visible='on';
             end
             function pbfun5(~,~)
+                plotstatfig1.Visible = 'off';
+                plotstatfig2.Visible = 'off';
+                plotstatfig3.Visible = 'off';
+                plotstatfig4.Visible = 'off';
+                plotstatfig5.Visible = 'off';
+                plotstatfig6.Visible = 'off';
+                plotstatfig7.Visible = 'off';
+                plotstatfig8.Visible = 'off';
+                plotstatfig9.Visible = 'off';
+                plotstatfig10.Visible = 'off';
                 set(singleplayerfig,'Visible','off')
+                set(plotstatfig5, 'Visible', 'on');
                 tit=sprintf('%s Rebounds',currentplayer1.fullname);
-                plotstatfig = figure('Name',currentplayer1.fullname,'Units',...
-                    'Normalized','Position',[0 0 1 1]);
+                
+                plotstatfig5.Name = currentplayer1.fullname;
+                plotstatfig5.Units = 'normalized';
+                plotstatfig5.Position = [0 0 1 1];
+                
+                pb1.Parent = plotstatfig5;
+                pb2.Parent = plotstatfig5;
+                pb3.Parent = plotstatfig5;
+                pb4.Parent = plotstatfig5;
+                pb5.Parent = plotstatfig5;
+                pb6.Parent = plotstatfig5;
+                pb7.Parent = plotstatfig5;
+                pb8.Parent = plotstatfig5;
+                pb9.Parent = plotstatfig5;
+                pb10.Parent = plotstatfig5;
+                
+                pb1.Position = [.03 .734 .065 .07];
+                pb2.Position = [.03 .664 .065 .07];
+                pb3.Position = [.03 .594 .065 .07];
+                pb4.Position = [.03 .524 .065 .07];
+                pb5.Position = [.03 .454 .065 .07];
+                pb6.Position = [.03 .384 .065 .07];
+                pb7.Position = [.03 .314 .065 .07];
+                pb8.Position = [.03 .244 .065 .07];
+                pb9.Position = [.03 .174 .065 .07];
+                pb10.Position = [.03 .104 .065 .07];
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -423,13 +614,48 @@ function spchosen(~,~)
                 end
                 plot(x,y)
                 title(tit);
-                plotstatfig.Visible='on';
+                plotstatfig5.Visible='on';
             end
             function pbfun6(~,~)
+                plotstatfig1.Visible = 'off';
+                plotstatfig2.Visible = 'off';
+                plotstatfig3.Visible = 'off';
+                plotstatfig4.Visible = 'off';
+                plotstatfig5.Visible = 'off';
+                plotstatfig6.Visible = 'off';
+                plotstatfig7.Visible = 'off';
+                plotstatfig8.Visible = 'off';
+                plotstatfig9.Visible = 'off';
+                plotstatfig10.Visible = 'off';
                 set(singleplayerfig,'Visible','off')
+                set(plotstatfig6, 'Visible', 'on');
                 tit=sprintf('%s Assists',currentplayer1.fullname);
-                plotstatfig = figure('Name',currentplayer1.fullname,'Units',...
-                    'Normalized','Position',[0 0 1 1]);
+                
+                plotstatfig6.Name = currentplayer1.fullname;
+                plotstatfig6.Units = 'normalized';
+                plotstatfig6.Position = [0 0 1 1];
+                
+                pb1.Parent = plotstatfig6;
+                pb2.Parent = plotstatfig6;
+                pb3.Parent = plotstatfig6;
+                pb4.Parent = plotstatfig6;
+                pb5.Parent = plotstatfig6;
+                pb6.Parent = plotstatfig6;
+                pb7.Parent = plotstatfig6;
+                pb8.Parent = plotstatfig6;
+                pb9.Parent = plotstatfig6;
+                pb10.Parent = plotstatfig6;
+                
+                pb1.Position = [.03 .734 .065 .07];
+                pb2.Position = [.03 .664 .065 .07];
+                pb3.Position = [.03 .594 .065 .07];
+                pb4.Position = [.03 .524 .065 .07];
+                pb5.Position = [.03 .454 .065 .07];
+                pb6.Position = [.03 .384 .065 .07];
+                pb7.Position = [.03 .314 .065 .07];
+                pb8.Position = [.03 .244 .065 .07];
+                pb9.Position = [.03 .174 .065 .07];
+                pb10.Position = [.03 .104 .065 .07];
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -458,13 +684,48 @@ function spchosen(~,~)
                 end
                 plot(x,y)
                 title(tit);
-                plotstatfig.Visible='on';
+                plotstatfig6.Visible='on';
             end
             function pbfun7(~,~)
+                plotstatfig1.Visible = 'off';
+                plotstatfig2.Visible = 'off';
+                plotstatfig3.Visible = 'off';
+                plotstatfig4.Visible = 'off';
+                plotstatfig5.Visible = 'off';
+                plotstatfig6.Visible = 'off';
+                plotstatfig7.Visible = 'off';
+                plotstatfig8.Visible = 'off';
+                plotstatfig9.Visible = 'off';
+                plotstatfig10.Visible = 'off';
                 set(singleplayerfig,'Visible','off')
+                set(plotstatfig7, 'Visible', 'on');
                 tit=sprintf('%s Steals',currentplayer1.fullname);
-               plotstatfig = figure('Name',currentplayer1.fullname,'Units',...
-                    'Normalized','Position',[0 0 1 1]);
+                
+                plotstatfig7.Name = currentplayer1.fullname;
+                plotstatfig7.Units = 'normalized';
+                plotstatfig7.Position = [0 0 1 1];
+                
+                pb1.Parent = plotstatfig7;
+                pb2.Parent = plotstatfig7;
+                pb3.Parent = plotstatfig7;
+                pb4.Parent = plotstatfig7;
+                pb5.Parent = plotstatfig7;
+                pb6.Parent = plotstatfig7;
+                pb7.Parent = plotstatfig7;
+                pb8.Parent = plotstatfig7;
+                pb9.Parent = plotstatfig7;
+                pb10.Parent = plotstatfig7;
+                
+                pb1.Position = [.03 .734 .065 .07];
+                pb2.Position = [.03 .664 .065 .07];
+                pb3.Position = [.03 .594 .065 .07];
+                pb4.Position = [.03 .524 .065 .07];
+                pb5.Position = [.03 .454 .065 .07];
+                pb6.Position = [.03 .384 .065 .07];
+                pb7.Position = [.03 .314 .065 .07];
+                pb8.Position = [.03 .244 .065 .07];
+                pb9.Position = [.03 .174 .065 .07];
+                pb10.Position = [.03 .104 .065 .07];
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -493,13 +754,48 @@ function spchosen(~,~)
                 end
                 plot(x,y)
                 title(tit);
-                plotstatfig.Visible='on';
+                plotstatfig7.Visible='on';
             end
             function pbfun8(~,~)
+                plotstatfig1.Visible = 'off';
+                plotstatfig2.Visible = 'off';
+                plotstatfig3.Visible = 'off';
+                plotstatfig4.Visible = 'off';
+                plotstatfig5.Visible = 'off';
+                plotstatfig6.Visible = 'off';
+                plotstatfig7.Visible = 'off';
+                plotstatfig8.Visible = 'off';
+                plotstatfig9.Visible = 'off';
+                plotstatfig10.Visible = 'off';
                 set(singleplayerfig,'Visible','off')
+                set(plotstatfig8, 'Visible', 'on');
                 tit=sprintf('%s Blocks',currentplayer1.fullname);
-                plotstatfig = figure('Name',currentplayer1.fullname,'Units',...
-                    'Normalized','Position',[0 0 1 1]);
+                
+                plotstatfig8.Name = currentplayer1.fullname;
+                plotstatfig8.Units = 'normalized';
+                plotstatfig8.Position = [0 0 1 1];
+                
+                pb1.Parent = plotstatfig8;
+                pb2.Parent = plotstatfig8;
+                pb3.Parent = plotstatfig8;
+                pb4.Parent = plotstatfig8;
+                pb5.Parent = plotstatfig8;
+                pb6.Parent = plotstatfig8;
+                pb7.Parent = plotstatfig8;
+                pb8.Parent = plotstatfig8;
+                pb9.Parent = plotstatfig8;
+                pb10.Parent = plotstatfig8;
+                
+                pb1.Position = [.03 .734 .065 .07];
+                pb2.Position = [.03 .664 .065 .07];
+                pb3.Position = [.03 .594 .065 .07];
+                pb4.Position = [.03 .524 .065 .07];
+                pb5.Position = [.03 .454 .065 .07];
+                pb6.Position = [.03 .384 .065 .07];
+                pb7.Position = [.03 .314 .065 .07];
+                pb8.Position = [.03 .244 .065 .07];
+                pb9.Position = [.03 .174 .065 .07];
+                pb10.Position = [.03 .104 .065 .07];
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -528,13 +824,48 @@ function spchosen(~,~)
                 end
                 plot(x,y)
                 title(tit);
-                plotstatfig.Visible='on';
+                plotstatfig8.Visible='on';
             end
             function pbfun9(~,~)
+                plotstatfig1.Visible = 'off';
+                plotstatfig2.Visible = 'off';
+                plotstatfig3.Visible = 'off';
+                plotstatfig4.Visible = 'off';
+                plotstatfig5.Visible = 'off';
+                plotstatfig6.Visible = 'off';
+                plotstatfig7.Visible = 'off';
+                plotstatfig8.Visible = 'off';
+                plotstatfig9.Visible = 'off';
+                plotstatfig10.Visible = 'off';
                 set(singleplayerfig,'Visible','off')
+                set(plotstatfig9, 'Visible', 'on');
                 tit=sprintf('%s Turnovers',currentplayer1.fullname);
-                plotstatfig = figure('Name',currentplayer1.fullname,'Units',...
-                    'Normalized','Position',[0 0 1 1]);
+                
+                plotstatfig9.Name = currentplayer1.fullname;
+                plotstatfig9.Units = 'normalized';
+                plotstatfig9.Position = [0 0 1 1];
+                
+                pb1.Parent = plotstatfig9;
+                pb2.Parent = plotstatfig9;
+                pb3.Parent = plotstatfig9;
+                pb4.Parent = plotstatfig9;
+                pb5.Parent = plotstatfig9;
+                pb6.Parent = plotstatfig9;
+                pb7.Parent = plotstatfig9;
+                pb8.Parent = plotstatfig9;
+                pb9.Parent = plotstatfig9;
+                pb10.Parent = plotstatfig9;
+                
+                pb1.Position = [.03 .734 .065 .07];
+                pb2.Position = [.03 .664 .065 .07];
+                pb3.Position = [.03 .594 .065 .07];
+                pb4.Position = [.03 .524 .065 .07];
+                pb5.Position = [.03 .454 .065 .07];
+                pb6.Position = [.03 .384 .065 .07];
+                pb7.Position = [.03 .314 .065 .07];
+                pb8.Position = [.03 .244 .065 .07];
+                pb9.Position = [.03 .174 .065 .07];
+                pb10.Position = [.03 .104 .065 .07];
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -563,13 +894,48 @@ function spchosen(~,~)
                 end
                 plot(x,y)
                 title(tit);
-                plotstatfig.Visible='on';
+                plotstatfig9.Visible='on';
             end
             function pbfun10(~,~)
+                plotstatfig1.Visible = 'off';
+                plotstatfig2.Visible = 'off';
+                plotstatfig3.Visible = 'off';
+                plotstatfig4.Visible = 'off';
+                plotstatfig5.Visible = 'off';
+                plotstatfig6.Visible = 'off';
+                plotstatfig7.Visible = 'off';
+                plotstatfig8.Visible = 'off';
+                plotstatfig9.Visible = 'off';
+                plotstatfig10.Visible = 'off';
                 set(singleplayerfig,'Visible','off')
+                set(plotstatfig10, 'Visible', 'on');
                 tit=sprintf('%s Total Points',currentplayer1.fullname);
-                 plotstatfig = figure('Name',currentplayer1.fullname,'Units',...
-                    'Normalized','Position',[0 0 1 1]);
+
+                plotstatfig10.Name = currentplayer1.fullname;
+                plotstatfig10.Units = 'normalized';
+                plotstatfig10.Position = [0 0 1 1];
+                
+                pb1.Parent = plotstatfig10;
+                pb2.Parent = plotstatfig10;
+                pb3.Parent = plotstatfig10;
+                pb4.Parent = plotstatfig10;
+                pb5.Parent = plotstatfig10;
+                pb6.Parent = plotstatfig10;
+                pb7.Parent = plotstatfig10;
+                pb8.Parent = plotstatfig10;
+                pb9.Parent = plotstatfig10;
+                pb10.Parent = plotstatfig10;
+                
+                pb1.Position = [.03 .734 .065 .07];
+                pb2.Position = [.03 .664 .065 .07];
+                pb3.Position = [.03 .594 .065 .07];
+                pb4.Position = [.03 .524 .065 .07];
+                pb5.Position = [.03 .454 .065 .07];
+                pb6.Position = [.03 .384 .065 .07];
+                pb7.Position = [.03 .314 .065 .07];
+                pb8.Position = [.03 .244 .065 .07];
+                pb9.Position = [.03 .174 .065 .07];
+                pb10.Position = [.03 .104 .065 .07];
                 backbutton = uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -598,11 +964,41 @@ function spchosen(~,~)
                 end
                 plot(x,y)
                 title(tit);
-                plotstatfig.Visible='on';
+                plotstatfig10.Visible='on';
             end
             function back69(~,~)
-                plotstatfig.Visible='off';
+                pb1.Parent = singleplayerfig;
+                pb2.Parent = singleplayerfig;
+                pb3.Parent = singleplayerfig;
+                pb4.Parent = singleplayerfig;
+                pb5.Parent = singleplayerfig;
+                pb6.Parent = singleplayerfig;
+                pb7.Parent = singleplayerfig;
+                pb8.Parent = singleplayerfig;
+                pb9.Parent = singleplayerfig;
+                pb10.Parent = singleplayerfig;
+                plotstatfig1.Visible='off';
+                pb1.Position = [.235 .734 .065 .07];
+                plotstatfig2.Visible='off';
+                pb2.Position = [.235 .664 .065 .07];
+                plotstatfig3.Visible='off';
+                pb3.Position = [.235 .594 .065 .07];
+                plotstatfig4.Visible='off';
+                pb4.Position = [.235 .524 .065 .07];
+                plotstatfig5.Visible='off';
+                pb5.Position = [.235 .454 .065 .07];
+                plotstatfig6.Visible='off';
+                pb6.Position = [.235 .384 .065 .07];
+                plotstatfig7.Visible='off';
+                pb7.Position = [.235 .314 .065 .07];
+                plotstatfig8.Visible='off';
+                pb8.Position = [.235 .244 .065 .07];
+                plotstatfig9.Visible='off';
+                pb9.Position = [.235 .174 .065 .07];
+                plotstatfig10.Visible='off';
+                pb10.Position = [.235 .104 .065 .07];
                 singleplayerfig.Visible='on';
+                
             end
             
             
