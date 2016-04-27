@@ -285,7 +285,7 @@ function spchosen(~,~)
                 plotstatfig.Visible='on';
             end
             function pbfun2(~,~)
-                set(singleplayerfig,'Visible','off')
+                set(singleplayerfig,'Visible','off');
                 tit=sprintf('%s Field Goal Percentages',currentplayer1.fullname);
                 plotstatfig=figure('Visible','off');
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
@@ -525,7 +525,7 @@ function spchosen(~,~)
             function pbfun9(~,~)
                 set(singleplayerfig,'Visible','off')
                 tit=sprintf('%s Turnovers',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
+                plotstatfig=figure('Visible','off');
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -559,7 +559,7 @@ function spchosen(~,~)
             function pbfun10(~,~)
                 set(singleplayerfig,'Visible','off')
                 tit=sprintf('%s Total Points',currentplayer1.fullname);
-                plotstatfig=figure('Visible','off')
+                plotstatfig=figure('Visible','off');
                 backbutton=uicontrol('Style','pushbutton','String','Back to Player Page','Units','normalized',...
                 'Position', [.1 .9 .05 .07],'Callback', @back69);
                 backbutton.Position(3)=backbutton.Extent(3);
@@ -727,7 +727,7 @@ set(twoplayersearch_a,'Visible','on');
                 namearr = cell(1,length(fullplayerindex));
                 for i = 1:length(fullplayerindex)
                     namearr{i} = players(fullplayerindex(i)).fullname;
-                    end
+                end
                 
                 if hObject == twoplayersearchbox1
                     compare2playersinstruct1.String = 'Did you mean:';
@@ -748,7 +748,7 @@ set(twoplayersearch_a,'Visible','on');
             set([didyoumean twoplayersearch_a],'Visible','off');
             player1display = uicontrol(twoplayersearch_b,'Style','text',...
                 'String',currentplayer1.fullname,'Units','Normalized',...
-                'Position',[.05 .5 .8 .05]); %FIX THIS LINE
+                'Position',[.05 .5 .8 .05]);
             twoplayersearch_b.Visible = 'on';
         end
         

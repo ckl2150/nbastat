@@ -10,21 +10,20 @@ function [x,y] = plotStats(games, n, stat, varargin)
     gamenum = length(games);
     
     %preallocation
-    minutes = zeros(1,n);
-    fgmade = zeros(1,n);
-    fgatmpt = zeros(1,n);
-    threeptmade = zeros(1,n);
-    threeptatmpt = zeros(1,n);
-    ftmade = zeros(1,n);
-    ftatmpt = zeros(1,n);
-    rebounds = zeros(1,n);
-    assists = zeros(1,n);
-    steals = zeros(1,n);
-    blocks = zeros(1,n);
-    to = zeros(1,n);
-    pts = zeros(1,n);
+%     minutes = zeros(1,n);
+%     fgmade = zeros(1,n);
+%     fgatmpt = zeros(1,n);
+%     threeptmade = zeros(1,n);
+%     threeptatmpt = zeros(1,n);
+%     ftmade = zeros(1,n);
+%     ftatmpt = zeros(1,n);
+%     rebounds = zeros(1,n);
+%     assists = zeros(1,n);
+%     steals = zeros(1,n);
+%     blocks = zeros(1,n);
+%     to = zeros(1,n);
+%     pts = zeros(1,n);
     
-    x = 1:n;
     while count ~= n+1
         %only retrieves information if player has played in the current game
         if ~isempty(games(gamenum).G)
@@ -82,9 +81,6 @@ function [x,y] = plotStats(games, n, stat, varargin)
         end
     end
     
-    disp(fgmade)
-    disp(fgatmpt)
-    
     if strcmp(stat,'min')
         y = minutes;
     elseif strcmp(stat,'fgp')
@@ -106,4 +102,6 @@ function [x,y] = plotStats(games, n, stat, varargin)
     elseif strcmp(stat,'pts')
         y = pts;
     end
+    
+    x = 1:length(y);
 end
